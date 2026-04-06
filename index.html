@@ -1,366 +1,3 @@
-
-These tasks run locally and aren't synced across devices
-
-I want to build a web app. Give me room to share what I'm imagining. I might have designs, wireframes, or examples of what I'm going for. Once I've laid that out, help me think through the details with follow-up questions. Only start building once we've agreed on the scope and approach. Then let's iterate as you build it out.
-
-
-Thought process
-Thought process
-Love this approach. Tell me everything — what's the app, who's it for, what problem does it solve? Share any designs, wireframes, screenshots, or examples you have in mind. I'll listen first, then we'll dig into the details together before writing a single line of code.
-
-i want a webapp for a fitness tracking program. I want to give it a text based fitness program and i want it to create the workout plan. 
-I want to link exercises to videos for tutorial and provide alternates if requested by user. 
-
-i want it to have a means to track input. Data should be logged into google sheets so it can later be used.
-
-
-Thought process
-Thought process
-Great concept — let me make sure I understand the details before we start building. A few things I want to nail down:
-
-What format is the fitness program text you'd be pasting in?
-Structured template
-Who will be using this app?
-For now just me but posssibly pothers
-For exercise tutorial videos, where should they come from?
-Auto-link YouTube
-What data do you want to log per workout session?
-Sets & reps completed, Weight used, How it felt / notes
-Good stuff. A couple more before we lock in scope:
-
-For the structured template — what does a typical program entry look like? For example, how would you write 'Day 1: Squats 3 sets of 10 reps'?
-Day/Exercise/Sets/Reps columns
-For Google Sheets logging — do you have an existing sheet set up, or should the app create a new one?
-Create a new sheet
-Good, I have a solid picture now. Let me lay out the proposed scope so we're aligned before I build anything.
-
-Here's what I'm thinking we build:
-
-1. Program Input A table where you paste/enter your program in Day | Exercise | Sets | Reps | Target Weight columns. The app reads it and generates your workout plan.
-
-2. Workout Plan View A clean day-by-day view of your program. Each exercise links to a YouTube search result for a tutorial. A "swap" button lets you browse alternate exercises (from a built-in muscle-group database).
-
-3. Active Workout Logger When you start a workout, each exercise gets input fields for sets completed, weight used, and a notes/RPE field. You log as you go.
-
-4. Google Sheets Logging After each session, data gets pushed to a new Google Sheet — one row per exercise set, with date, exercise, sets, reps, weight, and notes. This does require a one-time Google authorization step in the browser.
-
-A heads-up on Google Sheets: integrating it requires you to authorize the app through your Google account (standard OAuth popup — nothing gets stored server-side). I'll walk you through it when we get there, it's just a couple of clicks.
-
-One thing I want to confirm: for alternate exercises, should the app show a hardcoded list of swaps by muscle group (e.g., "can't do barbell squat → try goblet squat, leg press, Bulgarian split squat"), or did you have something else in mind?
-
-ueaj jarcpded os fome
-
-
-Thought process
-Thought process
-Reading between the keys there — "yeah hardcoded is fine"?
-
-If so, we're good to go. I have everything I need. Let me start building.
-
-
-Updated todo list, created a file, read a file
-Updated todo list, created a file, read a file
-Here's your first version — open it in your browser and take it for a spin. Here's what's built:
-
-Program tab — paste your workout in Day | Exercise | Sets | Reps | Weight format or type it row by row. Hit Save to generate your plan.
-
-Plan tab — your full schedule laid out by day. Each exercise has a ▶ Tutorial button (links YouTube) and a ⇄ Swap button that shows hardcoded alternatives by muscle group.
-
-Log Workout tab — pick your day, enter reps/weight per set and any notes, then Save Session.
-
-History tab — every logged session, displayed as a clean table.
-
-Sheets tab — step-by-step instructions to connect your Google Sheet. Once connected, every saved session auto-syncs a row per set.
-
-A couple of things to try first and then tell me what to tweak:
-
-Paste in a real program and see how the plan renders
-Try the Swap button on an exercise to see the alternates
-Let me know if the Google Sheets setup is confusing — I can simplify the instructions or change the auth approach
-What do you want to adjust?
-
-C:\Users\arvk9\AppData\Roaming\Claude\local-agent-mode-sessions\7256a20f-d24a-46cc-9b15-3882aa868dda\8e2d37cb-d792-4088-b8e7-af633d92d065\local_6e1811ad-7ef1-4137-9f25-0895daf6eafd\outputs\fitness-tracker.html
-Code 
-
-Show in Folder
-
-Uploaded image
-image.jpeg
-why does it look like this. Can you make it a more modern theme please. 
-
-here is an example
-
-
-Thought process
-Thought process
-I can see the reference — clean cards, gradient accents, coral/orange CTA buttons, soft shadows, and a much lighter, more polished feel. Let me retheme it completely.
-
-
-Read 2 files, updated todo list
-Read 2 files, updated todo list
-Now I'll replace just the CSS with a complete modern redesign — light background, white cards with soft shadows, gradient coral buttons, and clean typography matching your reference.
-
-
-Edited a file
-Edited a file
-Now update the remaining CSS (toast, empty state, misc utilities) to match:
-
-
-Edited a file
-Edited a file
-Now update the HTML page headers to use the new page-header class and add a hero banner to the Program page:
-
-
-Edited 5 files, updated todo list, read a file
-Edited 5 files, updated todo list, read a file
-Here's the redesigned version. Here's what changed:
-
-Colors & background — swapped the dark theme for a soft lavender-gray background with pure white cards and subtle drop shadows instead of borders.
-
-Buttons — the primary action buttons now use a coral-to-orange gradient (matching your reference), save button uses teal-to-green, and all buttons have pill shapes with hover lift effects.
-
-Nav — clean white with pill-shaped active tabs using a soft gradient highlight instead of a block color.
-
-Typography — switched to Inter (Google Fonts), gradient heading text, and tighter letter-spacing for a more modern feel.
-
-Cards & inputs — rounded corners everywhere, focus states with a soft purple glow ring, and inputs use a light fill instead of dark.
-
-Detail touches — set number circles use mini gradient pills, the alternates panel has a subtle gradient background, and the connected Sheets bar has a pulsing green dot.
-
-Open it and let me know what to tweak — colors, layout, any section that doesn't feel right yet.
-
-C:\Users\arvk9\AppData\Roaming\Claude\local-agent-mode-sessions\7256a20f-d24a-46cc-9b15-3882aa868dda\8e2d37cb-d792-4088-b8e7-af633d92d065\local_6e1811ad-7ef1-4137-9f25-0895daf6eafd\outputs\fitness-tracker.html
-Code 
-
-Show in Folder
-
-Hmm. Here are things i dont like.
-
-I don tlike how we create a program. Freeform text isnt great because its too difficult. Can you force the options for a user to create. 
-The log workoutpage isnt gerat etierht. LIke how do you actually log how many reps you did per set?? its not possible in current state. 
-
-Maybe add a timer next to each exercise. 
-
-Also optimize so its a mobile web app too please
-
-
-Thought process
-Thought process
-Good feedback — all three are real issues. Here's what I'll fix:
-
-Program builder → structured form with day/exercise cards, no free text
-Logger → each set gets its own row with a tap-to-complete checkmark, reps + weight inputs per set
-Rest timer → per-exercise countdown that starts when you check off a set
-Mobile → bottom nav bar, large tap targets, touch-first layout
-
-Updated todo list, created a file, read a file
-Updated todo list, created a file, read a file
-Here's the rebuilt version. Key changes:
-
-Program builder — tap "Add Day" to create a day, then "＋ Add Exercise" to pick from a searchable list with autocomplete (30+ exercises built in). Each exercise shows as a card with name, sets, reps, weight. No more free-form text.
-
-Logger — each set now has its own row with individual reps and weight inputs, plus a circle checkmark to tap when the set is done. Checking a set turns it green and auto-opens the rest timer. The header shows live "2/3 done" progress per exercise.
-
-Rest timer — each exercise card has a ⏱ button that opens a fullscreen timer modal. Options for 30s / 1m / 1:30 / 2m. Vibrates on mobile when time's up.
-
-Mobile — bottom navigation bar (like a native app), large tap targets, slide-up modal sheet for adding exercises, no horizontal scroll, full-width everything.
-
-Open it on your phone browser to get the full mobile feel. What would you like to change next?
-
-C:\Users\arvk9\AppData\Roaming\Claude\local-agent-mode-sessions\7256a20f-d24a-46cc-9b15-3882aa868dda\8e2d37cb-d792-4088-b8e7-af633d92d065\local_6e1811ad-7ef1-4137-9f25-0895daf6eafd\outputs\fitness-tracker.html
-Code 
-
-Show in Folder
-
-how do i open this in edge on website?
-
-
-Thought process
-Thought process
-Since it's a local HTML file, here are the easiest ways to open it in Edge:
-
-Option 1 — Drag & drop (easiest) Just drag the fitness-tracker.html file from your outputs folder directly onto an open Edge window. It'll load instantly.
-
-Option 2 — File menu Open Edge → press Ctrl+O → navigate to your outputs folder → select fitness-tracker.html.
-
-Option 3 — Address bar Type the full path directly into the Edge address bar, like: C:\Users\YourName\...\fitness-tracker.html
-
-To make it feel like a real app on your phone:
-
-If you want it on your phone, the easiest approach is to host it for free. Two options:
-
-GitHub Pages — free, just upload the file to a GitHub repo and enable Pages in settings
-Netlify Drop — go to netlify.com/drop and literally drag the HTML file onto the page. You'll get a live URL in seconds, no account needed.
-Once it has a URL, open it on your phone in Safari/Chrome and tap "Add to Home Screen" — it'll install like a native app with its own icon.
-
-Want me to help you get it hosted on Netlify or GitHub Pages?
-
-i copied and pasted code into github but i cant click it
-
-
-Thought process
-Thought process
-GitHub shows code files as text — it doesn't run HTML. To actually view it as a working webpage, you need to enable GitHub Pages. Here's how:
-
-1. Make sure your file is in a repo The file should be named fitness-tracker.html (or index.html works best for the root).
-
-2. Enable GitHub Pages
-
-Go to your repo on GitHub
-Click Settings (top menu)
-Scroll down to Pages in the left sidebar
-Under "Branch", select main (or master) and hit Save
-3. Wait ~1 minute, then GitHub will give you a URL like: https://yourusername.github.io/your-repo-name/fitness-tracker.html
-
-That URL is your live web app — open it on any device.
-
-Faster alternative — Netlify Drop (no setup needed):
-
-Go to netlify.com/drop
-Drag your fitness-tracker.html file onto the page
-You get a live link in about 10 seconds
-That's honestly the quickest way to get it live right now. Want help with either?
-
-Uploaded image
-image.jpeg
-Uploaded image
-image.jpeg
-Not sure whats going on
-
-
-Thought process
-Thought process
-I can see the problem — two issues:
-
-1. Your file is named Fitappv1 with no .html extension — GitHub Pages can't serve it without the extension.
-
-2. GitHub Pages needs the file named index.html to load at the root URL.
-
-Here's the fix:
-
-Rename the file to index.html on GitHub:
-
-Click on Fitappv1 in your repo
-Click the pencil icon (Edit) in the top right
-At the top, change the filename from Fitappv1 to index.html
-Scroll down and click Commit changes
-Then wait about 1 minute and go to: https://arvk93.github.io/fitness-tracker.html/
-
-That should load your app. Give it a try!
-
-Uploaded image
-image.jpeg
-anything here?
-
-
-Thought process
-Thought process
-Good news — GitHub Pages is set up correctly! Your site URL is: https://arvk93.github.io/fitness-tracker.html/
-
-The only remaining problem is the file inside your repo is named Fitappv1 with no .html extension. GitHub Pages is looking for index.html and can't find it.
-
-Fix — just rename the file:
-
-Go back to your repo's Code tab
-Click on Fitappv1
-Click the pencil ✏️ icon to edit
-At the very top, click on the filename Fitappv1 and rename it to index.html
-Click Commit changes
-Then visit https://arvk93.github.io/fitness-tracker.html/ — it should load your app. Takes about 30 seconds to update after you commit.
-
-i pressed unbpuiblsih now i cant get it back
-
-
-Thought process
-Thought process
-No worries, easy to fix! Just re-enable it:
-
-Go back to your repo's Settings tab
-Click Pages in the left sidebar
-Under Branch, select main from the dropdown (it'll say "None" right now)
-Make sure it says / (root) next to it
-Click Save
-GitHub Pages will republish in about a minute and your URL will be back at https://arvk93.github.io/fitness-tracker.html/
-
-Uploaded image
-image.jpeg
-still get this
-
-
-Thought process
-Thought process
-Let me just fix this for you directly in your browser. Give me a moment.
-
-
-Tabs Context
-Tabs Context
-Can't reach your browser directly. But the fix is simple — just two steps:
-
-Step 1 — Re-enable GitHub Pages:
-
-Repo → Settings → Pages → set Branch to main → Save
-Step 2 — Rename your file to index.html:
-
-Go to your repo's Code tab
-Click on your file (Fitappv1)
-Click the pencil ✏️ icon (top right of the file view)
-Click on the filename at the top of the editor — change it to index.html
-Click Commit changes → Commit changes again
-That's it. Both steps are needed — Pages has to be on AND the file has to be named index.html. Wait 60 seconds then try the URL again.
-
-Uploaded image
-image.jpeg
-ok lets do a few more updates. Add a bunch more exercises, owever give an initial dropdown of the exercise type to narrow down list. 
-Also maybe create some prebuilt workout reoutine options that poeple could use if they want. 
-
-Try to rebrand with this Logo and branidng for Arvin fitness
-
-
-Updated todo list
-Updated todo list
-Love the logo — stark black and white, bold and clean. I'll go dark premium theme (black/charcoal + gold accent) to match it. Writing the full update now.
-
-
-Created a file, updated todo list, read a file
-Created a file, updated todo list, read a file
-Here's the updated version. Here's what changed:
-
-Arvin branding — full dark/black theme with gold accents throughout. The logo mark (circle with triangle — recreation of your actual logo) sits in the top bar alongside "Arvin / FITNESS & REHAB" in the correct typography style.
-
-Exercise system — adding an exercise now starts with a category dropdown (Chest, Back, Shoulders, Biceps, Triceps, Quads, Hamstrings & Glutes, Calves, Core, Cardio, Full Body, Rehab & Mobility). Once you pick a category it shows only those exercises — over 200 total across all categories. There's also a "Type custom exercise" option at the bottom of each list.
-
-6 prebuilt routines — tap any to load instantly:
-
-Beginner Full Body (3 days)
-Push/Pull/Legs (6 days)
-Upper/Lower Split (4 days)
-Strength 5/3/1 (4 days)
-Rehab & Mobility (3 days) — fitting the "& Rehab" part of your brand
-Hypertrophy Bro Split (5 days)
-To get it on GitHub, just replace the content of your index.html with this new file. What else would you like to adjust?
-
-C:\Users\arvk9\AppData\Roaming\Claude\local-agent-mode-sessions\7256a20f-d24a-46cc-9b15-3882aa868dda\8e2d37cb-d792-4088-b8e7-af633d92d065\local_6e1811ad-7ef1-4137-9f25-0895daf6eafd\outputs\fitness-tracker.html
-Code 
-
-Show in Folder
-
-no use the same logo
-
-
-Found files, ran a command
-Found files, ran a command
-You've hit your limit · resets 2am (America/New_York)
-
-
-Usage limit reached ∙ Resets 2:00 AM ∙ limits shared with Claude Code
-Keep working
-
-
-
-Claude is AI and can make mistakes. Please double-check responses. Give us feedback
-
-Show in Folder
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -405,7 +42,7 @@ body {
   padding-bottom: var(--bottom-nav-h);
   -webkit-font-smoothing: antialiased;
 }
- 
+
 /* ── TOP BAR ── */
 .top-bar {
   background: var(--surface);
@@ -428,7 +65,7 @@ body {
 .brand-name { font-size: 0.9rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); }
 .brand-sub { font-size: 0.52rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-top: 2px; }
 .top-bar-page { font-size: 0.8rem; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
- 
+
 /* ── BOTTOM NAV ── */
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; right: 0;
@@ -449,21 +86,21 @@ body {
 .nav-item .nav-icon { font-size: 1.25rem; }
 .nav-item .nav-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
 .nav-item.active { color: var(--gold); }
- 
+
 /* ── PAGES ── */
 .page { display: none; max-width: 640px; margin: 0 auto; padding: 20px 16px; }
 .page.active { display: block; }
 .page-header { margin-bottom: 22px; }
 .page-header h1 { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; color: var(--white); }
 .page-header p { font-size: 0.82rem; color: var(--muted); margin-top: 3px; }
- 
+
 /* ── GOLD DIVIDER ── */
 .gold-line { height: 2px; background: linear-gradient(90deg, var(--gold), transparent); border-radius: 1px; margin: 16px 0; }
- 
+
 /* ── CARDS ── */
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; margin-bottom: 14px; box-shadow: var(--shadow); }
 .card-gold { border-color: rgba(201,168,76,0.3); background: linear-gradient(135deg, var(--surface), #1A1810); }
- 
+
 /* ── BUTTONS ── */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
@@ -491,7 +128,7 @@ body {
 .btn-sm { padding: 8px 14px; font-size: 0.78rem; min-height: 36px; }
 .btn-full { width: 100%; }
 .btn-xs { padding: 5px 10px; font-size: 0.72rem; border-radius: 8px; min-height: 30px; }
- 
+
 /* ── FORM ── */
 input, textarea, select {
   font-family: inherit; font-size: 0.95rem; color: var(--text);
@@ -508,17 +145,17 @@ label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform
 .form-row { margin-bottom: 14px; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
 .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 14px; }
- 
+
 /* ── SECTION LABEL ── */
 .section-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .section-label::after { content:''; flex:1; height:1px; background: linear-gradient(90deg, rgba(201,168,76,0.3), transparent); }
- 
+
 /* ── BADGES ── */
 .badge { display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em; }
 .badge-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(201,168,76,0.2); }
 .badge-muscle { background: rgba(78,205,196,0.1); color: var(--teal); border: 1px solid rgba(78,205,196,0.15); font-size: 0.62rem; }
 .badge-green { background: rgba(76,175,125,0.1); color: var(--green); border: 1px solid rgba(76,175,125,0.2); }
- 
+
 /* ── PROGRAM BUILDER ── */
 .day-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); margin-bottom: 14px; overflow: hidden; }
 .day-section-header {
@@ -550,7 +187,7 @@ label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform
   color: var(--muted);
 }
 .icon-btn.red { background: rgba(224,92,92,0.1); border-color: rgba(224,92,92,0.2); color: var(--red); }
- 
+
 /* ── PREBUILT ROUTINES ── */
 .routine-card {
   background: var(--surface); border: 1px solid var(--border);
@@ -564,7 +201,7 @@ label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform
 .routine-name { font-weight: 800; font-size: 0.95rem; color: var(--white); }
 .routine-desc { font-size: 0.75rem; color: var(--muted); margin-top: 3px; line-height: 1.4; }
 .routine-tags { display: flex; gap: 5px; margin-top: 7px; flex-wrap: wrap; }
- 
+
 /* ── MODAL ── */
 .modal-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.7);
@@ -584,7 +221,7 @@ label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform
 .modal-overlay.open .modal { transform: translateY(0); }
 .modal-handle { width: 36px; height: 4px; background: var(--border2); border-radius: 2px; margin: 0 auto 18px; }
 .modal-title { font-weight: 900; font-size: 1.1rem; color: var(--white); margin-bottom: 18px; letter-spacing: -0.3px; }
- 
+
 /* ── WORKOUT PLAN ── */
 .plan-exercise {
   background: var(--surface); border: 1px solid var(--border);
@@ -601,7 +238,7 @@ label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform
 .alt-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 9px; border-radius: 8px; }
 .alt-row:active { background: var(--surface3); }
 .alt-row-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
- 
+
 /* ── LOGGER ── */
 .day-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; overflow-x: auto; padding-bottom: 4px; }
 .day-pill {
@@ -652,14 +289,14 @@ label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform
 .set-row:not(.done) .set-check::after { content: ''; }
 .set-row.done .set-check::after { content: '✓'; color: #fff; font-weight: 900; font-size: 0.95rem; }
 .log-notes { padding: 8px 12px 13px; }
- 
+
 /* ── TIMER MODAL ── */
 .timer-options { display: flex; gap: 8px; justify-content: center; }
 .timer-opt { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border2); background: var(--surface2); cursor: pointer; font-size: 0.82rem; font-weight: 700; color: var(--muted); font-family: inherit; }
 .timer-opt.selected { background: var(--gold); color: #0A0A0A; border-color: transparent; }
 #timerDisplay { text-align:center; font-size:4.5rem; font-weight:900; font-variant-numeric:tabular-nums; color:var(--white); margin:20px 0 24px; letter-spacing:-3px; }
 #timerDisplay.running { color: var(--gold); }
- 
+
 /* ── HISTORY ── */
 .history-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
 .history-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 13px; }
@@ -669,7 +306,7 @@ label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform
 .history-ex-row:last-child { border-bottom: none; }
 .history-ex-name { flex: 1; font-weight: 600; font-size: 0.85rem; }
 .set-chip { background: var(--surface2); border-radius: 5px; padding: 2px 6px; font-size: 0.68rem; font-weight: 700; color: var(--text); border: 1px solid var(--border2); }
- 
+
 /* ── SHEETS ── */
 .step { display: flex; gap: 13px; margin-bottom: 16px; align-items: flex-start; }
 .step-num { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; background: var(--gold); color: #0A0A0A; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 900; }
@@ -678,13 +315,13 @@ label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform
 .connected-bar { display: flex; align-items: center; gap: 10px; background: rgba(76,175,125,0.08); border: 1px solid rgba(76,175,125,0.2); border-radius: 12px; padding: 13px 15px; margin-bottom: 16px; }
 .dot-live { width: 9px; height: 9px; border-radius: 50%; background: var(--green); flex-shrink: 0; animation: pulse 2s infinite; box-shadow: 0 0 0 3px rgba(76,175,125,0.2); }
 @keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(76,175,125,0.2);} 50%{box-shadow:0 0 0 7px rgba(76,175,125,0);} }
- 
+
 /* ── EMPTY STATE ── */
 .empty { text-align: center; padding: 52px 20px; border: 1px dashed var(--border2); border-radius: var(--r); }
 .empty-icon { font-size: 2.8rem; display: block; margin-bottom: 12px; }
 .empty p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
 .empty strong { color: var(--text); }
- 
+
 /* ── TOAST ── */
 #toast {
   position: fixed; bottom: calc(var(--bottom-nav-h) + 12px); left: 50%;
@@ -698,7 +335,7 @@ label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 #toast.success { background: #0D2418; border-color: rgba(76,175,125,0.4); color: var(--green); }
 #toast.error { background: #200D0D; border-color: rgba(224,92,92,0.4); color: var(--red); }
- 
+
 /* ── MISC ── */
 a { color: var(--gold); font-weight: 500; text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -712,7 +349,7 @@ a:hover { text-decoration: underline; }
 .mt-12 { margin-top: 12px; }
 .mt-16 { margin-top: 16px; }
 .mb-12 { margin-bottom: 12px; }
- 
+
 @media (min-width: 640px) {
   .page { padding: 28px 24px; }
   .modal { border-radius: 16px; max-width: 480px; margin: auto; }
@@ -721,7 +358,7 @@ a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
- 
+
 <!-- TOP BAR -->
 <div class="top-bar">
   <div class="brand">
@@ -741,16 +378,16 @@ a:hover { text-decoration: underline; }
   </div>
   <span class="top-bar-page" id="topTitle">Program</span>
 </div>
- 
+
 <!-- PAGES -->
- 
+
 <!-- ── PROGRAM ── -->
 <div id="page-program" class="page active">
   <div class="page-header">
     <h1>My Program</h1>
     <p>Build your custom training plan</p>
   </div>
- 
+
   <!-- Prebuilt Routines -->
   <div class="section-label">Prebuilt Routines</div>
   <div id="routinesList">
@@ -803,41 +440,41 @@ a:hover { text-decoration: underline; }
       </div>
     </div>
   </div>
- 
+
   <div class="gold-line"></div>
   <div class="section-label">Custom Program</div>
- 
+
   <div id="programDays"></div>
   <div style="display:flex;gap:10px;">
     <button class="btn btn-ghost btn-sm" onclick="addDay()" style="flex:1">＋ Add Day</button>
     <button class="btn btn-gold" onclick="saveProgram()" style="flex:1">Save Program ✓</button>
   </div>
 </div>
- 
+
 <!-- ── PLAN ── -->
 <div id="page-plan" class="page">
   <div class="page-header"><h1>Workout Plan</h1><p>Schedule with tutorials & alternates</p></div>
   <div id="planContent"></div>
 </div>
- 
+
 <!-- ── LOGGER ── -->
 <div id="page-logger" class="page">
   <div class="page-header"><h1>Log Workout</h1><p>Track every set in real time</p></div>
   <div id="loggerContent"></div>
 </div>
- 
+
 <!-- ── HISTORY ── -->
 <div id="page-history" class="page">
   <div class="page-header"><h1>History</h1><p>Your training log</p></div>
   <div id="historyContent"></div>
 </div>
- 
+
 <!-- ── SHEETS ── -->
 <div id="page-sheets" class="page">
   <div class="page-header"><h1>Google Sheets</h1><p>Auto-sync every session</p></div>
   <div id="sheetsContent"></div>
 </div>
- 
+
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <button class="nav-item active" onclick="showPage('program')" id="nav-program">
@@ -856,7 +493,7 @@ a:hover { text-decoration: underline; }
     <span class="nav-icon">🔗</span><span class="nav-label">Sheets</span>
   </button>
 </nav>
- 
+
 <!-- ADD EXERCISE MODAL -->
 <div class="modal-overlay" id="exerciseModal">
   <div class="modal">
@@ -904,7 +541,7 @@ a:hover { text-decoration: underline; }
     </div>
   </div>
 </div>
- 
+
 <!-- REST TIMER MODAL -->
 <div class="modal-overlay" id="timerModal">
   <div class="modal">
@@ -923,7 +560,7 @@ a:hover { text-decoration: underline; }
     </div>
   </div>
 </div>
- 
+
 <!-- ROUTINE CONFIRM MODAL -->
 <div class="modal-overlay" id="routineModal">
   <div class="modal">
@@ -936,9 +573,9 @@ a:hover { text-decoration: underline; }
     </div>
   </div>
 </div>
- 
+
 <div id="toast"></div>
- 
+
 <script>
 // ───────────────────────────────────────────────
 // EXERCISE DATABASE
@@ -957,13 +594,13 @@ const EXERCISES = {
   fullbody: ['Power Clean','Hang Clean','Push Press','Clean and Jerk','Snatch','Hang Snatch','Kettlebell Swing','Kettlebell Clean','Turkish Get Up','Farmer\'s Walk','Trap Bar Deadlift','Thruster','Wall Ball','Barbell Complex','Dumbbell Complex'],
   rehab: ['Hip 90/90 Stretch','Hip Flexor Stretch','Pigeon Pose','Cat-Cow','Bird Dog','Dead Bug','Clamshell','Banded Walk','Terminal Knee Extension','Wall Ankle Mobilization','Thoracic Rotation','Shoulder CARs','Cervical Retraction','Prone Press Up','McKenzie Extension','Supine Hip Rotation','Scapular Wall Slides','Doorway Chest Stretch','Foam Roll Quads','Foam Roll IT Band','Foam Roll Upper Back','Banded Hip Hinge','Pallof Press','Cook Hip Lift'],
 };
- 
+
 const MUSCLE_MAP = {
   chest:'chest',back:'back',shoulders:'shoulders',biceps:'biceps',triceps:'triceps',
   quads:'quads',hamstrings:'hamstrings',calves:'calves',core:'core',
   cardio:'cardio',fullbody:'fullbody',rehab:'rehab',
 };
- 
+
 const CAT_ICONS = { chest:'💪',back:'🔙',shoulders:'⬆️',biceps:'💪',triceps:'💪',quads:'🦵',hamstrings:'🦵',calves:'🦵',core:'🎯',cardio:'🏃',fullbody:'🏋️',rehab:'🩺',default:'🏋️' };
 const ALTERNATES = {
   chest:['Push Up','Dumbbell Fly','Pec Deck Machine','Cable Fly','Dips (Chest)'],
@@ -979,14 +616,14 @@ const ALTERNATES = {
   fullbody:['Kettlebell Swing','Farmer\'s Walk','Thruster','Turkish Get Up','Trap Bar Deadlift'],
   rehab:['Bird Dog','Dead Bug','Hip 90/90 Stretch','Cat-Cow','Banded Walk'],
 };
- 
+
 function getCategory(name){
   for(const [cat,list] of Object.entries(EXERCISES)) if(list.includes(name)) return cat;
   return 'default';
 }
 function getIcon(name){ return CAT_ICONS[getCategory(name)] || '🏋️'; }
 function getAlts(name){ return (ALTERNATES[getCategory(name)]||[]).filter(a=>a!==name).slice(0,5); }
- 
+
 // ───────────────────────────────────────────────
 // PREBUILT ROUTINES
 // ───────────────────────────────────────────────
@@ -1212,7 +849,7 @@ const ROUTINES = {
     ]
   },
 };
- 
+
 // ───────────────────────────────────────────────
 // STATE
 // ───────────────────────────────────────────────
@@ -1226,9 +863,9 @@ let timerDuration = 90;
 let timerRemaining = 90;
 let timerInterval = null;
 let pendingRoutineKey = null;
- 
+
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
- 
+
 // ───────────────────────────────────────────────
 // PERSIST
 // ───────────────────────────────────────────────
@@ -1242,7 +879,7 @@ function load(){
   try{ history=JSON.parse(localStorage.getItem('ff_history')||'[]'); }catch(e){ history=[]; }
   try{ sheetsConfig=JSON.parse(localStorage.getItem('ff_sheets')||'null'); }catch(e){ sheetsConfig=null; }
 }
- 
+
 // ───────────────────────────────────────────────
 // NAV
 // ───────────────────────────────────────────────
@@ -1259,7 +896,7 @@ function showPage(id){
   if(id==='history') renderHistory();
   if(id==='sheets') renderSheets();
 }
- 
+
 // ───────────────────────────────────────────────
 // ROUTINE LOADING
 // ───────────────────────────────────────────────
@@ -1283,7 +920,7 @@ function confirmLoadRoutine(key){
   renderProgramBuilder();
   toast(`"${r.name}" loaded ✓`,'success');
 }
- 
+
 // ───────────────────────────────────────────────
 // PROGRAM BUILDER
 // ───────────────────────────────────────────────
@@ -1332,7 +969,7 @@ function saveExercise(){
   renderProgramBuilder();
 }
 function removeExercise(di,ei){ program[di].exercises.splice(ei,1); renderProgramBuilder(); }
- 
+
 function renderProgramBuilder(){
   const el = document.getElementById('programDays');
   if(!program.length){
@@ -1360,14 +997,14 @@ function renderProgramBuilder(){
       </div>
     </div>`).join('');
 }
- 
+
 function saveProgram(){
   const total = program.reduce((a,d)=>a+d.exercises.length,0);
   if(!program.length||!total){ toast('Add at least one exercise first','error'); return; }
   save();
   toast(`Program saved — ${total} exercises, ${program.length} days ✓`,'success');
 }
- 
+
 // ───────────────────────────────────────────────
 // PLAN
 // ───────────────────────────────────────────────
@@ -1406,7 +1043,7 @@ function renderPlan(){
     </div>`).join('');
 }
 function toggleAlts(id){ const p=document.getElementById(id); if(p) p.classList.toggle('open'); }
- 
+
 // ───────────────────────────────────────────────
 // LOGGER
 // ───────────────────────────────────────────────
@@ -1460,7 +1097,7 @@ function renderLogger(){
   </div>`;
   el.innerHTML=html;
 }
- 
+
 function switchLogDay(i){ logDayIdx=i; logData={}; renderLogger(); }
 function updateSet(exId,si,field,val){ if(logData[exId]) logData[exId].sets[si][field]=val; }
 function updateNotes(exId,val){ if(logData[exId]) logData[exId].notes=val; }
@@ -1489,7 +1126,7 @@ async function saveSession(){
   toast('Session saved ✓','success');
   logData={}; renderLogger();
 }
- 
+
 // ───────────────────────────────────────────────
 // TIMER
 // ───────────────────────────────────────────────
@@ -1533,7 +1170,7 @@ function updateTimerDisplay(){
   const s=timerRemaining%60;
   document.getElementById('timerDisplay').textContent = m>0?`${m}:${String(s).padStart(2,'0')}`:s+'s';
 }
- 
+
 // ───────────────────────────────────────────────
 // HISTORY
 // ───────────────────────────────────────────────
@@ -1555,7 +1192,7 @@ function renderHistory(){
         </div>`).join('')}
     </div>`).join('');
 }
- 
+
 // ───────────────────────────────────────────────
 // GOOGLE SHEETS
 // ───────────────────────────────────────────────
@@ -1610,7 +1247,7 @@ async function writeSheet(apiKey,sheetId,tab,rows){
     return true;
   }catch(e){ toast('Network error','error'); return false; }
 }
- 
+
 // ───────────────────────────────────────────────
 // TOAST
 // ───────────────────────────────────────────────
@@ -1620,7 +1257,7 @@ function toast(msg,type=''){
   el.textContent=msg; el.className='show '+(type||'');
   clearTimeout(_tt); _tt=setTimeout(()=>{ el.className=''; },3000);
 }
- 
+
 // ───────────────────────────────────────────────
 // INIT
 // ───────────────────────────────────────────────
@@ -1629,4 +1266,3 @@ renderProgramBuilder();
 </script>
 </body>
 </html>
- 
