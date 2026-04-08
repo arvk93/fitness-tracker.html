@@ -42,7 +42,7 @@
 
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   --r: 24px; 
-  --bottom-space: 140px; /* FIX: Added massive padding to clear the floating nav */
+  --bottom-space: 140px; 
   --active-bar-h: 85px;
 }
 
@@ -142,7 +142,11 @@ body {
 .workout-timer-global { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 1.25rem; color: var(--brand); text-shadow: var(--brand-glow); }
 
 /* ── PAGES & ANIMATIONS ── */
-.page { display: none; max-width: 640px; margin: 0 auto; padding: 24px 20px; opacity: 0; }
+.page { 
+  display: none; max-width: 640px; margin: 0 auto; 
+  padding: 24px 20px 160px 20px; 
+  opacity: 0; 
+}
 .page.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
@@ -216,7 +220,7 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .routine-card { background: var(--glass-base); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: var(--r); padding: 16px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 16px; }
 .routine-card:hover, .routine-card:active { background: var(--glass-hover); transform: scale(0.98); border-color: var(--glass-highlight); }
 .routine-icon { font-size: 1.8rem; flex-shrink: 0; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--icon-bg); border-radius: 16px; border: 1px solid var(--glass-border); color: var(--text); }
-.routine-icon svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.routine-icon svg { width: 26px; height: 26px; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .routine-info { flex: 1; }
 .routine-name { font-weight: 600; font-size: 1.05rem; color: var(--text); }
 .routine-desc { font-size: 0.85rem; color: var(--muted); margin-top: 4px; line-height: 1.4; }
@@ -263,13 +267,13 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .last-perf-chip { display: inline-flex; align-items: center; gap: 4px; background: var(--glass-base); color: var(--muted); font-size: 0.7rem; font-weight: 500; padding: 4px 8px; border-radius: 6px; margin-top: 6px; border: 1px solid var(--glass-border); }
 
 .set-rows { padding: 10px 20px 0 20px; }
-.set-row { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--glass-border); }
+.set-row { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
 .set-row:last-child { border-bottom: none; }
 .set-num { width: 34px; height: 34px; border-radius: 50%; background: var(--glass-base); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 600; color: var(--muted); flex-shrink: 0; }
 .set-inputs { display: flex; align-items: center; gap: 12px; flex: 1; }
 .set-input-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; }
 .set-input-wrap label { font-size: 0.65rem; margin-bottom: 6px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-.set-input-wrap input { text-align: center; font-size: 1.15rem; font-weight: 600; padding: 12px 4px; border-radius: 12px; width: 100%; max-width: 90px; }
+.set-input-wrap input { text-align: center; font-size: 1.15rem; font-weight: 600; padding: 12px 4px; border-radius: 12px; width: 100%; max-width: 90px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); }
 
 .set-check {
   width: 48px; height: 48px; border-radius: 16px; border: 1px solid var(--glass-highlight); background: var(--glass-base);
@@ -285,15 +289,15 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 
 /* ── HISTORY ── */
 .history-card { background: var(--glass-base); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--r); padding: 20px; margin-bottom: 16px; }
-.history-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid var(--glass-border); padding-bottom: 12px; }
+.history-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; }
 .history-date { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
 .history-day-label { font-weight: 700; font-size: 1.2rem; color: var(--text); margin-top: 4px; }
 .history-meta-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
 .history-meta-chip { font-size: 0.7rem; font-weight: 600; color: var(--text); background: var(--glass-base); border: 1px solid var(--glass-border); padding: 4px 10px; border-radius: 8px; }
-.history-ex-row { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--glass-border); }
+.history-ex-row { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
 .history-ex-row:last-child { border-bottom: none; }
 .history-ex-name { font-size: 0.95rem; font-weight: 600; flex: 1; color: var(--text); }
-.set-chip { background: var(--glass-base); border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; font-weight: 600; color: var(--text); border: 1px solid var(--glass-border); }
+.set-chip { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; font-weight: 600; color: var(--text); border: 1px solid var(--glass-border); }
 .set-chip.pr { background: rgba(255,214,10,0.15); color: var(--gold); border-color: rgba(255,214,10,0.3); }
 
 /* ── CHART EMPTY ── */
@@ -306,7 +310,7 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .plate-dot { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.7rem; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
 .plate-label { flex: 1; font-weight: 600; font-size: 0.95rem; color: var(--text); }
 .plate-count { font-weight: 800; font-size: 1.1rem; color: var(--brand); }
-.plate-summary { background: var(--glass-base); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px; }
+.plate-summary { background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px; }
 .plate-summary .big { font-size: 2.2rem; font-weight: 800; color: var(--text); letter-spacing: -1px; }
 .plate-summary .sub { font-size: 0.8rem; color: var(--brand); font-weight: 600; margin-top: 4px; }
 
@@ -354,23 +358,33 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
   <div class="section-label">Prebuilt Routines</div>
   <div id="routinesList">
     <div class="routine-card" onclick="loadRoutine('westside')">
-      <div class="routine-icon"><svg viewBox="0 0 24 24"><path d="M13 3L4 14H11L11 21L20 10H13L13 3Z"/></svg></div>
+      <div class="routine-icon">
+        <svg viewBox="0 0 24 24"><line x1="2" y1="12" x2="22" y2="12"></line><line x1="6" y1="8" x2="6" y2="16"></line><line x1="18" y1="8" x2="18" y2="16"></line><line x1="9" y1="10" x2="9" y2="14"></line><line x1="15" y1="10" x2="15" y2="14"></line></svg>
+      </div>
       <div class="routine-info"><div class="routine-name">Westside Cut Phase</div><div class="routine-desc">4 Days lifting + 1 GPP. Custom setup.</div></div>
     </div>
     <div class="routine-card" onclick="loadRoutine('beginner')">
-      <div class="routine-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg></div>
+      <div class="routine-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
       <div class="routine-info"><div class="routine-name">Beginner Full Body</div><div class="routine-desc">3 days/week · compound movements</div></div>
     </div>
     <div class="routine-card" onclick="loadRoutine('ppl')">
-      <div class="routine-icon"><svg viewBox="0 0 24 24"><path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3"/><path d="M12 3L16 7M12 3L8 7"/></svg></div>
+      <div class="routine-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+      </div>
       <div class="routine-info"><div class="routine-name">Push / Pull / Legs</div><div class="routine-desc">3-6 days/week · balanced volume split</div></div>
     </div>
     <div class="routine-card" onclick="loadRoutine('upperlower')">
-      <div class="routine-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6" rx="2"/><rect x="4" y="14" width="16" height="6" rx="2"/></svg></div>
+      <div class="routine-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="1"></rect><rect x="3" y="14" width="18" height="7" rx="1"></rect></svg>
+      </div>
       <div class="routine-info"><div class="routine-name">Upper / Lower</div><div class="routine-desc">4 days/week · high frequency</div></div>
     </div>
     <div class="routine-card" onclick="loadRoutine('brosplit')">
-      <div class="routine-icon"><svg viewBox="0 0 24 24"><path d="M6 12V18M18 12V18M9 12H15M9 8H15M5 8H19C20.1046 8 21 8.89543 21 10V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V10C3 8.89543 3.89543 8 5 8Z"/></svg></div>
+      <div class="routine-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="8" x2="12" y2="12"></line></svg>
+      </div>
       <div class="routine-info"><div class="routine-name">5-Day Bro Split</div><div class="routine-desc">1 muscle group per day · max pump</div></div>
     </div>
   </div>
@@ -476,6 +490,19 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
       </div>
       <div class="toggle-switch" id="toggleTheme" onclick="toggleThemeSetting()"></div>
     </div>
+    <div class="toggle-row">
+      <div>
+        <div class="t-label">Interface Scale</div>
+        <div class="t-desc">Zoom out to fit more on screen.</div>
+      </div>
+      <select id="uiScaleSelect" style="width: 125px; background:rgba(255,255,255,0.05);" onchange="changeUIScale(this.value)">
+        <option value="0.85">Small</option>
+        <option value="0.90">Compact</option>
+        <option value="0.95">Slightly Smaller</option>
+        <option value="1">Default</option>
+        <option value="1.05">Large</option>
+      </select>
+    </div>
   </div>
 
   <div class="card">
@@ -492,7 +519,7 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
         <div class="t-label">Default Rest Duration</div>
         <div class="t-desc">Used for auto-start.</div>
       </div>
-      <select id="defaultRestSelect" style="width: 100px;" onchange="settings.defaultRest=parseInt(this.value);saveSettings()">
+      <select id="defaultRestSelect" style="width: 100px; background:rgba(255,255,255,0.05);" onchange="settings.defaultRest=parseInt(this.value);saveSettings()">
         <option value="30">30s</option>
         <option value="60">1m</option>
         <option value="90" selected>90s</option>
@@ -680,10 +707,11 @@ const BARBELL_EXERCISES = new Set(['Box Squat','Bench Press','Close Grip Bench',
 // ═══════════════════════════════════════════════
 let program = JSON.parse(localStorage.getItem('ff_program')) || [];
 let history = JSON.parse(localStorage.getItem('ff_history')) || [];
-let settings = JSON.parse(localStorage.getItem('ff_settings')) || { autoRest: false, sound: true, defaultRest: 90, theme: 'dark' };
+let settings = JSON.parse(localStorage.getItem('ff_settings')) || { autoRest: false, sound: true, defaultRest: 90, theme: 'dark', uiScale: 1.0 };
 
-// Apply theme on load
+// Apply theme and scale on load
 if (settings.theme === 'light') { document.documentElement.setAttribute('data-theme', 'light'); }
+if (settings.uiScale) { document.body.style.zoom = settings.uiScale; }
 
 let logData = {};
 let activeDayIdx = null;
@@ -1318,11 +1346,18 @@ function renderPlateCalc() {
 // ═══════════════════════════════════════════════
 // SETTINGS & THEME
 // ═══════════════════════════════════════════════
+function changeUIScale(val) {
+  settings.uiScale = parseFloat(val);
+  saveSettings();
+  document.body.style.zoom = settings.uiScale;
+}
+
 function renderSettings() {
   document.getElementById('toggleAutoRest').classList.toggle('on', !!settings.autoRest);
   document.getElementById('toggleSound').classList.toggle('on', settings.sound !== false);
   document.getElementById('toggleTheme').classList.toggle('on', settings.theme === 'light');
   document.getElementById('defaultRestSelect').value = settings.defaultRest || 90;
+  document.getElementById('uiScaleSelect').value = settings.uiScale || 1;
 }
 function toggleSetting(key) {
   settings[key] = !settings[key];
@@ -1339,7 +1374,6 @@ function toggleThemeSetting() {
   }
   renderSettings();
   
-  // Force redraw charts with new colors if on charts tab
   if (document.getElementById('page-history').classList.contains('active') && document.getElementById('tab-charts').classList.contains('active')) {
     switchHistoryTab('charts');
   }
@@ -1379,6 +1413,7 @@ function importJSON(ev) {
         settings = data.settings; saveSettings(); 
         if (settings.theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
         else document.documentElement.removeAttribute('data-theme');
+        if (settings.uiScale) document.body.style.zoom = settings.uiScale;
       }
       toast('Restored ✓', 'success');
       renderProgramBuilder(); renderSettings();
