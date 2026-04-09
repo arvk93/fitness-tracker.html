@@ -144,14 +144,11 @@ body {
 .workout-timer-global { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 1.25rem; color: var(--brand); text-shadow: var(--brand-glow); }
 
 /* ── PAGES & ANIMATIONS ── */
-.page { 
-  display: none; max-width: 640px; margin: 0 auto; 
-  padding: 24px 20px 160px 20px; 
-  opacity: 0; 
-}
+.page { display: none; max-width: 640px; margin: 0 auto; padding: 24px 20px 160px 20px; opacity: 0; }
 .page.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes confetti { 0% { transform: translateY(-10px) scale(0.8); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
 
 .page-header { margin-bottom: 24px; text-align: left; }
 .page-header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; color: var(--text); }
@@ -163,12 +160,8 @@ body {
   border: 1px solid var(--brand-dim); border-radius: var(--r); padding: 22px; margin-bottom: 32px; 
   box-shadow: var(--brand-glow); position: relative; overflow: hidden;
 }
-.active-dashboard::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--brand);
-}
-.phase-badge {
-  display: inline-block; padding: 4px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px;
-}
+.active-dashboard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--brand); }
+.phase-badge { display: inline-block; padding: 4px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; }
 .phase-badge.strength { background: rgba(50,215,75,0.15); color: var(--green); border: 1px solid rgba(50,215,75,0.3); }
 .phase-badge.hypertrophy { background: rgba(191,90,242,0.15); color: var(--purple); border: 1px solid rgba(191,90,242,0.3); }
 .phase-badge.power { background: rgba(255,69,58,0.15); color: var(--red); border: 1px solid rgba(255,69,58,0.3); }
@@ -225,10 +218,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
 
 /* ── TOGGLE SWITCH ── */
-.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--glass-base); }
-.toggle-row:last-child { border-bottom: none; }
-.toggle-row .t-label { font-weight: 600; font-size: 0.95rem; color: var(--text); }
-.toggle-row .t-desc { font-size: 0.8rem; color: var(--muted); margin-top: 4px; font-weight: 400; }
 .toggle-switch { position: relative; width: 50px; height: 28px; background: var(--glass-base); border-radius: 14px; cursor: pointer; transition: background 0.3s; flex-shrink: 0; border: 1px solid var(--glass-border); }
 .toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
 .toggle-switch.on { background: var(--green); border-color: var(--green); }
@@ -306,8 +295,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .set-row.done .set-num { background: transparent; border-color: transparent; color: var(--muted2); }
 .set-row.done .set-check { background: var(--green); border-color: transparent; box-shadow: 0 0 15px rgba(50,215,75,0.4); }
 .set-row.done .set-check::after { content: '✓'; color: #fff; font-weight: 800; font-size: 1.4rem; }
-.set-row.pr .set-check { background: var(--gold); box-shadow: 0 0 15px rgba(255,214,10,0.4); }
-.set-row.pr .set-check::after { color: #000; }
 
 .history-card { background: var(--glass-base); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--r); padding: 20px; margin-bottom: 16px; }
 .history-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; }
@@ -319,17 +306,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .history-ex-row:last-child { border-bottom: none; }
 .history-ex-name { font-size: 0.95rem; font-weight: 600; flex: 1; color: var(--text); }
 .set-chip { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; font-weight: 600; color: var(--text); border: 1px solid var(--glass-border); }
-.set-chip.pr { background: rgba(255,214,10,0.15); color: var(--gold); border-color: rgba(255,214,10,0.3); }
-
-/* ── STATS & CHARTS ── */
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-.stat-card { background: var(--brand); color: #fff; padding: 16px; border-radius: 16px; display: flex; flex-direction: column; justify-content: center; box-shadow: var(--brand-glow); }
-.stat-card.secondary { background: var(--glass-base); color: var(--text); border: 1px solid var(--glass-border); box-shadow: var(--shadow); backdrop-filter: blur(20px); }
-.stat-value { font-size: 1.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 4px; }
-.stat-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; }
-.stat-card.secondary .stat-label { color: var(--muted); }
-.chart-empty { text-align: center; padding: 30px 10px; color: var(--muted); font-size: 0.85rem; font-weight: 500; }
-.chart-empty svg { width: 32px; height: 32px; display: block; margin: 0 auto 10px; opacity: 0.5; stroke: currentColor; fill: none; }
 
 /* ── TOAST ── */
 #toast {
@@ -425,7 +401,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
       <div class="routine-info"><div class="routine-name">Active Recovery</div><div class="routine-desc">3 days/week · 50% volume to shed fatigue</div></div>
     </div>
   </div>
-
 </div>
 
 <div id="page-builder" class="page">
@@ -497,14 +472,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
       </select>
       <div id="strengthChartWrap" style="position:relative; height: 220px;"><canvas id="strengthChart"></canvas></div>
     </div>
-    <div class="card">
-      <div class="section-label">Body Metrics</div>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-        <p style="font-size:0.8rem; color:var(--muted); margin:0;">Synced via Samsung Health</p>
-        <button class="btn btn-ghost btn-sm" onclick="syncBodyMetrics()">Sync Now</button>
-      </div>
-      <div id="bodyChartWrap" style="position:relative; height: 220px;"><canvas id="bodyChart"></canvas></div>
-    </div>
   </div>
   <div id="historyLogView" style="display:none;"><div id="historyContent"></div></div>
 </div>
@@ -521,22 +488,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
     <div class="toggle-row"><div><div class="t-label">Auto-start Rest Timer</div></div><div class="toggle-switch" id="toggleAutoRest" onclick="toggleSetting('autoRest')"></div></div>
     <div class="toggle-row"><div><div class="t-label">Default Rest Duration</div></div><select id="defaultRestSelect" style="width: 100px; background:rgba(255,255,255,0.05);" onchange="settings.defaultRest=parseInt(this.value);saveSettings()"><option value="30">30s</option><option value="60">1m</option><option value="90" selected>90s</option><option value="120">2m</option><option value="180">3m</option></select></div>
     <div class="toggle-row"><div><div class="t-label">Sound & Haptics</div></div><div class="toggle-switch on" id="toggleSound" onclick="toggleSetting('sound')"></div></div>
-  </div>
-  <div class="card">
-    <div class="section-label">Integrations</div>
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <div><strong style="font-size:1.05rem; display:block; margin-bottom:4px; color:var(--text);">Samsung Health</strong><p id="healthSyncStatus" style="font-size:0.85rem; color:var(--muted);">Not linked.</p></div>
-      <button class="btn btn-sm btn-brand" onclick="enableHealthSync()">Link</button>
-    </div>
-  </div>
-  <div class="card">
-    <div class="section-label">Data Management</div>
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      <button class="btn btn-ghost btn-sm" style="flex:1; min-width: 120px;" onclick="exportCSV()">CSV</button>
-      <button class="btn btn-ghost btn-sm" style="flex:1; min-width: 120px;" onclick="exportJSON()">Backup</button>
-      <button class="btn btn-ghost btn-sm" style="flex:1; min-width: 120px;" onclick="document.getElementById('importFile').click()">Restore</button>
-      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)" />
-    </div>
   </div>
 </div>
 
@@ -604,7 +555,7 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
   <div class="modal">
     <div class="modal-handle"></div>
     <div style="font-size:1.4rem; font-weight:800; margin-bottom:8px; color:var(--text);" id="setupTitle">Start Routine</div>
-    <p style="font-size:0.85rem; color:var(--muted); margin-bottom:24px;">Set the parameters for your new active phase.</p>
+    <p style="font-size:0.85rem; color:var(--muted); margin-bottom:24px;" id="setupSubtitle">Set the parameters for your new active phase.</p>
     
     <div class="form-row" id="setupCustomPhaseRow" style="display:none">
       <label>Phase Type</label>
@@ -632,14 +583,13 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
     </div>
     <div style="display:flex;gap:12px;margin-top:30px">
       <button class="btn btn-ghost" style="flex:1" onclick="closeModal('routineSetupModal')">Cancel</button>
-      <button class="btn btn-brand" style="flex:1" onclick="confirmStartRoutine()">Set Active</button>
+      <button class="btn btn-brand" id="startRoutineBtn" style="flex:1" onclick="confirmStartRoutine()">Set Active</button>
     </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="exerciseModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.6rem; font-weight:800; margin-bottom:24px; color:var(--text);">Add Exercise</div><div class="form-row"><label>Category</label><select id="exCategory" onchange="filterExercises()"><option value="">— Select category —</option><option value="chest">Chest</option><option value="back">Back</option><option value="shoulders">Shoulders</option><option value="biceps">Biceps</option><option value="triceps">Triceps</option><option value="quads">Quads</option><option value="hamstrings">Hamstrings</option><option value="calves">Calves</option><option value="core">Core</option><option value="cardio">Cardio & GPP</option><option value="fullbody">Full Body</option></select></div><div class="form-row"><label>Exercise</label><select id="exName"><option value="">— Select category first —</option></select></div><div class="form-row" id="customNameRow" style="display:none"><label>Custom Name</label><input type="text" id="exCustomName" placeholder="Type exercise name…" /></div><div class="form-grid"><div><label>Sets</label><input type="number" id="exSets" value="3" inputmode="numeric" /></div><div><label>Target Reps</label><input type="text" id="exReps" placeholder="e.g. 8-12" /></div></div><div style="display:flex;gap:12px;margin-top:30px"><button class="btn btn-ghost" style="flex:1" onclick="closeModal('exerciseModal')">Cancel</button><button class="btn btn-brand" style="flex:1" onclick="saveExercise()">Add</button></div></div></div>
 <div class="modal-overlay" id="swapModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.6rem; font-weight:800; margin-bottom:8px; color:var(--text);">Swap Exercise</div><p style="font-size:0.9rem; color:var(--muted); margin-bottom:24px;">Swap <strong id="swapCurrentName" style="color:var(--text)"></strong>.</p><label>All Exercises</label><div class="form-row" style="display:flex; gap:12px;"><select id="swapAllSelect" style="flex:1;"></select><button class="btn btn-brand btn-sm" onclick="confirmSwap(document.getElementById('swapAllSelect').value)">Swap</button></div><button class="btn btn-ghost btn-full" style="margin-top:16px" onclick="closeModal('swapModal')">Cancel</button></div></div>
-<div class="modal-overlay" id="plateModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.6rem; font-weight:800; margin-bottom:20px; color:var(--text);">Plate Calculator</div><div class="form-grid"><div><label>Target Weight (lb)</label><input type="number" id="plateTarget" placeholder="225" inputmode="numeric" oninput="renderPlateCalc()"/></div><div><label>Bar Weight (lb)</label><input type="number" id="plateBar" value="45" inputmode="numeric" oninput="renderPlateCalc()"/></div></div><div class="plate-summary"><div class="big" id="plateTotal">—</div><div class="sub" id="plateSub">Enter a target weight</div></div><div id="plateBreakdown"></div><button class="btn btn-ghost btn-full" style="margin-top:16px" onclick="closeModal('plateModal')">Close</button></div></div>
 
 <div id="toast"></div>
 
@@ -724,11 +674,8 @@ const BARBELL_EXERCISES = new Set(['Box Squat','Bench Press','Close Grip Bench',
 // ═══════════════════════════════════════════════
 let history = JSON.parse(localStorage.getItem('ff_history')) || [];
 let settings = JSON.parse(localStorage.getItem('ff_settings')) || { autoRest: false, sound: true, defaultRest: 90, theme: 'dark', uiScale: 1.0 };
-
-// NEW: Active Program Object (Phase aware)
 let activeProgram = JSON.parse(localStorage.getItem('ff_active_program'));
 
-// Migration script for old array-based routines
 if (!activeProgram) {
   let oldProgram = JSON.parse(localStorage.getItem('ff_program'));
   if (oldProgram && oldProgram.length > 0) {
@@ -737,7 +684,6 @@ if (!activeProgram) {
   }
 }
 
-// Apply theme and scale on load
 if (settings.theme === 'light') { document.documentElement.setAttribute('data-theme', 'light'); }
 if (settings.uiScale) { document.body.style.zoom = settings.uiScale; }
 
@@ -755,7 +701,10 @@ let currentSwapExId = null;
 let pendingRoutineKey = null;
 
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
-function saveProgramToStore(){ localStorage.setItem('ff_active_program', JSON.stringify(activeProgram)); }
+function saveProgramToStore(){ 
+  if (activeProgram) localStorage.setItem('ff_active_program', JSON.stringify(activeProgram));
+  else localStorage.removeItem('ff_active_program');
+}
 function saveHistoryToStore(){ localStorage.setItem('ff_history', JSON.stringify(history)); }
 function saveSettings(){ localStorage.setItem('ff_settings', JSON.stringify(settings)); }
 
@@ -855,7 +804,7 @@ function calculateCurrentWeek() {
 function renderDashboard() {
   const dashEl = document.getElementById('activeDashboard');
   if(!activeProgram) {
-    dashEl.innerHTML = `<div class="chart-empty"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>No Active Program. Select one from the Vault below.</div>`;
+    dashEl.innerHTML = `<div class="chart-empty"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>No Active Program. Select a phase from the Vault to begin.</div>`;
     return;
   }
   
@@ -870,8 +819,20 @@ function renderDashboard() {
       <div class="progress-bar"><div class="progress-fill" style="width: ${pct}%"></div></div>
     </div>
     <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 16px;">${activeProgram.days.length} workouts per microcycle.</p>
-    <button class="btn btn-ghost btn-sm" onclick="openBuilder()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Edit Days & Exercises</button>
+    <div style="display:flex; gap:10px;">
+      <button class="btn btn-ghost btn-sm" style="flex:2;" onclick="openBuilder()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Edit Phase</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1; border-color: rgba(255,69,58,0.3); color: var(--red);" onclick="endActivePhase()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg> End</button>
+    </div>
   `;
+}
+
+function endActivePhase() {
+  if(confirm("Are you sure you want to end this phase? This will clear your dashboard.")) {
+    activeProgram = null;
+    saveProgramToStore();
+    renderDashboard();
+    toast("Phase Ended", "success");
+  }
 }
 
 // ═══════════════════════════════════════════════
@@ -879,18 +840,28 @@ function renderDashboard() {
 // ═══════════════════════════════════════════════
 function openStartModal(key) {
   pendingRoutineKey = key;
-  document.getElementById('setupTitle').textContent = `Start ${ROUTINES[key].name}`;
+  const isSwap = !!activeProgram;
+  
+  document.getElementById('setupTitle').textContent = isSwap ? `Swap to ${ROUTINES[key].name}` : `Start ${ROUTINES[key].name}`;
+  document.getElementById('setupSubtitle').textContent = isSwap ? "This will end your current phase and start a new one." : "Set the parameters for your new active phase.";
   document.getElementById('setupCustomPhaseRow').style.display = 'none';
   document.getElementById('setupCustomNameRow').style.display = 'none';
+  document.getElementById('startRoutineBtn').textContent = isSwap ? "Swap Phase" : "Start Phase";
+  
   document.getElementById('routineSetupModal').classList.add('open');
 }
 
 function openCreateCustomModal() {
   pendingRoutineKey = 'custom';
-  document.getElementById('setupTitle').textContent = `Create Custom Routine`;
+  const isSwap = !!activeProgram;
+  
+  document.getElementById('setupTitle').textContent = isSwap ? `Swap to Custom Routine` : `Create Custom Routine`;
+  document.getElementById('setupSubtitle').textContent = isSwap ? "This will end your current phase and start a fresh canvas." : "Start with a blank canvas.";
   document.getElementById('setupCustomPhaseRow').style.display = 'block';
   document.getElementById('setupCustomNameRow').style.display = 'block';
   document.getElementById('setupName').value = '';
+  document.getElementById('startRoutineBtn').textContent = isSwap ? "Swap Phase" : "Start Phase";
+  
   document.getElementById('routineSetupModal').classList.add('open');
 }
 
@@ -991,7 +962,7 @@ function setupLoggerPreState() {
   document.getElementById('loggerActive').style.display = 'none';
   document.getElementById('train-header').textContent = "Train";
   const setupEl = document.getElementById('daySelectorList');
-  if(!activeProgram || !activeProgram.days.length) { setupEl.innerHTML = `<div class="empty"><p>Set an active routine in the Hub first.</p></div>`; return; }
+  if(!activeProgram || !activeProgram.days.length) { setupEl.innerHTML = `<div class="empty"><p>Set an active phase in the Hub first.</p></div>`; return; }
   
   const currentWeek = calculateCurrentWeek();
   document.getElementById('train-subtitle').textContent = `${activeProgram.name} • Week ${currentWeek}`;
@@ -1521,7 +1492,6 @@ function importJSON(ev) {
       if(!confirm('Restore will overwrite your current data. Continue?')) return;
       if(data.activeProgram) { activeProgram = data.activeProgram; saveProgramToStore(); }
       else if(data.program) { 
-        // Migrate legacy V2 backup
         activeProgram = { name: "Migrated Routine", phase: "hybrid", startDate: getLocalYMD(), targetWeeks: 8, days: data.program };
         saveProgramToStore();
       }
