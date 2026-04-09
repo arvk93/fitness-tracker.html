@@ -42,7 +42,7 @@
 
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   --r: 24px; 
-  --bottom-space: 140px; 
+  --bottom-space: 180px; 
   --active-bar-h: 85px;
 }
 
@@ -142,7 +142,7 @@ body {
 .workout-timer-global { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 1.25rem; color: var(--brand); text-shadow: var(--brand-glow); }
 
 /* ── PAGES & ANIMATIONS ── */
-.page { display: none; max-width: 640px; margin: 0 auto; padding: 24px 20px 160px 20px; opacity: 0; }
+.page { display: none; max-width: 640px; margin: 0 auto; padding: 24px 20px 0px 20px; opacity: 0; }
 .page.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
@@ -189,7 +189,7 @@ body {
 .btn-sm { padding: 10px 16px; font-size: 0.85rem; border-radius: 12px; }
 .btn-full { width: 100%; }
 
-/* ── FORMS ── */
+/* ── FORMS (FIXED NATIVE SELECT STYLING) ── */
 input, select {
   font-family: inherit; font-size: 1rem; color: var(--text); background: var(--input-bg);
   border: 1px solid var(--glass-border); border-radius: 14px; padding: 14px 16px; width: 100%; outline: none;
@@ -198,6 +198,11 @@ input, select {
 input:focus, select:focus { border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-dim); }
 input::placeholder { color: var(--muted2); font-weight: 400; }
 select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='gray' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+
+/* FIX: Ensure select dropdown options are readable on all mobile OS */
+select option { background: #1e1e1e; color: #ffffff; }
+:root[data-theme="light"] select option { background: #ffffff; color: #000000; }
+
 label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom: 8px; display: block; }
 .form-row { margin-bottom: 16px; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
@@ -240,12 +245,8 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .vault-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid var(--glass-border); padding-bottom: 12px;}
 .vault-title { font-size: 1.2rem; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
 
-/* Accordion Folders */
 .phase-group { margin-bottom: 12px; background: var(--glass-base); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; backdrop-filter: blur(10px); }
-.phase-group-title { 
-  font-size: 0.95rem; font-weight: 700; color: var(--text); padding: 16px; 
-  display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;
-}
+.phase-group-title { font-size: 0.95rem; font-weight: 700; color: var(--text); padding: 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s; }
 .phase-group-title:active { background: var(--glass-hover); }
 .phase-group-title svg { transition: transform 0.3s; stroke: var(--muted); }
 .phase-group-title.open svg { transform: rotate(180deg); }
@@ -300,10 +301,16 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .modal-overlay.open .modal { transform: translateY(0); }
 .modal-handle { width: 40px; height: 5px; background: var(--glass-highlight); border-radius: 3px; margin: 0 auto 24px; }
 
-/* ── INFO MODAL SPECIFICS ── */
+/* INFO & PREVIEW MODAL SPECIFICS */
 .info-section { margin-bottom: 20px; padding: 16px; background: var(--glass-base); border-radius: 16px; border: 1px solid var(--glass-border); }
 .info-section h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
 .info-section p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+.preview-container { background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 16px; padding: 16px; max-height: 250px; overflow-y: auto; margin-bottom: 24px; }
+.preview-day { font-weight: 700; color: var(--brand); font-size: 0.85rem; margin-top: 12px; margin-bottom: 6px; border-bottom: 1px solid var(--glass-border); padding-bottom: 4px; }
+.preview-day:first-child { margin-top: 0; }
+.preview-ex { font-size: 0.85rem; color: var(--text); margin-bottom: 4px; display: flex; justify-content: space-between; }
+.preview-ex span { color: var(--muted); font-size: 0.75rem; }
 
 /* ── WORLD-CLASS LOGGER ── */
 .top-rest-timer { background: var(--glass-base); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--r); padding: 18px; margin-bottom: 20px; }
@@ -334,7 +341,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .set-input-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; }
 .set-input-wrap label { font-size: 0.65rem; margin-bottom: 6px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
 .set-input-wrap input { text-align: center; font-size: 1.15rem; font-weight: 600; padding: 12px 4px; border-radius: 12px; width: 100%; max-width: 90px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); }
-
 .set-check { width: 48px; height: 48px; border-radius: 16px; border: 1px solid var(--glass-highlight); background: var(--glass-base); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .set-check:active { transform: scale(0.85); }
 .set-row.done .set-num { background: transparent; border-color: transparent; color: var(--muted2); }
@@ -356,6 +362,8 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .history-ex-name { font-size: 0.95rem; font-weight: 600; flex: 1; color: var(--text); }
 .set-chip { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; font-weight: 600; color: var(--text); border: 1px solid var(--glass-border); }
 .set-chip.pr { background: rgba(255,214,10,0.15); color: var(--gold); border-color: rgba(255,214,10,0.3); }
+
+/* ── CHART EMPTY ── */
 .chart-empty { text-align: center; padding: 30px 10px; color: var(--muted); font-size: 0.85rem; font-weight: 500; }
 .chart-empty svg { width: 32px; height: 32px; display: block; margin: 0 auto 10px; opacity: 0.5; stroke: currentColor; fill: none; }
 
@@ -430,6 +438,14 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
         <div class="routine-icon icon-strength"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
         <div class="routine-info"><div class="routine-name">Starting Strength</div><div class="routine-desc">3 days/week · Linear progression base</div></div>
       </div>
+      <div class="routine-card" onclick="openStartModal('five_three_one')">
+        <div class="routine-icon icon-strength"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="8" width="18" height="8" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/></svg></div>
+        <div class="routine-info"><div class="routine-name">5/3/1 Boring But Big</div><div class="routine-desc">4 days/week · Heavy main, volume assist</div></div>
+      </div>
+      <div class="routine-card" onclick="openStartModal('texas_method')">
+        <div class="routine-icon icon-strength"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M12 3v18"/></svg></div>
+        <div class="routine-info"><div class="routine-name">Texas Method</div><div class="routine-desc">3 days/week · Volume, Light, Intensity</div></div>
+      </div>
     </div>
   </div>
 
@@ -474,6 +490,10 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
         <div class="routine-icon icon-power"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
         <div class="routine-info"><div class="routine-name">PHUL Split</div><div class="routine-desc">4 days/week · Power + Hypertrophy</div></div>
       </div>
+      <div class="routine-card" onclick="openStartModal('tactical')">
+        <div class="routine-icon icon-power"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/><path d="M5 22h14"/></svg></div>
+        <div class="routine-info"><div class="routine-name">Tactical Barbell</div><div class="routine-desc">4 days/week · Strength + Heavy Conditioning</div></div>
+      </div>
     </div>
   </div>
 
@@ -485,6 +505,10 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
       <div class="routine-card" onclick="openStartModal('deload')">
         <div class="routine-icon icon-deload"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
         <div class="routine-info"><div class="routine-name">Active Recovery</div><div class="routine-desc">3 days/week · 50% volume to shed fatigue</div></div>
+      </div>
+      <div class="routine-card" onclick="openStartModal('mobility')">
+        <div class="routine-icon icon-deload"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="5" r="2"/><path d="M12 7v8M8 11h8M9 22l3-7 3 7"/></svg></div>
+        <div class="routine-info"><div class="routine-name">Mobility & Yoga Flow</div><div class="routine-desc">2 days/week · Pure recovery & stretching</div></div>
       </div>
     </div>
   </div>
@@ -534,6 +558,7 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
     <button id="tab-charts" class="active" onclick="switchHistoryTab('charts')">Dashboard</button>
     <button id="tab-log" onclick="switchHistoryTab('log')">Log</button>
   </div>
+  
   <div id="historyChartsView">
     <div class="stats-grid">
       <div class="stat-card">
@@ -545,10 +570,19 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
         <div class="stat-label">Lbs Moved</div>
       </div>
     </div>
+    
     <div class="card">
       <div class="section-label">Total Volume Output</div>
+      <p style="font-size:0.8rem; color:var(--muted); margin-bottom:16px;">Total weight × reps per session.</p>
       <div id="volumeChartWrap" style="position:relative; height: 220px;"><canvas id="volumeChart"></canvas></div>
     </div>
+    
+    <div class="card">
+      <div class="section-label">Muscle Group Distribution</div>
+      <p style="font-size:0.8rem; color:var(--muted); margin-bottom:16px;">Total sets logged per muscle group (All Time).</p>
+      <div id="muscleChartWrap" style="position:relative; height: 240px; display:flex; justify-content:center;"><canvas id="muscleChart"></canvas></div>
+    </div>
+    
     <div class="card">
       <div class="section-label">Estimated 1RM Trend</div>
       <select id="chartMuscleGroup" onchange="updateStrengthChart()" style="margin-bottom:16px;">
@@ -560,10 +594,11 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
       </select>
       <div id="strengthChartWrap" style="position:relative; height: 220px;"><canvas id="strengthChart"></canvas></div>
     </div>
+    
     <div class="card">
       <div class="section-label">Body Metrics</div>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-        <p style="font-size:0.8rem; color:var(--muted); margin:0;">Synced via Samsung Health</p>
+        <p style="font-size:0.8rem; color:var(--muted); margin:0;">Synced via Health Connect</p>
         <button class="btn btn-ghost btn-sm" onclick="syncBodyMetrics()">Sync Now</button>
       </div>
       <div id="bodyChartWrap" style="position:relative; height: 220px;"><canvas id="bodyChart"></canvas></div>
@@ -577,18 +612,22 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
   <div class="card">
     <div class="section-label">Appearance</div>
     <div class="toggle-row"><div><div class="t-label">Theme</div><div class="t-desc">Toggle Light/Dark mode.</div></div><div class="toggle-switch" id="toggleTheme" onclick="toggleThemeSetting()"></div></div>
-    <div class="toggle-row"><div><div class="t-label">Interface Scale</div></div><select id="uiScaleSelect" style="width: 125px; background:rgba(255,255,255,0.05);" onchange="changeUIScale(this.value)"><option value="0.85">Small</option><option value="0.90">Compact</option><option value="0.95">Slightly Smaller</option><option value="1">Default</option><option value="1.05">Large</option></select></div>
+    <div class="toggle-row"><div><div class="t-label">Interface Scale</div></div><select id="uiScaleSelect" style="width: 125px;" onchange="changeUIScale(this.value)"><option value="0.85">Small</option><option value="0.90">Compact</option><option value="0.95">Slightly Smaller</option><option value="1">Default</option><option value="1.05">Large</option></select></div>
   </div>
   <div class="card">
     <div class="section-label">Preferences</div>
     <div class="toggle-row"><div><div class="t-label">Auto-start Rest Timer</div></div><div class="toggle-switch" id="toggleAutoRest" onclick="toggleSetting('autoRest')"></div></div>
-    <div class="toggle-row"><div><div class="t-label">Default Rest Duration</div></div><select id="defaultRestSelect" style="width: 100px; background:rgba(255,255,255,0.05);" onchange="settings.defaultRest=parseInt(this.value);saveSettings()"><option value="30">30s</option><option value="60">1m</option><option value="90" selected>90s</option><option value="120">2m</option><option value="180">3m</option></select></div>
+    <div class="toggle-row"><div><div class="t-label">Default Rest Duration</div></div><select id="defaultRestSelect" style="width: 100px;" onchange="settings.defaultRest=parseInt(this.value);saveSettings()"><option value="30">30s</option><option value="60">1m</option><option value="90" selected>90s</option><option value="120">2m</option><option value="180">3m</option></select></div>
     <div class="toggle-row"><div><div class="t-label">Sound & Haptics</div></div><div class="toggle-switch on" id="toggleSound" onclick="toggleSetting('sound')"></div></div>
   </div>
   <div class="card">
     <div class="section-label">Integrations</div>
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <div><strong style="font-size:1.05rem; display:block; margin-bottom:4px; color:var(--text);">Samsung Health</strong><p id="healthSyncStatus" style="font-size:0.85rem; color:var(--muted);">Not linked.</p></div>
+      <div>
+        <strong style="font-size:1.05rem; display:block; margin-bottom:4px; color:var(--text);">Health Connect</strong>
+        <p style="font-size:0.8rem; color:var(--muted); line-height: 1.4; margin-bottom: 6px;">Syncs with Google Fit, Samsung Health, Oura, Garmin, etc.</p>
+        <p id="healthSyncStatus" style="font-size:0.8rem; font-weight:700; color:var(--muted);">Not linked.</p>
+      </div>
       <button class="btn btn-sm btn-brand" onclick="enableHealthSync()">Link</button>
     </div>
   </div>
@@ -644,7 +683,7 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
     <p style="font-size:0.9rem; color:var(--muted); margin-bottom:24px;">Periodization prevents plateaus and manages CNS fatigue. Choose your active block based on your recovery bandwidth.</p>
     <div class="info-section"><h3 style="color:var(--green)">Strength Phase</h3><p><strong>Goal:</strong> Maximize force production.<br><strong>Reps:</strong> 1-5 range.<br><strong>Taxation:</strong> High CNS fatigue. Requires dialed-in sleep.</p></div>
     <div class="info-section"><h3 style="color:var(--purple)">Hypertrophy Phase</h3><p><strong>Goal:</strong> Muscle cross-sectional area growth.<br><strong>Reps:</strong> 8-12 range.<br><strong>Taxation:</strong> High metabolic fatigue, lower CNS tax.</p></div>
-    <div class="info-section"><h3 style="color:var(--red)">Power & Hybrid</h3><p><strong>Goal:</strong> Force x Velocity + Base building.<br><strong>Method:</strong> Moving sub-maximal weight as fast as possible.</p></div>
+    <div class="info-section"><h3 style="color:var(--brand)">Power & Hybrid</h3><p><strong>Goal:</strong> Force x Velocity + Base building.<br><strong>Method:</strong> Moving sub-maximal weight as fast as possible.</p></div>
     <div class="info-section"><h3 style="color:var(--gold)">Deload Phase</h3><p><strong>Goal:</strong> Shed accumulated fatigue.<br><strong>Method:</strong> Drop volume and intensity by 40-50% for 1 week.</p></div>
     <button class="btn btn-ghost btn-full" onclick="closeModal('phaseInfoModal')">Got it</button>
   </div>
@@ -664,7 +703,13 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
       <label>Target Phase Length (Weeks)</label>
       <select id="setupWeeks"><option value="4">4 Weeks (Microcycle)</option><option value="8" selected>8 Weeks (Mesocycle)</option><option value="12">12 Weeks (Macrocycle)</option><option value="1">1 Week (Deload)</option></select>
     </div>
-    <div style="display:flex;gap:12px;margin-top:30px">
+    
+    <div id="setupPreviewArea" style="display:none;">
+      <label>Routine Preview</label>
+      <div class="preview-container" id="setupPreviewContent"></div>
+    </div>
+    
+    <div style="display:flex;gap:12px;margin-top:20px">
       <button class="btn btn-ghost" style="flex:1" onclick="closeModal('routineSetupModal')">Cancel</button>
       <button class="btn btn-brand" id="startRoutineBtn" style="flex:1" onclick="confirmStartRoutine()">Set Active</button>
     </div>
@@ -736,6 +781,23 @@ const ROUTINES = {
     { dayName: 'Workout A', exercises: [{name:'Barbell Squat',sets:3,reps:'5'}, {name:'Bench Press',sets:3,reps:'5'}, {name:'Deadlift',sets:1,reps:'5'}] },
     { dayName: 'Workout B', exercises: [{name:'Barbell Squat',sets:3,reps:'5'}, {name:'Overhead Press',sets:3,reps:'5'}, {name:'Power Clean',sets:5,reps:'3'}] }
   ]},
+  five_three_one: { name: '5/3/1 Boring But Big', phase: 'strength', days: [
+    { dayName: 'Overhead Press Day', exercises: [{name:'Overhead Press',sets:3,reps:'5/3/1'}, {name:'Overhead Press',sets:5,reps:'10'}, {name:'Lat Pulldown',sets:5,reps:'10'}] },
+    { dayName: 'Deadlift Day', exercises: [{name:'Deadlift',sets:3,reps:'5/3/1'}, {name:'Deadlift',sets:5,reps:'10'}, {name:'Hanging Leg Raise',sets:5,reps:'15'}] },
+    { dayName: 'Bench Press Day', exercises: [{name:'Bench Press',sets:3,reps:'5/3/1'}, {name:'Bench Press',sets:5,reps:'10'}, {name:'Dumbbell Row',sets:5,reps:'10'}] },
+    { dayName: 'Squat Day', exercises: [{name:'Barbell Squat',sets:3,reps:'5/3/1'}, {name:'Barbell Squat',sets:5,reps:'10'}, {name:'Lying Leg Curl',sets:5,reps:'10'}] }
+  ]},
+  texas_method: { name: 'Texas Method', phase: 'strength', days: [
+    { dayName: 'Volume Day', exercises: [{name:'Barbell Squat',sets:5,reps:'5'}, {name:'Bench Press',sets:5,reps:'5'}, {name:'Deadlift',sets:1,reps:'5'}] },
+    { dayName: 'Light Day', exercises: [{name:'Front Squat',sets:3,reps:'5'}, {name:'Overhead Press',sets:3,reps:'5'}, {name:'Pull-ups',sets:3,reps:'8'}] },
+    { dayName: 'Intensity Day', exercises: [{name:'Barbell Squat',sets:1,reps:'5'}, {name:'Bench Press',sets:1,reps:'5'}, {name:'Power Clean',sets:5,reps:'3'}] }
+  ]},
+  tactical: { name: 'Tactical Barbell / Fighter', phase: 'power', days: [
+    { dayName: 'Strength 1', exercises: [{name:'Barbell Squat',sets:3,reps:'5'}, {name:'Bench Press',sets:3,reps:'5'}, {name:'Pull-ups',sets:3,reps:'5'}] },
+    { dayName: 'Endurance (LISS)', exercises: [{name:'Treadmill Run',sets:1,reps:'45 min'}] },
+    { dayName: 'Strength 2', exercises: [{name:'Barbell Squat',sets:3,reps:'5'}, {name:'Bench Press',sets:3,reps:'5'}, {name:'Pull-ups',sets:3,reps:'5'}] },
+    { dayName: 'Conditioning (HIC)', exercises: [{name:'Sled Push',sets:6,reps:'50m'}, {name:'Battle Ropes',sets:6,reps:'60s'}] }
+  ]},
   westside: { name: 'Westside Cut Phase', phase: 'power', days: [
     { dayName:'Max Effort Lower', exercises:[{name:'Box Squat',sets:3,reps:'3-5'},{name:'Broad Jumps',sets:4,reps:'3'},{name:'RDL barbell',sets:4,reps:'6-8'},{name:'Walking Lunges',sets:3,reps:'8/leg'},{name:'Hanging Leg Raises',sets:3,reps:'12-15'}]},
     { dayName:'Max Effort Upper', exercises:[{name:'Close Grip Bench',sets:3,reps:'3-5'},{name:'Med Ball Throws',sets:3,reps:'10'},{name:'Barbell Row',sets:4,reps:'6-8'},{name:'Pull-ups',sets:4,reps:'6'},{name:'Lying Tricep DB Extensions',sets:3,reps:'10-12'},{name:'Cable Rope Face Pulls',sets:3,reps:'15'}]},
@@ -766,6 +828,10 @@ const ROUTINES = {
   ]},
   deload: { name: 'Active Recovery', phase: 'deload', days: [
     { dayName:'Mobility & Bloodflow', exercises:[{name:'Stationary Bike',sets:1,reps:'15 min'},{name:'Push Up',sets:3,reps:'10'},{name:'Lat Pulldown',sets:3,reps:'10'},{name:'Goblet Squat',sets:3,reps:'10'},{name:'Plank',sets:3,reps:'45s'}]}
+  ]},
+  mobility: { name: 'Mobility & Yoga Flow', phase: 'deload', days: [
+    { dayName: 'Lower Body Focus', exercises: [{name:'Stationary Bike',sets:1,reps:'10 min'}, {name:'Hip 90/90 Stretch',sets:3,reps:'60s'}, {name:'Bird Dog',sets:3,reps:'12'}] },
+    { dayName: 'Upper Body Focus', exercises: [{name:'Rowing Machine',sets:1,reps:'10 min'}, {name:'Cat-Cow',sets:3,reps:'15'}, {name:'Pallof Press',sets:3,reps:'12'}] }
   ]}
 };
 
@@ -919,7 +985,7 @@ function renderDashboard() {
         <p>You have no active phase. Choose a goal to start.</p>
         <div class="quick-starts">
           <button class="btn btn-brand btn-full" onclick="openStartModal('arnold')">🔥 Start Hypertrophy</button>
-          <button class="btn btn-ghost btn-full" style="color:var(--green)" onclick="openStartModal('starting_strength')">💪 Start Strength</button>
+          <button class="btn btn-ghost btn-full" style="color:var(--green); border-color: rgba(50,215,75,0.3);" onclick="openStartModal('starting_strength')">💪 Start Strength</button>
           <button class="btn btn-ghost btn-full" style="border-style:dashed;" onclick="openCreateCustomModal()">＋ Build Custom Phase</button>
         </div>
       </div>
@@ -967,6 +1033,17 @@ function openStartModal(key) {
   document.getElementById('setupCustomNameRow').style.display = 'none';
   document.getElementById('startRoutineBtn').textContent = isSwap ? "Swap Phase" : "Start Phase";
   
+  // Build Preview
+  let previewHTML = '';
+  ROUTINES[key].days.forEach(day => {
+    previewHTML += `<div class="preview-day">${day.dayName}</div>`;
+    day.exercises.forEach(ex => {
+      previewHTML += `<div class="preview-ex"><span>${ex.name}</span> <span>${ex.sets} × ${ex.reps}</span></div>`;
+    });
+  });
+  document.getElementById('setupPreviewContent').innerHTML = previewHTML;
+  document.getElementById('setupPreviewArea').style.display = 'block';
+  
   document.getElementById('routineSetupModal').classList.add('open');
 }
 
@@ -978,6 +1055,7 @@ function openCreateCustomModal() {
   document.getElementById('setupSubtitle').textContent = isSwap ? "This will end your current phase and start a fresh canvas." : "Start with a blank canvas.";
   document.getElementById('setupCustomPhaseRow').style.display = 'block';
   document.getElementById('setupCustomNameRow').style.display = 'block';
+  document.getElementById('setupPreviewArea').style.display = 'none';
   document.getElementById('setupName').value = '';
   document.getElementById('startRoutineBtn').textContent = isSwap ? "Swap Phase" : "Start Phase";
   
@@ -1049,10 +1127,7 @@ function saveExercise(){
 }
 function removeExercise(di,ei){ 
   activeProgram.days[di].exercises.splice(ei,1); 
-  // If the next exercise was linked to this one, break the link
-  if(activeProgram.days[di].exercises[ei]) {
-    activeProgram.days[di].exercises[ei].linkedToPrevious = false;
-  }
+  if(activeProgram.days[di].exercises[ei]) { activeProgram.days[di].exercises[ei].linkedToPrevious = false; }
   saveProgramToStore(); renderProgramBuilder(); 
 }
 function toggleSuperset(di, ei) {
@@ -1228,13 +1303,10 @@ function toggleSet(exId, si, exIndex) {
   document.getElementById(`setrow-${exId}-${si}`).classList.toggle('done', set.done);
   persistWorkoutState();
 
-  // TIMER LOGIC: Only auto-start if NOT followed by a linked superset exercise
   if(set.done && settings.autoRest) {
     const day = activeProgram.days[activeDayIdx];
     const nextEx = day.exercises[exIndex + 1];
     const isSupersetChainActive = nextEx && nextEx.linkedToPrevious;
-    
-    // Do not start timer if this is part of a superset chain and we aren't at the end of the chain
     if (!isSupersetChainActive) {
       startTopTimer(settings.defaultRest || 90);
     }
@@ -1285,15 +1357,12 @@ function addWarmupSets() {
     { reps: '3', weight: w3, done: false, isWarmup: true }
   ];
   
-  // Prepend warmups to the current array
   logData[warmupTargetExId].sets = [...newSets, ...logData[warmupTargetExId].sets];
-  
   renderActiveWorkout();
   persistWorkoutState();
   closeModal('warmupModal');
   toast('Warmups injected', 'success');
 }
-
 
 function openSwapModal(exId, exName) {
   currentSwapExId = exId;
@@ -1360,7 +1429,7 @@ function best1RMForExercise(exName, excludeSessionId = null) {
     s.entries.forEach(e => {
       if(e.exercise !== exName) return;
       e.sets.forEach(set => {
-        if(set.isWarmup) return; // ignore warmups
+        if(set.isWarmup) return; 
         const w = parseFloat(set.weight)||0;
         const r = parseInt(set.reps)||0;
         const rm = w > 0 && r > 0 ? w * (1 + r/30) : 0;
@@ -1376,7 +1445,7 @@ function detectPRs(entries) {
     const prevBest = best1RMForExercise(e.exercise);
     let sessionBest = 0;
     e.sets.forEach(set => {
-      if(set.isWarmup) return; // ignore warmups
+      if(set.isWarmup) return; 
       const w = parseFloat(set.weight)||0;
       const r = parseInt(set.reps)||0;
       const rm = w > 0 && r > 0 ? w * (1 + r/30) : 0;
@@ -1430,7 +1499,7 @@ async function finishWorkout() {
 // ═══════════════════════════════════════════════
 // HISTORY & ANALYTICS
 // ═══════════════════════════════════════════════
-let strengthChart = null; let volumeChart = null; let bodyChart = null;
+let strengthChart = null; let volumeChart = null; let bodyChart = null; let muscleChart = null;
 
 function getChartColors() {
   const style = getComputedStyle(document.documentElement);
@@ -1457,6 +1526,7 @@ function switchHistoryTab(tab) {
     calculateKPIs();
     updateVolumeChart();
     updateStrengthChart();
+    updateMuscleChart();
     if(!bodyChart) renderBodyChart([], []);
   }
 }
@@ -1464,8 +1534,7 @@ function calculateKPIs() {
   document.getElementById('kpi-sessions').textContent = history.length;
   let totalVol = 0;
   history.forEach(s => s.entries.forEach(e => e.sets.forEach(set => {
-    if(set.isWarmup) return; // don't count warmup volume
-    totalVol += (parseFloat(set.weight)||0) * (parseInt(set.reps)||0);
+    if(!set.isWarmup) totalVol += (parseFloat(set.weight)||0) * (parseInt(set.reps)||0);
   })));
   document.getElementById('kpi-volume').innerHTML = `${(totalVol/1000).toFixed(1)}<span style="font-size:1rem; opacity:0.6;">k</span>`;
 }
@@ -1476,20 +1545,26 @@ function restoreChartCanvas(wrapId, canvasId) {
   const wrap = document.getElementById(wrapId);
   if(!wrap.querySelector('canvas')) wrap.innerHTML = `<canvas id="${canvasId}"></canvas>`;
 }
+
 function updateVolumeChart() {
   if (typeof Chart === 'undefined') { showChartEmpty('volumeChartWrap', 'You must be online to load charts.'); return; }
   if(!history.length) { showChartEmpty('volumeChartWrap','Complete a session to see your volume trend.'); return; }
   
   restoreChartCanvas('volumeChartWrap','volumeChart');
-  const sorted = [...history].reverse();
-  const labels = sorted.map(s => s.date);
-  const data = sorted.map(s => {
+  
+  // Aggregate by Date to fix multiple entries on same day
+  const volByDate = {};
+  history.forEach(s => {
     let vol = 0;
     s.entries.forEach(e => e.sets.forEach(set => {
       if(!set.isWarmup) vol += (parseFloat(set.weight)||0) * (parseInt(set.reps)||0);
     }));
-    return vol;
+    volByDate[s.date] = (volByDate[s.date] || 0) + vol;
   });
+  
+  const labels = Object.keys(volByDate).sort((a,b) => new Date(a)-new Date(b));
+  const data = labels.map(d => volByDate[d]);
+  
   if(volumeChart) volumeChart.destroy();
   const ctx = document.getElementById('volumeChart').getContext('2d');
   volumeChart = new Chart(ctx, {
@@ -1498,6 +1573,42 @@ function updateVolumeChart() {
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
   });
 }
+
+function updateMuscleChart() {
+  if (typeof Chart === 'undefined') { showChartEmpty('muscleChartWrap', 'You must be online to load charts.'); return; }
+  if(!history.length) { showChartEmpty('muscleChartWrap','No data yet — log sets to see your distribution.'); return; }
+  
+  restoreChartCanvas('muscleChartWrap','muscleChart');
+  
+  const groupCounts = { chest: 0, back: 0, shoulders: 0, legs: 0, arms: 0, core: 0 };
+  
+  history.forEach(s => s.entries.forEach(e => {
+    const validSets = e.sets.filter(set => !set.isWarmup).length;
+    if (EXERCISES.chest.includes(e.exercise)) groupCounts.chest += validSets;
+    else if (EXERCISES.back.includes(e.exercise)) groupCounts.back += validSets;
+    else if (EXERCISES.shoulders.includes(e.exercise)) groupCounts.shoulders += validSets;
+    else if (EXERCISES.quads.includes(e.exercise) || EXERCISES.hamstrings.includes(e.exercise) || EXERCISES.calves.includes(e.exercise)) groupCounts.legs += validSets;
+    else if (EXERCISES.biceps.includes(e.exercise) || EXERCISES.triceps.includes(e.exercise)) groupCounts.arms += validSets;
+    else if (EXERCISES.core.includes(e.exercise)) groupCounts.core += validSets;
+  }));
+  
+  const labels = ['Chest', 'Back', 'Shoulders', 'Legs', 'Arms', 'Core'].filter(l => groupCounts[l.toLowerCase()] > 0);
+  const data = labels.map(l => groupCounts[l.toLowerCase()]);
+  const bgColors = ['#0A84FF', '#FF453A', '#FFD60A', '#32D74B', '#BF5AF2', '#5E5CE6'];
+  
+  if(muscleChart) muscleChart.destroy();
+  const ctx = document.getElementById('muscleChart').getContext('2d');
+  muscleChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data, backgroundColor: bgColors, borderWidth: 0 }] },
+    options: { 
+      responsive: true, maintainAspectRatio: false, 
+      cutout: '70%',
+      plugins: { legend: { position: 'right', labels: { color: getChartColors().text, padding: 15, usePointStyle: true } } }
+    }
+  });
+}
+
 function updateStrengthChart() {
   if (typeof Chart === 'undefined') { showChartEmpty('strengthChartWrap', 'You must be online to load charts.'); return; }
   if(!history.length) { showChartEmpty('strengthChartWrap','No data yet — log sets to see your 1RM trend.'); return; }
@@ -1505,31 +1616,37 @@ function updateStrengthChart() {
   restoreChartCanvas('strengthChartWrap','strengthChart');
   const group = document.getElementById('chartMuscleGroup').value;
   const exList = EXERCISES[group] || [];
-  const sorted = [...history].reverse();
   const exFreq = {};
-  sorted.forEach(s => s.entries.forEach(e => { if(exList.includes(e.exercise)) exFreq[e.exercise] = (exFreq[e.exercise]||0)+1; }));
+  history.forEach(s => s.entries.forEach(e => { if(exList.includes(e.exercise)) exFreq[e.exercise] = (exFreq[e.exercise]||0)+1; }));
+  
   const topExercises = Object.keys(exFreq).sort((a,b) => exFreq[b] - exFreq[a]).slice(0, 2);
   if(!topExercises.length) { showChartEmpty('strengthChartWrap','No logged sets for this muscle group yet.'); return; }
+  
   const colors = ['#32D74B', '#FF453A'];
   const labelsSet = new Set();
-  sorted.forEach(s => s.entries.forEach(e => { if(topExercises.includes(e.exercise)) labelsSet.add(s.date); }));
+  history.forEach(s => s.entries.forEach(e => { if(topExercises.includes(e.exercise)) labelsSet.add(s.date); }));
   const labels = Array.from(labelsSet).sort((a,b) => new Date(a) - new Date(b));
+  
   const datasets = topExercises.map((exName, idx) => {
     const data = labels.map(date => {
-      const session = sorted.find(s => s.date === date);
-      if(!session) return null;
-      const entry = session.entries.find(e => e.exercise === exName);
-      if(!entry) return null;
+      // Find all sessions on this date and extract max 1RM for this exercise
+      const sessions = history.filter(s => s.date === date);
       let max1RM = 0;
-      entry.sets.forEach(set => {
-        if(set.isWarmup) return;
-        const rm = (parseFloat(set.weight)||0) * (1 + (parseInt(set.reps)||0)/30);
-        if(rm > max1RM) max1RM = rm;
+      sessions.forEach(session => {
+        const entry = session.entries.find(e => e.exercise === exName);
+        if(entry) {
+          entry.sets.forEach(set => {
+            if(set.isWarmup) return;
+            const rm = (parseFloat(set.weight)||0) * (1 + (parseInt(set.reps)||0)/30);
+            if(rm > max1RM) max1RM = rm;
+          });
+        }
       });
-      return max1RM.toFixed(1);
+      return max1RM > 0 ? max1RM.toFixed(1) : null;
     });
     return { label: exName, data, borderColor: colors[idx], backgroundColor: colors[idx]+'33', tension: 0.4, spanGaps: true, fill: true };
   });
+  
   if(strengthChart) strengthChart.destroy();
   const ctx = document.getElementById('strengthChart').getContext('2d');
   strengthChart = new Chart(ctx, {
@@ -1537,12 +1654,13 @@ function updateStrengthChart() {
     options: { responsive: true, maintainAspectRatio: false }
   });
 }
+
 function renderHistory(){
   const el=document.getElementById('historyContent');
   if(!history.length){ el.innerHTML=`<div class="empty"><p>No sessions yet.</p></div>`; return; }
   el.innerHTML=history.map(s=>{
     const dur = s.duration ? `⏱ ${Math.floor(s.duration/60)}m ${s.duration%60}s` : '';
-    const totalSets = s.entries.reduce((a,e)=>a+e.sets.length,0);
+    const totalSets = s.entries.reduce((a,e)=>a+e.sets.filter(set=>!set.isWarmup).length,0);
     const prList = s.prs || [];
     return `<div class="history-card">
       <div class="history-card-header">
@@ -1551,7 +1669,7 @@ function renderHistory(){
           <div class="history-day-label">${s.dayName}${prList.length?'<span class="pr-flag">PR</span>':''}</div>
           <div class="history-meta-row">
             ${dur ? `<span class="history-meta-chip">${dur}</span>` : ''}
-            <span class="history-meta-chip">${totalSets} sets</span>
+            <span class="history-meta-chip">${totalSets} working sets</span>
             <span class="history-meta-chip">${s.entries.length} exercises</span>
           </div>
         </div>
