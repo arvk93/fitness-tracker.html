@@ -220,14 +220,18 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .routine-card { background: var(--glass-base); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: var(--r); padding: 16px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 16px; }
 .routine-card:hover, .routine-card:active { background: var(--glass-hover); transform: scale(0.98); border-color: var(--glass-highlight); }
 
-/* NEW SOLID GRADIENT ICONS */
+/* SOLID GRADIENT ICONS */
 .routine-icon { font-size: 1.8rem; flex-shrink: 0; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 16px; color: #fff; }
 .routine-icon svg { width: 24px; height: 24px; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon-custom { background: rgba(255,255,255,0.1); color: var(--text); border: 2px dashed var(--muted); }
 .icon-westside { background: linear-gradient(135deg, #FF453A, #FF9F0A); box-shadow: 0 4px 12px rgba(255,69,58,0.3); }
 .icon-beginner { background: linear-gradient(135deg, #32D74B, #30B0C7); box-shadow: 0 4px 12px rgba(50,215,75,0.3); }
 .icon-ppl { background: linear-gradient(135deg, #0A84FF, #5E5CE6); box-shadow: 0 4px 12px rgba(10,132,255,0.3); }
 .icon-upperlower { background: linear-gradient(135deg, #BF5AF2, #FF375F); box-shadow: 0 4px 12px rgba(191,90,242,0.3); }
 .icon-brosplit { background: linear-gradient(135deg, #FFD60A, #FF9F0A); color: #000; box-shadow: 0 4px 12px rgba(255,214,10,0.3); }
+.icon-phul { background: linear-gradient(135deg, #FF9F0A, #FF375F); box-shadow: 0 4px 12px rgba(255,159,10,0.3); }
+.icon-arnold { background: linear-gradient(135deg, #30B0C7, #5E5CE6); box-shadow: 0 4px 12px rgba(94,92,230,0.3); }
+.icon-ss { background: linear-gradient(135deg, #32D74B, #FFD60A); color: #000; box-shadow: 0 4px 12px rgba(50,215,75,0.3); }
 
 .routine-info { flex: 1; }
 .routine-name { font-weight: 600; font-size: 1.05rem; color: var(--text); }
@@ -365,37 +369,66 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 
   <div class="section-label">Prebuilt Routines</div>
   <div id="routinesList">
+    
+    <div class="routine-card" onclick="clearRoutine()">
+      <div class="routine-icon icon-custom">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 5V19M5 12H19" stroke="currentColor"/></svg>
+      </div>
+      <div class="routine-info"><div class="routine-name">Create Custom Routine</div><div class="routine-desc">Start with a blank canvas</div></div>
+    </div>
+    
+    <div class="routine-card" onclick="loadRoutine('phul')">
+      <div class="routine-icon icon-phul">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <div class="routine-info"><div class="routine-name">PHUL Split</div><div class="routine-desc">4 days/week · Power + Hypertrophy</div></div>
+    </div>
+
+    <div class="routine-card" onclick="loadRoutine('arnold')">
+      <div class="routine-icon icon-arnold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 12V18M18 12V18M9 12H15M9 8H15M5 8H19C20.1046 8 21 8.89543 21 10V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V10C3 8.89543 3.89543 8 5 8Z"/></svg>
+      </div>
+      <div class="routine-info"><div class="routine-name">Arnold Split</div><div class="routine-desc">6 days/week · High volume classic</div></div>
+    </div>
+
+    <div class="routine-card" onclick="loadRoutine('starting_strength')">
+      <div class="routine-icon icon-ss">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+      </div>
+      <div class="routine-info"><div class="routine-name">Starting Strength</div><div class="routine-desc">3 days/week · Linear progression base</div></div>
+    </div>
+    
     <div class="routine-card" onclick="loadRoutine('westside')">
       <div class="routine-icon icon-westside">
-        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="2" y1="12" x2="22" y2="12"></line><line x1="6" y1="8" x2="6" y2="16"></line><line x1="18" y1="8" x2="18" y2="16"></line><line x1="9" y1="10" x2="9" y2="14"></line><line x1="15" y1="10" x2="15" y2="14"></line></svg>
       </div>
       <div class="routine-info"><div class="routine-name">Westside Cut Phase</div><div class="routine-desc">4 Days lifting + 1 GPP. Custom setup.</div></div>
     </div>
     
     <div class="routine-card" onclick="loadRoutine('beginner')">
       <div class="routine-icon icon-beginner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor" fill-opacity="0.3"/><path d="M9 12l2 2 4-4"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
       </div>
       <div class="routine-info"><div class="routine-name">Beginner Full Body</div><div class="routine-desc">3 days/week · compound movements</div></div>
     </div>
 
     <div class="routine-card" onclick="loadRoutine('ppl')">
       <div class="routine-icon icon-ppl">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="6" r="4" fill="currentColor" fill-opacity="0.3"/><circle cx="6" cy="18" r="4" fill="currentColor" fill-opacity="0.3"/><circle cx="18" cy="18" r="4" fill="currentColor" fill-opacity="0.3"/><path d="M10 10l-2 4M14 10l2 4M8 18h8"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="6" r="4"/><circle cx="6" cy="18" r="4"/><circle cx="18" cy="18" r="4"/><path d="M10 10l-2 4M14 10l2 4M8 18h8"/></svg>
       </div>
       <div class="routine-info"><div class="routine-name">Push / Pull / Legs</div><div class="routine-desc">3-6 days/week · balanced volume split</div></div>
     </div>
 
     <div class="routine-card" onclick="loadRoutine('upperlower')">
       <div class="routine-icon icon-upperlower">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="6" rx="2" fill="currentColor" fill-opacity="0.3"/><rect x="3" y="14" width="18" height="6" rx="2" fill="currentColor" fill-opacity="0.3"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/></svg>
       </div>
       <div class="routine-info"><div class="routine-name">Upper / Lower</div><div class="routine-desc">4 days/week · high frequency</div></div>
     </div>
 
     <div class="routine-card" onclick="loadRoutine('brosplit')">
       <div class="routine-icon icon-brosplit">
-        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="2" y="6" width="4" height="12" rx="1"/><rect x="18" y="6" width="4" height="12" rx="1"/><rect x="6" y="10" width="12" height="4"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="8" x2="12" y2="12"></line></svg>
       </div>
       <div class="routine-info"><div class="routine-name">5-Day Bro Split</div><div class="routine-desc">1 muscle group per day · max pump</div></div>
     </div>
@@ -682,6 +715,21 @@ const EXERCISES = {
 };
 
 const ROUTINES = {
+  phul: { name: 'PHUL Split', days: [
+    { dayName: 'Upper Power', exercises: [{name:'Bench Press',sets:4,reps:'3-5'}, {name:'Incline Dumbbell Press',sets:3,reps:'6-10'}, {name:'Barbell Row',sets:4,reps:'3-5'}, {name:'Lat Pulldown',sets:3,reps:'6-10'}, {name:'Overhead Press',sets:3,reps:'5-8'}, {name:'Barbell Curl',sets:3,reps:'6-10'}, {name:'Skull Crusher',sets:3,reps:'6-10'}] },
+    { dayName: 'Lower Power', exercises: [{name:'Barbell Squat',sets:4,reps:'3-5'}, {name:'Deadlift',sets:4,reps:'3-5'}, {name:'Leg Press',sets:5,reps:'10-15'}, {name:'Lying Leg Curl',sets:3,reps:'6-10'}, {name:'Standing Calf Raise',sets:4,reps:'6-10'}] },
+    { dayName: 'Upper Hypertrophy', exercises: [{name:'Incline Bench Press',sets:4,reps:'8-12'}, {name:'Cable Fly',sets:4,reps:'8-12'}, {name:'Cable Row',sets:4,reps:'8-12'}, {name:'Dumbbell Row',sets:3,reps:'8-12'}, {name:'Lateral Raise',sets:4,reps:'8-12'}, {name:'Dumbbell Curl',sets:4,reps:'8-12'}, {name:'Tricep Pushdown (Rope)',sets:4,reps:'8-12'}] },
+    { dayName: 'Lower Hypertrophy', exercises: [{name:'Front Squat',sets:4,reps:'8-12'}, {name:'Walking Lunges',sets:4,reps:'8-12'}, {name:'Leg Extension',sets:4,reps:'10-15'}, {name:'Seated Leg Curl',sets:4,reps:'10-15'}, {name:'Seated Calf Raise',sets:4,reps:'10-15'}] }
+  ]},
+  arnold: { name: 'Arnold Split', days: [
+    { dayName: 'Chest & Back', exercises: [{name:'Bench Press',sets:4,reps:'8-12'}, {name:'Incline Bench Press',sets:4,reps:'8-12'}, {name:'Pull-ups',sets:4,reps:'8-12'}, {name:'Barbell Row',sets:4,reps:'8-12'}, {name:'Deadlift',sets:3,reps:'5-8'}] },
+    { dayName: 'Shoulders & Arms', exercises: [{name:'Arnold Press',sets:4,reps:'8-12'}, {name:'Lateral Raise',sets:4,reps:'10-15'}, {name:'Barbell Curl',sets:4,reps:'8-12'}, {name:'Skull Crusher',sets:4,reps:'8-12'}, {name:'Hammer Curl',sets:3,reps:'8-12'}] },
+    { dayName: 'Legs', exercises: [{name:'Barbell Squat',sets:4,reps:'8-12'}, {name:'Leg Press',sets:4,reps:'8-12'}, {name:'Romanian Deadlift',sets:4,reps:'8-12'}, {name:'Leg Extension',sets:3,reps:'12-15'}, {name:'Lying Leg Curl',sets:3,reps:'12-15'}] }
+  ]},
+  starting_strength: { name: 'Starting Strength', days: [
+    { dayName: 'Workout A', exercises: [{name:'Barbell Squat',sets:3,reps:'5'}, {name:'Bench Press',sets:3,reps:'5'}, {name:'Deadlift',sets:1,reps:'5'}] },
+    { dayName: 'Workout B', exercises: [{name:'Barbell Squat',sets:3,reps:'5'}, {name:'Overhead Press',sets:3,reps:'5'}, {name:'Power Clean',sets:5,reps:'3'}] }
+  ]},
   westside: { name: 'Westside Cut Phase', days: [
     { dayName:'Max Effort Lower', exercises:[{name:'Box Squat',sets:3,reps:'3-5'},{name:'Broad Jumps',sets:4,reps:'3'},{name:'RDL barbell',sets:4,reps:'6-8'},{name:'Walking Lunges',sets:3,reps:'8/leg'},{name:'Hanging Leg Raises',sets:3,reps:'12-15'}]},
     { dayName:'Max Effort Upper', exercises:[{name:'Close Grip Bench',sets:3,reps:'3-5'},{name:'Med Ball Throws',sets:3,reps:'10'},{name:'Barbell Row',sets:4,reps:'6-8'},{name:'Pull-ups',sets:4,reps:'6'},{name:'Lying Tricep DB Extensions',sets:3,reps:'10-12'},{name:'Cable Rope Face Pulls',sets:3,reps:'15'}]},
@@ -837,6 +885,15 @@ function loadRoutine(key){
   renderProgramBuilder();
   toast(`Routine loaded`, 'success');
 }
+
+function clearRoutine() {
+  if(!confirm(`Clear current routine and start fresh?`)) return;
+  program = [];
+  saveProgramToStore();
+  renderProgramBuilder();
+  toast(`Blank canvas ready`, 'success');
+}
+
 function addDay(){ program.push({dayName: `Day ${program.length+1}`, exercises: []}); saveProgramToStore(); renderProgramBuilder(); }
 function removeDay(idx){ if(!confirm(`Remove?`)) return; program.splice(idx,1); saveProgramToStore(); renderProgramBuilder(); }
 function updateDayName(idx, val){ program[idx].dayName = val; saveProgramToStore(); }
