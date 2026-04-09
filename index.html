@@ -39,6 +39,7 @@
   --red: #FF453A;
   --green: #32D74B;
   --gold: #FFD60A;
+  --purple: #BF5AF2;
 
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   --r: 24px; 
@@ -74,6 +75,7 @@
   --red: #EF4444;
   --green: #10B981;
   --gold: #F59E0B;
+  --purple: #9333EA;
 
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
@@ -150,16 +152,40 @@ body {
 .page.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-@keyframes confetti { 0% { transform: translateY(-10px) scale(0.8); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
 
 .page-header { margin-bottom: 24px; text-align: left; }
 .page-header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; color: var(--text); }
 .page-header p { font-size: 0.95rem; color: var(--muted); margin-top: 4px; }
 
-/* ── SEGMENTED CONTROL ── */
-.segmented-control { display: flex; background: var(--glass-base); border-radius: 14px; padding: 4px; margin-bottom: 24px; border: 1px solid var(--glass-border); backdrop-filter: blur(20px); }
-.segmented-control button { flex: 1; padding: 10px; border-radius: 10px; border: none; background: transparent; color: var(--muted); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
-.segmented-control button.active { background: var(--glass-highlight); color: var(--text); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+/* ── DASHBOARD (ACTIVE PHASE) ── */
+.active-dashboard {
+  background: var(--glass-base); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--brand-dim); border-radius: var(--r); padding: 22px; margin-bottom: 32px; 
+  box-shadow: var(--brand-glow); position: relative; overflow: hidden;
+}
+.active-dashboard::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--brand);
+}
+.phase-badge {
+  display: inline-block; padding: 4px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px;
+}
+.phase-badge.strength { background: rgba(50,215,75,0.15); color: var(--green); border: 1px solid rgba(50,215,75,0.3); }
+.phase-badge.hypertrophy { background: rgba(191,90,242,0.15); color: var(--purple); border: 1px solid rgba(191,90,242,0.3); }
+.phase-badge.power { background: rgba(255,69,58,0.15); color: var(--red); border: 1px solid rgba(255,69,58,0.3); }
+.phase-badge.deload { background: rgba(255,214,10,0.15); color: var(--gold); border: 1px solid rgba(255,214,10,0.3); }
+.phase-badge.hybrid { background: var(--brand-dim); color: var(--brand); border: 1px solid rgba(10,132,255,0.3); }
+
+.tracker-container { margin: 16px 0; }
+.tracker-header { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
+.progress-bar { height: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; overflow: hidden; border: 1px solid var(--glass-border); }
+.progress-fill { height: 100%; background: var(--brand); border-radius: 4px; transition: width 0.5s ease; }
+
+/* ── VAULT (PROGRAM LIBRARY) ── */
+.vault-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid var(--glass-border); padding-bottom: 12px;}
+.vault-title { font-size: 1.2rem; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.phase-group { margin-bottom: 24px; }
+.phase-group-title { font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; margin-left: 4px; display: flex; align-items: center; gap: 8px; }
+.phase-group-title::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
 
 /* ── COMPONENTS ── */
 .card { 
@@ -169,14 +195,6 @@ body {
 }
 .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .section-label::after { content:''; flex:1; height:1px; background: linear-gradient(90deg, var(--glass-border), transparent); }
-
-/* ── STAT CARDS ── */
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-.stat-card { background: var(--brand); color: #fff; padding: 16px; border-radius: 16px; display: flex; flex-direction: column; justify-content: center; box-shadow: var(--brand-glow); }
-.stat-card.secondary { background: var(--glass-base); color: var(--text); border: 1px solid var(--glass-border); box-shadow: var(--shadow); backdrop-filter: blur(20px); }
-.stat-value { font-size: 1.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 4px; }
-.stat-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; }
-.stat-card.secondary .stat-label { color: var(--muted); }
 
 /* ── BUTTONS ── */
 .btn {
@@ -216,31 +234,38 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .toggle-switch.on { background: var(--green); border-color: var(--green); }
 .toggle-switch.on::after { transform: translateX(22px); }
 
-/* ── PREBUILT ROUTINES ── */
+/* ── ROUTINE CARDS ── */
 .routine-card { background: var(--glass-base); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: var(--r); padding: 16px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 16px; }
 .routine-card:hover, .routine-card:active { background: var(--glass-hover); transform: scale(0.98); border-color: var(--glass-highlight); }
 
-/* SOLID GRADIENT ICONS */
 .routine-icon { font-size: 1.8rem; flex-shrink: 0; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 16px; color: #fff; }
 .routine-icon svg { width: 24px; height: 24px; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.icon-custom { background: rgba(255,255,255,0.1); color: var(--text); border: 2px dashed var(--muted); }
-.icon-westside { background: linear-gradient(135deg, #FF453A, #FF9F0A); box-shadow: 0 4px 12px rgba(255,69,58,0.3); }
-.icon-beginner { background: linear-gradient(135deg, #32D74B, #30B0C7); box-shadow: 0 4px 12px rgba(50,215,75,0.3); }
-.icon-ppl { background: linear-gradient(135deg, #0A84FF, #5E5CE6); box-shadow: 0 4px 12px rgba(10,132,255,0.3); }
-.icon-upperlower { background: linear-gradient(135deg, #BF5AF2, #FF375F); box-shadow: 0 4px 12px rgba(191,90,242,0.3); }
-.icon-brosplit { background: linear-gradient(135deg, #FFD60A, #FF9F0A); color: #000; box-shadow: 0 4px 12px rgba(255,214,10,0.3); }
-.icon-phul { background: linear-gradient(135deg, #FF9F0A, #FF375F); box-shadow: 0 4px 12px rgba(255,159,10,0.3); }
-.icon-arnold { background: linear-gradient(135deg, #30B0C7, #5E5CE6); box-shadow: 0 4px 12px rgba(94,92,230,0.3); }
-.icon-ss { background: linear-gradient(135deg, #32D74B, #FFD60A); color: #000; box-shadow: 0 4px 12px rgba(50,215,75,0.3); }
+.icon-custom { background: rgba(255,255,255,0.05); color: var(--text); border: 2px dashed var(--muted); }
+.icon-strength { background: linear-gradient(135deg, #32D74B, #0A84FF); box-shadow: 0 4px 12px rgba(50,215,75,0.3); }
+.icon-hypertrophy { background: linear-gradient(135deg, #BF5AF2, #FF375F); box-shadow: 0 4px 12px rgba(191,90,242,0.3); }
+.icon-power { background: linear-gradient(135deg, #FF453A, #FF9F0A); box-shadow: 0 4px 12px rgba(255,69,58,0.3); }
+.icon-deload { background: linear-gradient(135deg, #FFD60A, #32D74B); color: #000; box-shadow: 0 4px 12px rgba(255,214,10,0.3); }
 
 .routine-info { flex: 1; }
 .routine-name { font-weight: 600; font-size: 1.05rem; color: var(--text); }
-.routine-desc { font-size: 0.85rem; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+.routine-desc { font-size: 0.8rem; color: var(--muted); margin-top: 4px; line-height: 1.4; }
 
-/* ── MY ACTIVE ROUTINE BUILDER ── */
+/* ── MODALS ── */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 200; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--modal-bg); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--glass-border); border-radius: 32px 32px 0 0; padding: 24px 20px; width: 100%; max-width: 640px; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); padding-bottom: calc(24px + env(safe-area-inset-bottom)); max-height: 90vh; overflow-y: auto; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); }
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-handle { width: 40px; height: 5px; background: var(--glass-highlight); border-radius: 3px; margin: 0 auto 24px; }
+
+/* ── INFO MODAL SPECIFICS ── */
+.info-section { margin-bottom: 20px; padding: 16px; background: var(--glass-base); border-radius: 16px; border: 1px solid var(--glass-border); }
+.info-section h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.info-section p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+/* ── BUILDER & EXERCISE LIST ── */
 .day-section { background: var(--glass-base); border: 1px solid var(--glass-border); border-radius: var(--r); margin-bottom: 16px; overflow: hidden; backdrop-filter: blur(20px); }
 .day-section-header { display: flex; align-items: center; gap: 12px; padding: 16px; background: var(--glass-base); border-bottom: 1px solid var(--glass-border); }
-.day-tag { background: var(--brand-dim); color: var(--brand); border: 1px solid rgba(10,132,255,0.3); border-radius: 8px; padding: 4px 10px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; text-shadow: var(--brand-glow); }
+.day-tag { background: var(--brand-dim); color: var(--brand); border: 1px solid rgba(10,132,255,0.3); border-radius: 8px; padding: 4px 10px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; }
 .day-name-input { background: transparent; border: none; color: var(--text); font-weight: 600; font-size: 1.05rem; flex: 1; padding: 0; box-shadow: none !important; border-radius: 0; }
 .day-section-body { padding: 16px; }
 .exercise-row { display: flex; align-items: center; gap: 12px; background: var(--glass-base); border-radius: 14px; padding: 14px; margin-bottom: 10px; border: 1px solid var(--glass-border); }
@@ -250,22 +275,13 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .icon-btn { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-base); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; color: var(--muted); }
 .icon-btn svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; }
 .icon-btn.red { background: rgba(255,69,58,0.1); border-color: rgba(255,69,58,0.3); color: var(--red); }
-.icon-btn.red:active { background: var(--red); color: #fff; transform: scale(0.9); }
+.icon-btn.red:active { transform: scale(0.9); }
 
-/* ── MODALS ── */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 200; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-.modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal { background: var(--modal-bg); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--glass-border); border-radius: 32px 32px 0 0; padding: 24px 20px; width: 100%; max-width: 640px; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); padding-bottom: calc(24px + env(safe-area-inset-bottom)); max-height: 90vh; overflow-y: auto; box-shadow: 0 -10px 40px rgba(0,0,0,0.5); }
-.modal-overlay.open .modal { transform: translateY(0); }
-.modal-handle { width: 40px; height: 5px; background: var(--glass-highlight); border-radius: 3px; margin: 0 auto 24px; }
-
-/* ── WORLD-CLASS LOGGER ── */
+/* ── LOGGER & HISTORY (Inherited from robust base) ── */
 .top-rest-timer { background: var(--glass-base); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--r); padding: 18px; margin-bottom: 20px; }
 .timer-display-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .current-rest-time { font-size: 2.2rem; font-weight: 800; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -1px; }
 .current-rest-time.running { color: var(--brand); text-shadow: var(--brand-glow); }
-.current-rest-time.finished { color: var(--green); text-shadow: 0 0 15px rgba(50,215,75,0.4); animation: pulse 0.6s ease-in-out 3; }
-
 .log-exercise-card { background: var(--glass-base); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--r); margin-bottom: 16px; overflow: hidden; box-shadow: var(--shadow); }
 .log-ex-header { padding: 18px 20px; background: var(--glass-base); border-bottom: 1px solid var(--glass-border); }
 .log-ex-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
@@ -277,7 +293,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .action-link.plate { background: rgba(255,214,10,0.15); color: var(--gold); border: 1px solid rgba(255,214,10,0.3); }
 .log-ex-target { font-size: 0.85rem; font-weight: 500; color: var(--muted); }
 .last-perf-chip { display: inline-flex; align-items: center; gap: 4px; background: var(--glass-base); color: var(--muted); font-size: 0.7rem; font-weight: 500; padding: 4px 8px; border-radius: 6px; margin-top: 6px; border: 1px solid var(--glass-border); }
-
 .set-rows { padding: 10px 20px 0 20px; }
 .set-row { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
 .set-row:last-child { border-bottom: none; }
@@ -286,20 +301,14 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .set-input-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; }
 .set-input-wrap label { font-size: 0.65rem; margin-bottom: 6px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
 .set-input-wrap input { text-align: center; font-size: 1.15rem; font-weight: 600; padding: 12px 4px; border-radius: 12px; width: 100%; max-width: 90px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); }
-
-.set-check {
-  width: 48px; height: 48px; border-radius: 16px; border: 1px solid var(--glass-highlight); background: var(--glass-base);
-  display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+.set-check { width: 48px; height: 48px; border-radius: 16px; border: 1px solid var(--glass-highlight); background: var(--glass-base); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .set-check:active { transform: scale(0.85); }
 .set-row.done .set-num { background: transparent; border-color: transparent; color: var(--muted2); }
 .set-row.done .set-check { background: var(--green); border-color: transparent; box-shadow: 0 0 15px rgba(50,215,75,0.4); }
 .set-row.done .set-check::after { content: '✓'; color: #fff; font-weight: 800; font-size: 1.4rem; }
 .set-row.pr .set-check { background: var(--gold); box-shadow: 0 0 15px rgba(255,214,10,0.4); }
 .set-row.pr .set-check::after { color: #000; }
-.pr-flag { display: inline-block; background: var(--gold); color: #000; font-size: 0.6rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-left: 6px; letter-spacing: 0.05em; animation: confetti 0.6s ease-out; }
 
-/* ── HISTORY ── */
 .history-card { background: var(--glass-base); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--r); padding: 20px; margin-bottom: 16px; }
 .history-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; }
 .history-date { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
@@ -312,19 +321,15 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 .set-chip { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; font-weight: 600; color: var(--text); border: 1px solid var(--glass-border); }
 .set-chip.pr { background: rgba(255,214,10,0.15); color: var(--gold); border-color: rgba(255,214,10,0.3); }
 
-/* ── CHART EMPTY ── */
+/* ── STATS & CHARTS ── */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.stat-card { background: var(--brand); color: #fff; padding: 16px; border-radius: 16px; display: flex; flex-direction: column; justify-content: center; box-shadow: var(--brand-glow); }
+.stat-card.secondary { background: var(--glass-base); color: var(--text); border: 1px solid var(--glass-border); box-shadow: var(--shadow); backdrop-filter: blur(20px); }
+.stat-value { font-size: 1.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 4px; }
+.stat-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; }
+.stat-card.secondary .stat-label { color: var(--muted); }
 .chart-empty { text-align: center; padding: 30px 10px; color: var(--muted); font-size: 0.85rem; font-weight: 500; }
 .chart-empty svg { width: 32px; height: 32px; display: block; margin: 0 auto 10px; opacity: 0.5; stroke: currentColor; fill: none; }
-
-/* ── PLATE CALC ── */
-.plate-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--glass-border); }
-.plate-row:last-child { border-bottom: none; }
-.plate-dot { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.7rem; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-.plate-label { flex: 1; font-weight: 600; font-size: 0.95rem; color: var(--text); }
-.plate-count { font-weight: 800; font-size: 1.1rem; color: var(--brand); }
-.plate-summary { background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px; }
-.plate-summary .big { font-size: 2.2rem; font-weight: 800; color: var(--text); letter-spacing: -1px; }
-.plate-summary .sub { font-size: 0.8rem; color: var(--brand); font-weight: 600; margin-top: 4px; }
 
 /* ── TOAST ── */
 #toast {
@@ -336,7 +341,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 #toast.success { border-color: var(--green); box-shadow: 0 0 20px rgba(50,215,75,0.2); }
 #toast.error { border-color: var(--red); box-shadow: 0 0 20px rgba(255,69,58,0.2); }
-#toast.pr { border-color: var(--gold); box-shadow: 0 0 20px rgba(255,214,10,0.3); }
 
 .empty { text-align: center; padding: 60px 20px; border: 1px dashed var(--glass-highlight); border-radius: var(--r); background: var(--glass-base); }
 .empty p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; font-weight: 500; }
@@ -358,89 +362,81 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
       <span class="brand-sub">Gym Buddy</span>
     </div>
   </div>
-  <span class="top-bar-page" id="topTitle">Program</span>
+  <span class="top-bar-page" id="topTitle">Hub</span>
 </div>
 
 <div id="page-program" class="page active">
   <div class="page-header">
     <h1>Training Hub</h1>
-    <p>Select a preset or build from scratch.</p>
+    <p>Manage your active cycle and vault.</p>
   </div>
 
-  <div class="section-label">Prebuilt Routines</div>
-  <div id="routinesList">
-    
-    <div class="routine-card" onclick="clearRoutine()">
-      <div class="routine-icon icon-custom">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 5V19M5 12H19" stroke="currentColor"/></svg>
-      </div>
-      <div class="routine-info"><div class="routine-name">Create Custom Routine</div><div class="routine-desc">Start with a blank canvas</div></div>
-    </div>
-    
-    <div class="routine-card" onclick="loadRoutine('phul')">
-      <div class="routine-icon icon-phul">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/><circle cx="12" cy="12" r="3"/></svg>
-      </div>
-      <div class="routine-info"><div class="routine-name">PHUL Split</div><div class="routine-desc">4 days/week · Power + Hypertrophy</div></div>
+  <div class="active-dashboard" id="activeDashboard">
     </div>
 
-    <div class="routine-card" onclick="loadRoutine('arnold')">
-      <div class="routine-icon icon-arnold">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 12V18M18 12V18M9 12H15M9 8H15M5 8H19C20.1046 8 21 8.89543 21 10V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V10C3 8.89543 3.89543 8 5 8Z"/></svg>
-      </div>
-      <div class="routine-info"><div class="routine-name">Arnold Split</div><div class="routine-desc">6 days/week · High volume classic</div></div>
+  <div class="vault-header">
+    <div class="vault-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+      Program Vault
     </div>
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('phaseInfoModal').classList.add('open')">ℹ️ Phase Guide</button>
+  </div>
 
-    <div class="routine-card" onclick="loadRoutine('starting_strength')">
-      <div class="routine-icon icon-ss">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-      </div>
+  <button class="btn btn-ghost btn-full" style="margin-bottom: 24px; border-style: dashed;" onclick="openCreateCustomModal()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V19M5 12H19"/></svg> Create Custom Routine
+  </button>
+
+  <div class="phase-group">
+    <div class="phase-group-title">Strength Phase</div>
+    <div class="routine-card" onclick="openStartModal('starting_strength')">
+      <div class="routine-icon icon-strength"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
       <div class="routine-info"><div class="routine-name">Starting Strength</div><div class="routine-desc">3 days/week · Linear progression base</div></div>
     </div>
-    
-    <div class="routine-card" onclick="loadRoutine('westside')">
-      <div class="routine-icon icon-westside">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="2" y1="12" x2="22" y2="12"></line><line x1="6" y1="8" x2="6" y2="16"></line><line x1="18" y1="8" x2="18" y2="16"></line><line x1="9" y1="10" x2="9" y2="14"></line><line x1="15" y1="10" x2="15" y2="14"></line></svg>
-      </div>
-      <div class="routine-info"><div class="routine-name">Westside Cut Phase</div><div class="routine-desc">4 Days lifting + 1 GPP. Custom setup.</div></div>
-    </div>
-    
-    <div class="routine-card" onclick="loadRoutine('beginner')">
-      <div class="routine-icon icon-beginner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      </div>
-      <div class="routine-info"><div class="routine-name">Beginner Full Body</div><div class="routine-desc">3 days/week · compound movements</div></div>
-    </div>
+  </div>
 
-    <div class="routine-card" onclick="loadRoutine('ppl')">
-      <div class="routine-icon icon-ppl">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="6" r="4"/><circle cx="6" cy="18" r="4"/><circle cx="18" cy="18" r="4"/><path d="M10 10l-2 4M14 10l2 4M8 18h8"/></svg>
-      </div>
-      <div class="routine-info"><div class="routine-name">Push / Pull / Legs</div><div class="routine-desc">3-6 days/week · balanced volume split</div></div>
+  <div class="phase-group">
+    <div class="phase-group-title">Hypertrophy Phase</div>
+    <div class="routine-card" onclick="openStartModal('arnold')">
+      <div class="routine-icon icon-hypertrophy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 12V18M18 12V18M9 12H15M9 8H15M5 8H19C20.1046 8 21 8.89543 21 10V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V10C3 8.89543 3.89543 8 5 8Z"/></svg></div>
+      <div class="routine-info"><div class="routine-name">Arnold Split</div><div class="routine-desc">6 days/week · High volume classic</div></div>
     </div>
-
-    <div class="routine-card" onclick="loadRoutine('upperlower')">
-      <div class="routine-icon icon-upperlower">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/></svg>
-      </div>
-      <div class="routine-info"><div class="routine-name">Upper / Lower</div><div class="routine-desc">4 days/week · high frequency</div></div>
-    </div>
-
-    <div class="routine-card" onclick="loadRoutine('brosplit')">
-      <div class="routine-icon icon-brosplit">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="8" x2="12" y2="12"></line></svg>
-      </div>
+    <div class="routine-card" onclick="openStartModal('brosplit')">
+      <div class="routine-icon icon-hypertrophy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="8" x2="12" y2="12"></line></svg></div>
       <div class="routine-info"><div class="routine-name">5-Day Bro Split</div><div class="routine-desc">1 muscle group per day · max pump</div></div>
     </div>
   </div>
 
-  <div class="section-label" style="margin-top: 30px;">My Active Routine</div>
+  <div class="phase-group">
+    <div class="phase-group-title">Power & Hybrid Phase</div>
+    <div class="routine-card" onclick="openStartModal('westside')">
+      <div class="routine-icon icon-power"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="2" y1="12" x2="22" y2="12"></line><line x1="6" y1="8" x2="6" y2="16"></line><line x1="18" y1="8" x2="18" y2="16"></line><line x1="9" y1="10" x2="9" y2="14"></line><line x1="15" y1="10" x2="15" y2="14"></line></svg></div>
+      <div class="routine-info"><div class="routine-name">Westside Cut Phase</div><div class="routine-desc">4 Days lifting + 1 GPP. Custom setup.</div></div>
+    </div>
+    <div class="routine-card" onclick="openStartModal('phul')">
+      <div class="routine-icon icon-power"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="routine-info"><div class="routine-name">PHUL Split</div><div class="routine-desc">4 days/week · Power + Hypertrophy</div></div>
+    </div>
+  </div>
+
+  <div class="phase-group">
+    <div class="phase-group-title">Deload & Maintenance</div>
+    <div class="routine-card" onclick="openStartModal('deload')">
+      <div class="routine-icon icon-deload"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+      <div class="routine-info"><div class="routine-name">Active Recovery</div><div class="routine-desc">3 days/week · 50% volume to shed fatigue</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div id="page-builder" class="page">
+  <div class="page-header">
+    <h1 id="builderTitle">Edit Routine</h1>
+    <p>Customize days and exercises.</p>
+  </div>
   <div id="programDays"></div>
   <div style="display:flex;gap:12px;">
-    <button class="btn btn-ghost" onclick="addDay()" style="flex:1">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V19M5 12H19"/></svg> Add Day
-    </button>
-    <button class="btn btn-brand" onclick="saveProgram()" style="flex:1">Save Routine</button>
+    <button class="btn btn-ghost" onclick="addDay()" style="flex:1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V19M5 12H19"/></svg> Add Day</button>
+    <button class="btn btn-brand" onclick="saveAndReturnToHub()" style="flex:1">Save & Return</button>
   </div>
 </div>
 
@@ -471,7 +467,6 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
 
 <div id="page-history" class="page">
   <div class="page-header"><h1>History & Analytics</h1><p>Operational insights into your training.</p></div>
-
   <div class="segmented-control">
     <button id="tab-charts" class="active" onclick="switchHistoryTab('charts')">Dashboard</button>
     <button id="tab-log" onclick="switchHistoryTab('log')">Log</button>
@@ -489,10 +484,7 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
     </div>
     <div class="card">
       <div class="section-label">Total Volume Output</div>
-      <p style="font-size:0.8rem; color:var(--muted); margin-bottom:16px;">Total weight × reps per session.</p>
-      <div id="volumeChartWrap" style="position:relative; height: 220px;">
-        <canvas id="volumeChart"></canvas>
-      </div>
+      <div id="volumeChartWrap" style="position:relative; height: 220px;"><canvas id="volumeChart"></canvas></div>
     </div>
     <div class="card">
       <div class="section-label">Estimated 1RM Trend</div>
@@ -503,9 +495,7 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
         <option value="hamstrings">Hamstrings</option>
         <option value="shoulders">Shoulders</option>
       </select>
-      <div id="strengthChartWrap" style="position:relative; height: 220px;">
-        <canvas id="strengthChart"></canvas>
-      </div>
+      <div id="strengthChartWrap" style="position:relative; height: 220px;"><canvas id="strengthChart"></canvas></div>
     </div>
     <div class="card">
       <div class="section-label">Body Metrics</div>
@@ -513,98 +503,38 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
         <p style="font-size:0.8rem; color:var(--muted); margin:0;">Synced via Samsung Health</p>
         <button class="btn btn-ghost btn-sm" onclick="syncBodyMetrics()">Sync Now</button>
       </div>
-      <div id="bodyChartWrap" style="position:relative; height: 220px;">
-        <canvas id="bodyChart"></canvas>
-      </div>
+      <div id="bodyChartWrap" style="position:relative; height: 220px;"><canvas id="bodyChart"></canvas></div>
     </div>
   </div>
-  <div id="historyLogView" style="display:none;">
-    <div id="historyContent"></div>
-  </div>
+  <div id="historyLogView" style="display:none;"><div id="historyContent"></div></div>
 </div>
 
 <div id="page-data" class="page">
   <div class="page-header"><h1>Settings</h1><p>Preferences, data, and integrations.</p></div>
-
   <div class="card">
     <div class="section-label">Appearance</div>
-    <div class="toggle-row">
-      <div>
-        <div class="t-label">Theme</div>
-        <div class="t-desc">Toggle between Light and Dark mode.</div>
-      </div>
-      <div class="toggle-switch" id="toggleTheme" onclick="toggleThemeSetting()"></div>
-    </div>
-    <div class="toggle-row">
-      <div>
-        <div class="t-label">Interface Scale</div>
-        <div class="t-desc">Zoom out to fit more on screen.</div>
-      </div>
-      <select id="uiScaleSelect" style="width: 125px; background:rgba(255,255,255,0.05);" onchange="changeUIScale(this.value)">
-        <option value="0.85">Small</option>
-        <option value="0.90">Compact</option>
-        <option value="0.95">Slightly Smaller</option>
-        <option value="1">Default</option>
-        <option value="1.05">Large</option>
-      </select>
-    </div>
+    <div class="toggle-row"><div><div class="t-label">Theme</div><div class="t-desc">Toggle Light/Dark mode.</div></div><div class="toggle-switch" id="toggleTheme" onclick="toggleThemeSetting()"></div></div>
+    <div class="toggle-row"><div><div class="t-label">Interface Scale</div></div><select id="uiScaleSelect" style="width: 125px; background:rgba(255,255,255,0.05);" onchange="changeUIScale(this.value)"><option value="0.85">Small</option><option value="0.90">Compact</option><option value="0.95">Slightly Smaller</option><option value="1">Default</option><option value="1.05">Large</option></select></div>
   </div>
-
   <div class="card">
     <div class="section-label">Preferences</div>
-    <div class="toggle-row">
-      <div>
-        <div class="t-label">Auto-start Rest Timer</div>
-        <div class="t-desc">Start timer automatically when finishing a set.</div>
-      </div>
-      <div class="toggle-switch" id="toggleAutoRest" onclick="toggleSetting('autoRest')"></div>
-    </div>
-    <div class="toggle-row">
-      <div>
-        <div class="t-label">Default Rest Duration</div>
-        <div class="t-desc">Used for auto-start.</div>
-      </div>
-      <select id="defaultRestSelect" style="width: 100px; background:rgba(255,255,255,0.05);" onchange="settings.defaultRest=parseInt(this.value);saveSettings()">
-        <option value="30">30s</option>
-        <option value="60">1m</option>
-        <option value="90" selected>90s</option>
-        <option value="120">2m</option>
-        <option value="180">3m</option>
-      </select>
-    </div>
-    <div class="toggle-row">
-      <div>
-        <div class="t-label">Sound & Haptics</div>
-        <div class="t-desc">Alert when rest ends.</div>
-      </div>
-      <div class="toggle-switch on" id="toggleSound" onclick="toggleSetting('sound')"></div>
-    </div>
+    <div class="toggle-row"><div><div class="t-label">Auto-start Rest Timer</div></div><div class="toggle-switch" id="toggleAutoRest" onclick="toggleSetting('autoRest')"></div></div>
+    <div class="toggle-row"><div><div class="t-label">Default Rest Duration</div></div><select id="defaultRestSelect" style="width: 100px; background:rgba(255,255,255,0.05);" onchange="settings.defaultRest=parseInt(this.value);saveSettings()"><option value="30">30s</option><option value="60">1m</option><option value="90" selected>90s</option><option value="120">2m</option><option value="180">3m</option></select></div>
+    <div class="toggle-row"><div><div class="t-label">Sound & Haptics</div></div><div class="toggle-switch on" id="toggleSound" onclick="toggleSetting('sound')"></div></div>
   </div>
-
   <div class="card">
     <div class="section-label">Integrations</div>
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <div>
-        <strong style="font-size:1.05rem; display:block; margin-bottom:4px; color:var(--text);">Samsung Health</strong>
-        <p id="healthSyncStatus" style="font-size:0.85rem; color:var(--muted);">Not linked to Health Connect.</p>
-      </div>
+      <div><strong style="font-size:1.05rem; display:block; margin-bottom:4px; color:var(--text);">Samsung Health</strong><p id="healthSyncStatus" style="font-size:0.85rem; color:var(--muted);">Not linked.</p></div>
       <button class="btn btn-sm btn-brand" onclick="enableHealthSync()">Link</button>
     </div>
   </div>
-
   <div class="card">
     <div class="section-label">Data Management</div>
-    <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 16px; line-height: 1.5;">Export history for analysis or backup your full profile.</p>
     <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      <button class="btn btn-ghost btn-sm" style="flex:1; min-width: 120px;" onclick="exportCSV()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg> CSV
-      </button>
-      <button class="btn btn-ghost btn-sm" style="flex:1; min-width: 120px;" onclick="exportJSON()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Backup
-      </button>
-      <button class="btn btn-ghost btn-sm" style="flex:1; min-width: 120px;" onclick="document.getElementById('importFile').click()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg> Restore
-      </button>
+      <button class="btn btn-ghost btn-sm" style="flex:1; min-width: 120px;" onclick="exportCSV()">CSV</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1; min-width: 120px;" onclick="exportJSON()">Backup</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1; min-width: 120px;" onclick="document.getElementById('importFile').click()">Restore</button>
       <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)" />
     </div>
   </div>
@@ -614,7 +544,7 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
   <nav class="bottom-nav" id="mainNav">
     <button class="nav-item active" onclick="showPage('program')" id="nav-program">
       <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-      <span class="nav-label">Routine</span>
+      <span class="nav-label">Hub</span>
     </button>
     <button class="nav-item" onclick="showPage('logger')" id="nav-logger">
       <svg viewBox="0 0 24 24"><path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"/></svg>
@@ -644,54 +574,78 @@ label { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom:
   </div>
 </div>
 
-<div class="modal-overlay" id="exerciseModal">
+<div class="modal-overlay" id="phaseInfoModal">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div style="font-size:1.6rem; font-weight:800; margin-bottom:24px; color:var(--text);">Add Exercise</div>
-    <div class="form-row"><label>Category</label><select id="exCategory" onchange="filterExercises()"><option value="">— Select category —</option><option value="chest">Chest</option><option value="back">Back</option><option value="shoulders">Shoulders</option><option value="biceps">Biceps</option><option value="triceps">Triceps</option><option value="quads">Quads</option><option value="hamstrings">Hamstrings</option><option value="calves">Calves</option><option value="core">Core</option><option value="cardio">Cardio & GPP</option><option value="fullbody">Full Body</option></select></div>
-    <div class="form-row"><label>Exercise</label><select id="exName"><option value="">— Select category first —</option></select></div>
-    <div class="form-row" id="customNameRow" style="display:none"><label>Custom Name</label><input type="text" id="exCustomName" placeholder="Type exercise name…" /></div>
-    <div class="form-grid"><div><label>Sets</label><input type="number" id="exSets" value="3" inputmode="numeric" /></div><div><label>Target Reps</label><input type="text" id="exReps" placeholder="e.g. 8-12" /></div></div>
-    <div style="display:flex;gap:12px;margin-top:30px"><button class="btn btn-ghost" style="flex:1" onclick="closeModal('exerciseModal')">Cancel</button><button class="btn btn-brand" style="flex:1" onclick="saveExercise()">Add</button></div>
+    <div style="font-size:1.6rem; font-weight:800; margin-bottom:16px; color:var(--text);">Phase Guide</div>
+    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:24px;">Periodization is about shifting macrocycle focus to prevent plateaus and manage CNS fatigue. Choose your active block based on your current recovery bandwidth.</p>
+    
+    <div class="info-section">
+      <h3 style="color:var(--green)">Strength Phase</h3>
+      <p><strong>Goal:</strong> Maximize force production.<br><strong>Reps:</strong> 1-5 range.<br><strong>Taxation:</strong> High CNS fatigue. Requires dialed-in sleep and nutrition.</p>
+    </div>
+    <div class="info-section">
+      <h3 style="color:var(--purple)">Hypertrophy Phase</h3>
+      <p><strong>Goal:</strong> Muscle cross-sectional area growth.<br><strong>Reps:</strong> 8-12 range.<br><strong>Taxation:</strong> High metabolic fatigue, lower CNS tax. Focus on mind-muscle connection and time under tension.</p>
+    </div>
+    <div class="info-section">
+      <h3 style="color:var(--red)">Power & Hybrid</h3>
+      <p><strong>Goal:</strong> Force x Velocity + Base building.<br><strong>Method:</strong> Moving sub-maximal weight as fast as possible combined with heavy days.</p>
+    </div>
+    <div class="info-section">
+      <h3 style="color:var(--gold)">Deload Phase</h3>
+      <p><strong>Goal:</strong> Shed accumulated fatigue.<br><strong>Method:</strong> Drop volume and intensity by 40-50%. Run this for 1 week after a gruelling 8-week block.</p>
+    </div>
+    <button class="btn btn-ghost btn-full" onclick="closeModal('phaseInfoModal')">Got it</button>
   </div>
 </div>
 
-<div class="modal-overlay" id="swapModal">
+<div class="modal-overlay" id="routineSetupModal">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div style="font-size:1.6rem; font-weight:800; margin-bottom:8px; color:var(--text);">Swap Exercise</div>
-    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:24px;">Swap <strong id="swapCurrentName" style="color:var(--text)"></strong> for another movement.</p>
-    <label>All Exercises</label>
-    <div class="form-row" style="display:flex; gap:12px;">
-      <select id="swapAllSelect" style="flex:1;"></select>
-      <button class="btn btn-brand btn-sm" onclick="confirmSwap(document.getElementById('swapAllSelect').value)">Swap</button>
+    <div style="font-size:1.4rem; font-weight:800; margin-bottom:8px; color:var(--text);" id="setupTitle">Start Routine</div>
+    <p style="font-size:0.85rem; color:var(--muted); margin-bottom:24px;">Set the parameters for your new active phase.</p>
+    
+    <div class="form-row" id="setupCustomPhaseRow" style="display:none">
+      <label>Phase Type</label>
+      <select id="setupPhase">
+        <option value="hybrid">General / Hybrid</option>
+        <option value="strength">Strength</option>
+        <option value="hypertrophy">Hypertrophy</option>
+        <option value="power">Power</option>
+        <option value="deload">Deload</option>
+      </select>
     </div>
-    <button class="btn btn-ghost btn-full" style="margin-top:16px" onclick="closeModal('swapModal')">Cancel</button>
+    <div class="form-row" id="setupCustomNameRow" style="display:none">
+      <label>Routine Name</label>
+      <input type="text" id="setupName" placeholder="e.g. Arvin's Summer Cut" />
+    </div>
+
+    <div class="form-row">
+      <label>Target Phase Length (Weeks)</label>
+      <select id="setupWeeks">
+        <option value="4">4 Weeks (Microcycle)</option>
+        <option value="8" selected>8 Weeks (Mesocycle)</option>
+        <option value="12">12 Weeks (Macrocycle)</option>
+        <option value="1">1 Week (Deload)</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:30px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('routineSetupModal')">Cancel</button>
+      <button class="btn btn-brand" style="flex:1" onclick="confirmStartRoutine()">Set Active</button>
+    </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="plateModal">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div style="font-size:1.6rem; font-weight:800; margin-bottom:20px; color:var(--text);">Plate Calculator</div>
-    <div class="form-grid">
-      <div><label>Target Weight (lb)</label><input type="number" id="plateTarget" placeholder="225" inputmode="numeric" oninput="renderPlateCalc()"/></div>
-      <div><label>Bar Weight (lb)</label><input type="number" id="plateBar" value="45" inputmode="numeric" oninput="renderPlateCalc()"/></div>
-    </div>
-    <div class="plate-summary">
-      <div class="big" id="plateTotal">—</div>
-      <div class="sub" id="plateSub">Enter a target weight above</div>
-    </div>
-    <div id="plateBreakdown"></div>
-    <button class="btn btn-ghost btn-full" style="margin-top:16px" onclick="closeModal('plateModal')">Close</button>
-  </div>
-</div>
+<div class="modal-overlay" id="exerciseModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.6rem; font-weight:800; margin-bottom:24px; color:var(--text);">Add Exercise</div><div class="form-row"><label>Category</label><select id="exCategory" onchange="filterExercises()"><option value="">— Select category —</option><option value="chest">Chest</option><option value="back">Back</option><option value="shoulders">Shoulders</option><option value="biceps">Biceps</option><option value="triceps">Triceps</option><option value="quads">Quads</option><option value="hamstrings">Hamstrings</option><option value="calves">Calves</option><option value="core">Core</option><option value="cardio">Cardio & GPP</option><option value="fullbody">Full Body</option></select></div><div class="form-row"><label>Exercise</label><select id="exName"><option value="">— Select category first —</option></select></div><div class="form-row" id="customNameRow" style="display:none"><label>Custom Name</label><input type="text" id="exCustomName" placeholder="Type exercise name…" /></div><div class="form-grid"><div><label>Sets</label><input type="number" id="exSets" value="3" inputmode="numeric" /></div><div><label>Target Reps</label><input type="text" id="exReps" placeholder="e.g. 8-12" /></div></div><div style="display:flex;gap:12px;margin-top:30px"><button class="btn btn-ghost" style="flex:1" onclick="closeModal('exerciseModal')">Cancel</button><button class="btn btn-brand" style="flex:1" onclick="saveExercise()">Add</button></div></div></div>
+<div class="modal-overlay" id="swapModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.6rem; font-weight:800; margin-bottom:8px; color:var(--text);">Swap Exercise</div><p style="font-size:0.9rem; color:var(--muted); margin-bottom:24px;">Swap <strong id="swapCurrentName" style="color:var(--text)"></strong>.</p><label>All Exercises</label><div class="form-row" style="display:flex; gap:12px;"><select id="swapAllSelect" style="flex:1;"></select><button class="btn btn-brand btn-sm" onclick="confirmSwap(document.getElementById('swapAllSelect').value)">Swap</button></div><button class="btn btn-ghost btn-full" style="margin-top:16px" onclick="closeModal('swapModal')">Cancel</button></div></div>
+<div class="modal-overlay" id="plateModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.6rem; font-weight:800; margin-bottom:20px; color:var(--text);">Plate Calculator</div><div class="form-grid"><div><label>Target Weight (lb)</label><input type="number" id="plateTarget" placeholder="225" inputmode="numeric" oninput="renderPlateCalc()"/></div><div><label>Bar Weight (lb)</label><input type="number" id="plateBar" value="45" inputmode="numeric" oninput="renderPlateCalc()"/></div></div><div class="plate-summary"><div class="big" id="plateTotal">—</div><div class="sub" id="plateSub">Enter a target weight</div></div><div id="plateBreakdown"></div><button class="btn btn-ghost btn-full" style="margin-top:16px" onclick="closeModal('plateModal')">Close</button></div></div>
 
 <div id="toast"></div>
 
 <script>
 // ═══════════════════════════════════════════════
-// HELPER: LOCAL TIMEZONE DATE FIX
+// HELPER: LOCAL TIMEZONE DATE
 // ═══════════════════════════════════════════════
 function getLocalYMD(d = new Date()) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -715,59 +669,73 @@ const EXERCISES = {
 };
 
 const ROUTINES = {
-  phul: { name: 'PHUL Split', days: [
+  phul: { name: 'PHUL Split', phase: 'power', days: [
     { dayName: 'Upper Power', exercises: [{name:'Bench Press',sets:4,reps:'3-5'}, {name:'Incline Dumbbell Press',sets:3,reps:'6-10'}, {name:'Barbell Row',sets:4,reps:'3-5'}, {name:'Lat Pulldown',sets:3,reps:'6-10'}, {name:'Overhead Press',sets:3,reps:'5-8'}, {name:'Barbell Curl',sets:3,reps:'6-10'}, {name:'Skull Crusher',sets:3,reps:'6-10'}] },
     { dayName: 'Lower Power', exercises: [{name:'Barbell Squat',sets:4,reps:'3-5'}, {name:'Deadlift',sets:4,reps:'3-5'}, {name:'Leg Press',sets:5,reps:'10-15'}, {name:'Lying Leg Curl',sets:3,reps:'6-10'}, {name:'Standing Calf Raise',sets:4,reps:'6-10'}] },
     { dayName: 'Upper Hypertrophy', exercises: [{name:'Incline Bench Press',sets:4,reps:'8-12'}, {name:'Cable Fly',sets:4,reps:'8-12'}, {name:'Cable Row',sets:4,reps:'8-12'}, {name:'Dumbbell Row',sets:3,reps:'8-12'}, {name:'Lateral Raise',sets:4,reps:'8-12'}, {name:'Dumbbell Curl',sets:4,reps:'8-12'}, {name:'Tricep Pushdown (Rope)',sets:4,reps:'8-12'}] },
     { dayName: 'Lower Hypertrophy', exercises: [{name:'Front Squat',sets:4,reps:'8-12'}, {name:'Walking Lunges',sets:4,reps:'8-12'}, {name:'Leg Extension',sets:4,reps:'10-15'}, {name:'Seated Leg Curl',sets:4,reps:'10-15'}, {name:'Seated Calf Raise',sets:4,reps:'10-15'}] }
   ]},
-  arnold: { name: 'Arnold Split', days: [
+  arnold: { name: 'Arnold Split', phase: 'hypertrophy', days: [
     { dayName: 'Chest & Back', exercises: [{name:'Bench Press',sets:4,reps:'8-12'}, {name:'Incline Bench Press',sets:4,reps:'8-12'}, {name:'Pull-ups',sets:4,reps:'8-12'}, {name:'Barbell Row',sets:4,reps:'8-12'}, {name:'Deadlift',sets:3,reps:'5-8'}] },
     { dayName: 'Shoulders & Arms', exercises: [{name:'Arnold Press',sets:4,reps:'8-12'}, {name:'Lateral Raise',sets:4,reps:'10-15'}, {name:'Barbell Curl',sets:4,reps:'8-12'}, {name:'Skull Crusher',sets:4,reps:'8-12'}, {name:'Hammer Curl',sets:3,reps:'8-12'}] },
     { dayName: 'Legs', exercises: [{name:'Barbell Squat',sets:4,reps:'8-12'}, {name:'Leg Press',sets:4,reps:'8-12'}, {name:'Romanian Deadlift',sets:4,reps:'8-12'}, {name:'Leg Extension',sets:3,reps:'12-15'}, {name:'Lying Leg Curl',sets:3,reps:'12-15'}] }
   ]},
-  starting_strength: { name: 'Starting Strength', days: [
+  starting_strength: { name: 'Starting Strength', phase: 'strength', days: [
     { dayName: 'Workout A', exercises: [{name:'Barbell Squat',sets:3,reps:'5'}, {name:'Bench Press',sets:3,reps:'5'}, {name:'Deadlift',sets:1,reps:'5'}] },
     { dayName: 'Workout B', exercises: [{name:'Barbell Squat',sets:3,reps:'5'}, {name:'Overhead Press',sets:3,reps:'5'}, {name:'Power Clean',sets:5,reps:'3'}] }
   ]},
-  westside: { name: 'Westside Cut Phase', days: [
+  westside: { name: 'Westside Cut Phase', phase: 'power', days: [
     { dayName:'Max Effort Lower', exercises:[{name:'Box Squat',sets:3,reps:'3-5'},{name:'Broad Jumps',sets:4,reps:'3'},{name:'RDL barbell',sets:4,reps:'6-8'},{name:'Walking Lunges',sets:3,reps:'8/leg'},{name:'Hanging Leg Raises',sets:3,reps:'12-15'}]},
     { dayName:'Max Effort Upper', exercises:[{name:'Close Grip Bench',sets:3,reps:'3-5'},{name:'Med Ball Throws',sets:3,reps:'10'},{name:'Barbell Row',sets:4,reps:'6-8'},{name:'Pull-ups',sets:4,reps:'6'},{name:'Lying Tricep DB Extensions',sets:3,reps:'10-12'},{name:'Cable Rope Face Pulls',sets:3,reps:'15'}]},
     { dayName:'Dynamic Lower', exercises:[{name:'Leg Press',sets:5,reps:'8-10'},{name:'Deadlift',sets:5,reps:'5'},{name:'Sled Push',sets:6,reps:'25m'},{name:'GHR/Nordic',sets:4,reps:'8'}]},
     { dayName:'Dynamic Upper', exercises:[{name:'Wide Bench',sets:5,reps:'5'},{name:'Plyo Push-ups',sets:5,reps:'5'},{name:'DB Chest Press',sets:4,reps:'8-10'},{name:'Chest Supported DB Row',sets:4,reps:'10'},{name:'Lateral + Rear Delt Flys',sets:3,reps:'15-20'}]},
     { dayName:'GPP & Loaded Cardio', exercises:[{name:'Prowler Push',sets:8,reps:'25m'},{name:'Farmers Carry',sets:4,reps:'40m'},{name:'Battle Ropes',sets:5,reps:'30s'},{name:'Core Circuit',sets:3,reps:'1'},{name:'Vest Walk',sets:1,reps:'35 min'}]}
   ]},
-  beginner: { name: 'Beginner Full Body', days: [
+  beginner: { name: 'Beginner Full Body', phase: 'hypertrophy', days: [
     { dayName:'Day A', exercises:[{name:'Barbell Squat',sets:3,reps:'8'},{name:'Bench Press',sets:3,reps:'8'},{name:'Barbell Row',sets:3,reps:'8'}]},
     { dayName:'Day B', exercises:[{name:'Romanian Deadlift',sets:3,reps:'8'},{name:'Overhead Press',sets:3,reps:'8'},{name:'Pull-ups',sets:3,reps:'5-8'}]},
     { dayName:'Day C', exercises:[{name:'Leg Press',sets:3,reps:'10'},{name:'Incline Dumbbell Press',sets:3,reps:'10'},{name:'Cable Row',sets:3,reps:'10'}]}
   ]},
-  ppl: { name: 'Push / Pull / Legs', days: [
+  ppl: { name: 'Push / Pull / Legs', phase: 'hypertrophy', days: [
     { dayName:'Push', exercises:[{name:'Bench Press',sets:4,reps:'8'},{name:'Overhead Press',sets:3,reps:'10'},{name:'Tricep Pushdown (Rope)',sets:3,reps:'12'}]},
     { dayName:'Pull', exercises:[{name:'Deadlift',sets:3,reps:'5'},{name:'Pull-ups',sets:3,reps:'8'},{name:'Barbell Curl',sets:3,reps:'10'}]},
     { dayName:'Legs', exercises:[{name:'Barbell Squat',sets:4,reps:'8'},{name:'Romanian Deadlift',sets:3,reps:'10'},{name:'Standing Calf Raise',sets:3,reps:'15'}]}
   ]},
-  upperlower: { name: 'Upper / Lower Split', days: [
+  upperlower: { name: 'Upper / Lower Split', phase: 'hypertrophy', days: [
     { dayName:'Upper', exercises:[{name:'Bench Press',sets:4,reps:'8'},{name:'Barbell Row',sets:4,reps:'8'},{name:'Overhead Press',sets:3,reps:'10'},{name:'Lat Pulldown',sets:3,reps:'10'}]},
     { dayName:'Lower', exercises:[{name:'Barbell Squat',sets:4,reps:'8'},{name:'Romanian Deadlift',sets:3,reps:'8'},{name:'Leg Press',sets:3,reps:'12'},{name:'Standing Calf Raise',sets:4,reps:'15'}]}
   ]},
-  brosplit: { name: '5-Day Bro Split', days: [
+  brosplit: { name: '5-Day Bro Split', phase: 'hypertrophy', days: [
     { dayName:'Chest', exercises:[{name:'Bench Press',sets:4,reps:'8'},{name:'Incline Dumbbell Press',sets:3,reps:'10'},{name:'Cable Fly',sets:3,reps:'12'}]},
     { dayName:'Back', exercises:[{name:'Deadlift',sets:3,reps:'5'},{name:'Lat Pulldown',sets:3,reps:'10'},{name:'Cable Row',sets:3,reps:'10'}]},
     { dayName:'Arms', exercises:[{name:'Barbell Curl',sets:4,reps:'10'},{name:'Skull Crusher',sets:4,reps:'10'},{name:'Hammer Curl',sets:3,reps:'12'}]},
     { dayName:'Legs', exercises:[{name:'Barbell Squat',sets:4,reps:'8'},{name:'Leg Press',sets:3,reps:'12'},{name:'Lying Leg Curl',sets:3,reps:'12'}]},
     { dayName:'Shoulders', exercises:[{name:'Overhead Press',sets:4,reps:'8'},{name:'Lateral Raise',sets:4,reps:'15'},{name:'Face Pull',sets:3,reps:'15'}]}
+  ]},
+  deload: { name: 'Active Recovery', phase: 'deload', days: [
+    { dayName:'Mobility & Bloodflow', exercises:[{name:'Stationary Bike',sets:1,reps:'15 min'},{name:'Push Up',sets:3,reps:'10'},{name:'Lat Pulldown',sets:3,reps:'10'},{name:'Goblet Squat',sets:3,reps:'10'},{name:'Plank',sets:3,reps:'45s'}]}
   ]}
 };
 
 const BARBELL_EXERCISES = new Set(['Box Squat','Bench Press','Close Grip Bench','Wide Bench','Incline Bench Press','Decline Bench Press','Barbell Row','Deadlift','Rack Pull','Sumo Deadlift','RDL barbell','Romanian Deadlift','Barbell Squat','Front Squat','Hack Squat','Overhead Press','Close Grip Bench Press','Good Morning','T-Bar Row','Trap Bar Deadlift','Clean and Press','Power Clean','Thruster','Barbell Curl','EZ Bar Curl','Upright Row','Shrug']);
 
 // ═══════════════════════════════════════════════
-// STATE & THEME INITIALIZATION
+// STATE & DATA MIGRATION
 // ═══════════════════════════════════════════════
-let program = JSON.parse(localStorage.getItem('ff_program')) || [];
 let history = JSON.parse(localStorage.getItem('ff_history')) || [];
 let settings = JSON.parse(localStorage.getItem('ff_settings')) || { autoRest: false, sound: true, defaultRest: 90, theme: 'dark', uiScale: 1.0 };
+
+// NEW: Active Program Object (Phase aware)
+let activeProgram = JSON.parse(localStorage.getItem('ff_active_program'));
+
+// Migration script for old array-based routines
+if (!activeProgram) {
+  let oldProgram = JSON.parse(localStorage.getItem('ff_program'));
+  if (oldProgram && oldProgram.length > 0) {
+    activeProgram = { name: "Migrated Routine", phase: "hybrid", startDate: getLocalYMD(), targetWeeks: 8, days: oldProgram };
+    localStorage.setItem('ff_active_program', JSON.stringify(activeProgram));
+  }
+}
 
 // Apply theme and scale on load
 if (settings.theme === 'light') { document.documentElement.setAttribute('data-theme', 'light'); }
@@ -784,9 +752,10 @@ let topTimerInt = null;
 let topTimerRemaining = 0;
 let editDayIdx = null;
 let currentSwapExId = null;
+let pendingRoutineKey = null;
 
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
-function saveProgramToStore(){ localStorage.setItem('ff_program', JSON.stringify(program)); }
+function saveProgramToStore(){ localStorage.setItem('ff_active_program', JSON.stringify(activeProgram)); }
 function saveHistoryToStore(){ localStorage.setItem('ff_history', JSON.stringify(history)); }
 function saveSettings(){ localStorage.setItem('ff_settings', JSON.stringify(settings)); }
 
@@ -828,21 +797,19 @@ function tryRestoreWorkout(){
   try {
     const s = JSON.parse(raw);
     if(Date.now() - s.savedAt > 12*3600*1000) { localStorage.removeItem('ff_active_workout'); return false; }
-    if(!program[s.activeDayIdx]) { localStorage.removeItem('ff_active_workout'); return false; }
-    if(confirm(`Resume in-progress workout (${program[s.activeDayIdx].dayName})?`)) {
+    if(!activeProgram || !activeProgram.days[s.activeDayIdx]) { localStorage.removeItem('ff_active_workout'); return false; }
+    if(confirm(`Resume in-progress workout (${activeProgram.days[s.activeDayIdx].dayName})?`)) {
       activeDayIdx = s.activeDayIdx;
       logData = s.logData || {};
-      
       globalSeconds = s.globalSeconds || 0;
       workoutStartTime = Date.now() - (globalSeconds * 1000); 
-      
       isWorkoutActive = true;
       document.getElementById('mainNavWrap').classList.add('hidden');
       document.getElementById('activeWorkoutBar').classList.add('visible');
       showPage('logger');
       document.getElementById('loggerSetup').style.display = 'none';
       document.getElementById('loggerActive').style.display = 'block';
-      document.getElementById('train-header').textContent = program[activeDayIdx].dayName;
+      document.getElementById('train-header').textContent = activeProgram.days[activeDayIdx].dayName;
       clearInterval(globalTimerInt);
       globalTimerInt = setInterval(tickGlobalTimer, 1000);
       tickGlobalTimer();
@@ -856,7 +823,7 @@ function tryRestoreWorkout(){
 }
 
 // ═══════════════════════════════════════════════
-// NAVIGATION
+// NAVIGATION & DASHBOARD RENDER
 // ═══════════════════════════════════════════════
 function showPage(id){
   if(isWorkoutActive && id !== 'logger') {
@@ -867,36 +834,109 @@ function showPage(id){
   document.getElementById('page-'+id).classList.add('active');
   const nav = document.getElementById('nav-'+id);
   if(nav) nav.classList.add('active');
-  document.getElementById('topTitle').textContent = {program:'Program', logger:'Train', history:'Analytics', data:'Settings'}[id] || id;
+  document.getElementById('topTitle').textContent = {program:'Hub', logger:'Train', history:'Analytics', data:'Settings'}[id] || id;
   window.scrollTo(0,0);
   if(id==='logger' && !isWorkoutActive) setupLoggerPreState();
   if(id==='history') { renderHistory(); switchHistoryTab('charts'); }
-  if(id==='program') renderProgramBuilder();
+  if(id==='program') renderDashboard();
   if(id==='data') renderSettings();
 }
 
-// ═══════════════════════════════════════════════
-// ROUTINES
-// ═══════════════════════════════════════════════
-function loadRoutine(key){
-  if(!confirm(`Replace Active Routine?`)) return;
-  program = ROUTINES[key].days.map(d => ({ dayName: d.dayName, exercises: d.exercises.map(e => ({...e, id: uid()})) }));
-  saveProgramToStore();
-  renderProgramBuilder();
-  toast(`Routine loaded`, 'success');
+function calculateCurrentWeek() {
+  if(!activeProgram || !activeProgram.startDate) return 1;
+  const start = new Date(activeProgram.startDate);
+  const now = new Date(getLocalYMD());
+  const diffTime = Math.abs(now - start);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+  const week = Math.floor(diffDays / 7) + 1;
+  return week > activeProgram.targetWeeks ? activeProgram.targetWeeks : week;
 }
 
-function clearRoutine() {
-  if(!confirm(`Clear current routine and start fresh?`)) return;
-  program = [];
-  saveProgramToStore();
-  renderProgramBuilder();
-  toast(`Blank canvas ready`, 'success');
+function renderDashboard() {
+  const dashEl = document.getElementById('activeDashboard');
+  if(!activeProgram) {
+    dashEl.innerHTML = `<div class="chart-empty"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>No Active Program. Select one from the Vault below.</div>`;
+    return;
+  }
+  
+  const currentWeek = calculateCurrentWeek();
+  const pct = (currentWeek / activeProgram.targetWeeks) * 100;
+  
+  dashEl.innerHTML = `
+    <div class="phase-badge ${activeProgram.phase}">${activeProgram.phase} Phase</div>
+    <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 6px;">${activeProgram.name}</h2>
+    <div class="tracker-container">
+      <div class="tracker-header"><span>Week ${currentWeek} of ${activeProgram.targetWeeks}</span><span>${Math.round(pct)}%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width: ${pct}%"></div></div>
+    </div>
+    <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 16px;">${activeProgram.days.length} workouts per microcycle.</p>
+    <button class="btn btn-ghost btn-sm" onclick="openBuilder()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Edit Days & Exercises</button>
+  `;
 }
 
-function addDay(){ program.push({dayName: `Day ${program.length+1}`, exercises: []}); saveProgramToStore(); renderProgramBuilder(); }
-function removeDay(idx){ if(!confirm(`Remove?`)) return; program.splice(idx,1); saveProgramToStore(); renderProgramBuilder(); }
-function updateDayName(idx, val){ program[idx].dayName = val; saveProgramToStore(); }
+// ═══════════════════════════════════════════════
+// ROUTINE SETUP & BUILDER
+// ═══════════════════════════════════════════════
+function openStartModal(key) {
+  pendingRoutineKey = key;
+  document.getElementById('setupTitle').textContent = `Start ${ROUTINES[key].name}`;
+  document.getElementById('setupCustomPhaseRow').style.display = 'none';
+  document.getElementById('setupCustomNameRow').style.display = 'none';
+  document.getElementById('routineSetupModal').classList.add('open');
+}
+
+function openCreateCustomModal() {
+  pendingRoutineKey = 'custom';
+  document.getElementById('setupTitle').textContent = `Create Custom Routine`;
+  document.getElementById('setupCustomPhaseRow').style.display = 'block';
+  document.getElementById('setupCustomNameRow').style.display = 'block';
+  document.getElementById('setupName').value = '';
+  document.getElementById('routineSetupModal').classList.add('open');
+}
+
+function confirmStartRoutine() {
+  const weeks = parseInt(document.getElementById('setupWeeks').value);
+  
+  if (pendingRoutineKey === 'custom') {
+    const name = document.getElementById('setupName').value.trim() || 'Custom Routine';
+    const phase = document.getElementById('setupPhase').value;
+    activeProgram = { name, phase, startDate: getLocalYMD(), targetWeeks: weeks, days: [] };
+  } else {
+    const r = ROUTINES[pendingRoutineKey];
+    activeProgram = { 
+      name: r.name, 
+      phase: r.phase, 
+      startDate: getLocalYMD(), 
+      targetWeeks: weeks, 
+      days: r.days.map(d => ({ dayName: d.dayName, exercises: d.exercises.map(e => ({...e, id: uid()})) })) 
+    };
+  }
+  
+  saveProgramToStore();
+  closeModal('routineSetupModal');
+  renderDashboard();
+  
+  if(pendingRoutineKey === 'custom') openBuilder();
+  toast(`Active Phase Set`, 'success');
+}
+
+// ── BUILDER ENGINE ──
+function openBuilder() {
+  renderProgramBuilder();
+  document.getElementById('page-program').classList.remove('active');
+  document.getElementById('page-builder').classList.add('active');
+}
+
+function saveAndReturnToHub() {
+  saveProgramToStore();
+  document.getElementById('page-builder').classList.remove('active');
+  showPage('program');
+  toast(`Saved ✓`,'success');
+}
+
+function addDay(){ activeProgram.days.push({dayName: `Day ${activeProgram.days.length+1}`, exercises: []}); renderProgramBuilder(); }
+function removeDay(idx){ if(!confirm(`Remove?`)) return; activeProgram.days.splice(idx,1); renderProgramBuilder(); }
+function updateDayName(idx, val){ activeProgram.days[idx].dayName = val; }
 
 function filterExercises() {
   const cat = document.getElementById('exCategory').value;
@@ -913,16 +953,16 @@ function saveExercise(){
   const sets = parseInt(document.getElementById('exSets').value)||3;
   const reps = document.getElementById('exReps').value.trim();
   if(!name) { toast('Select exercise', 'error'); return; }
-  program[editDayIdx].exercises.push({id:uid(), name, sets, reps});
-  saveProgramToStore();
+  activeProgram.days[editDayIdx].exercises.push({id:uid(), name, sets, reps});
   closeModal('exerciseModal'); renderProgramBuilder();
 }
-function removeExercise(di,ei){ program[di].exercises.splice(ei,1); saveProgramToStore(); renderProgramBuilder(); }
+function removeExercise(di,ei){ activeProgram.days[di].exercises.splice(ei,1); renderProgramBuilder(); }
 
 function renderProgramBuilder(){
   const el = document.getElementById('programDays');
-  if(!program.length){ el.innerHTML=`<div class="empty"><p>Build or load a routine above.</p></div>`; return; }
-  el.innerHTML = program.map((day,di)=>`
+  document.getElementById('builderTitle').textContent = activeProgram.name;
+  if(!activeProgram.days.length){ el.innerHTML=`<div class="empty"><p>Tap Add Day to start building.</p></div>`; return; }
+  el.innerHTML = activeProgram.days.map((day,di)=>`
     <div class="day-section">
       <div class="day-section-header">
         <span class="day-tag">Day ${di+1}</span>
@@ -941,7 +981,6 @@ function renderProgramBuilder(){
       </div>
     </div>`).join('');
 }
-function saveProgram(){ saveProgramToStore(); toast(`Saved ✓`,'success'); }
 
 // ═══════════════════════════════════════════════
 // WORKOUT FLOW
@@ -952,8 +991,12 @@ function setupLoggerPreState() {
   document.getElementById('loggerActive').style.display = 'none';
   document.getElementById('train-header').textContent = "Train";
   const setupEl = document.getElementById('daySelectorList');
-  if(!program.length) { setupEl.innerHTML = `<div class="empty"><p>Build routine first.</p></div>`; return; }
-  setupEl.innerHTML = program.map((d, i) => `
+  if(!activeProgram || !activeProgram.days.length) { setupEl.innerHTML = `<div class="empty"><p>Set an active routine in the Hub first.</p></div>`; return; }
+  
+  const currentWeek = calculateCurrentWeek();
+  document.getElementById('train-subtitle').textContent = `${activeProgram.name} • Week ${currentWeek}`;
+
+  setupEl.innerHTML = activeProgram.days.map((d, i) => `
     <div class="card" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center;" onclick="startWorkout(${i})">
       <div><div style="font-weight:700; font-size:1.15rem;">${d.dayName}</div><div style="font-size:0.85rem; color:var(--muted); margin-top:6px;">${d.exercises.length} Exercises</div></div>
       <div style="font-size:1.5rem; color:var(--brand);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg></div>
@@ -970,7 +1013,7 @@ async function startWorkout(dayIdx) {
   document.getElementById('activeWorkoutBar').classList.add('visible');
   document.getElementById('loggerSetup').style.display = 'none';
   document.getElementById('loggerActive').style.display = 'block';
-  document.getElementById('train-header').textContent = program[dayIdx].dayName;
+  document.getElementById('train-header').textContent = activeProgram.days[dayIdx].dayName;
   clearInterval(globalTimerInt);
   globalTimerInt = setInterval(tickGlobalTimer, 1000);
   renderActiveWorkout();
@@ -1011,7 +1054,7 @@ function addSetToExercise(exId) {
 }
 
 function renderActiveWorkout() {
-  const day = program[activeDayIdx];
+  const day = activeProgram.days[activeDayIdx];
   let html = '';
   day.exercises.forEach(ex => {
     const ghost = findGhostData(ex.name);
@@ -1091,7 +1134,7 @@ function openSwapModal(exId, exName) {
   document.getElementById('swapModal').classList.add('open');
 }
 function confirmSwap(newName) {
-  const ex = program[activeDayIdx].exercises.find(e => e.id === currentSwapExId);
+  const ex = activeProgram.days[activeDayIdx].exercises.find(e => e.id === currentSwapExId);
   if(ex) {
     ex.name = newName;
     const ghost = findGhostData(newName);
@@ -1174,7 +1217,7 @@ async function finishWorkout() {
   if(!confirm("Complete session?")) return;
   if (wakeLock) try { wakeLock.release(); } catch(e){}
   clearInterval(globalTimerInt); stopTopTimer();
-  const day = program[activeDayIdx];
+  const day = activeProgram.days[activeDayIdx];
   const date = getLocalYMD(); 
   const durationSec = globalSeconds;
 
@@ -1464,7 +1507,7 @@ function exportCSV() {
   download(csv, `Arvins_Gym_Buddy_${getLocalYMD()}.csv`, 'text/csv;charset=utf-8;');
 }
 function exportJSON() {
-  const data = { program, history, settings, exportedAt: new Date().toISOString(), version: 2 };
+  const data = { activeProgram, history, settings, exportedAt: new Date().toISOString(), version: 3 };
   download(JSON.stringify(data, null, 2), `Arvins_Backup_${getLocalYMD()}.json`, 'application/json');
   toast('Backup saved ✓', 'success');
 }
@@ -1476,7 +1519,12 @@ function importJSON(ev) {
     try {
       const data = JSON.parse(e.target.result);
       if(!confirm('Restore will overwrite your current data. Continue?')) return;
-      if(data.program) { program = data.program; saveProgramToStore(); }
+      if(data.activeProgram) { activeProgram = data.activeProgram; saveProgramToStore(); }
+      else if(data.program) { 
+        // Migrate legacy V2 backup
+        activeProgram = { name: "Migrated Routine", phase: "hybrid", startDate: getLocalYMD(), targetWeeks: 8, days: data.program };
+        saveProgramToStore();
+      }
       if(data.history) { history = data.history; saveHistoryToStore(); }
       if(data.settings) { 
         settings = data.settings; saveSettings(); 
@@ -1485,7 +1533,7 @@ function importJSON(ev) {
         if (settings.uiScale) document.body.style.zoom = settings.uiScale;
       }
       toast('Restored ✓', 'success');
-      renderProgramBuilder(); renderSettings();
+      renderDashboard(); renderSettings();
     } catch(err) { toast('Invalid backup file', 'error'); }
   };
   reader.readAsText(file);
