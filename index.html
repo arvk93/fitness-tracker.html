@@ -23,15 +23,16 @@
   --input-bg: #F2EFEA;
   --nav-bg: rgba(255, 255, 255, 0.85);
 
-  --brand: #D4A373; /* Warm Camel / Tan */
+  --brand: #D4A373; /* Camel */
   --brand-dim: rgba(212, 163, 115, 0.15);
   
-  --action-bg: #8B7D6B; /* Complementary Warm Taupe */
+  --action-bg: #8B7D6B; /* Taupe */
   --action-text: #FFFFFF;
   
   --red: #D96C6C;
-  --green: #7D9D75; /* Sage Green */
+  --green: #7D9D75; /* Sage */
   --gold: #D4B26A;
+  --blue: #5B9CF6;
 
   --shadow: 0 12px 36px rgba(51, 45, 39, 0.06);
   --shadow-sm: 0 4px 12px rgba(51, 45, 39, 0.04);
@@ -60,7 +61,7 @@ body {
 /* ── FLOATING BOTTOM NAV ── */
 .bottom-nav-wrap { position: fixed; bottom: 20px; left: 20px; right: 20px; display: flex; justify-content: center; z-index: 100; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .bottom-nav-wrap.hidden { transform: translateY(150%); }
-.bottom-nav { display: flex; align-items: center; background: var(--nav-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--border); border-radius: 40px; padding: 8px 16px; box-shadow: var(--shadow); }
+.bottom-nav { display: flex; align-items: center; background: var(--nav-bg); backdrop-filter: blur(30px); border: 1px solid var(--border); border-radius: 40px; padding: 8px 16px; box-shadow: var(--shadow); }
 .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border: none; background: transparent; cursor: pointer; padding: 8px 16px; color: var(--muted); transition: all 0.2s; border-radius: 20px; }
 .nav-item svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; fill: none; transition: transform 0.2s; }
 .nav-item .nav-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.02em; }
@@ -68,13 +69,13 @@ body {
 .nav-item:active svg { transform: scale(0.85); }
 
 /* ── ACTIVE WORKOUT BAR ── */
-.active-workout-bar { position: fixed; bottom: 0; left: 0; right: 0; height: var(--active-bar-h); background: var(--nav-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; padding-bottom: env(safe-area-inset-bottom); z-index: 99; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.active-workout-bar { position: fixed; bottom: 0; left: 0; right: 0; height: var(--active-bar-h); background: var(--nav-bg); backdrop-filter: blur(30px); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; padding-bottom: env(safe-area-inset-bottom); z-index: 99; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 .active-workout-bar.visible { transform: translateY(0); }
 .workout-timer-global { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.25rem; color: var(--action-bg); }
 
 /* ── PAGES & COMPONENTS ── */
 .page { display: none; max-width: 640px; margin: 0 auto; padding: 24px 20px 160px 20px; opacity: 0; }
-.page.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.page.active { display: block; animation: fadeIn 0.4s forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
 .page-header { margin-bottom: 24px; text-align: left; }
@@ -82,10 +83,12 @@ body {
 .page-header p { font-size: 0.95rem; color: var(--muted); margin-top: 4px; font-weight: 500; }
 
 .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow-sm); transition: transform 0.2s; }
+.section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.section-label::after { content:''; flex:1; height:1px; background: var(--border); }
 
 /* ── BUTTONS & FORMS ── */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 14px; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); color: inherit; }
-.btn-brand { background: var(--action-bg); color: var(--action-text); box-shadow: 0 4px 14px rgba(139, 125, 107, 0.2); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 14px; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: all 0.2s; color: inherit; font-family: inherit; }
+.btn-brand { background: var(--action-bg); color: var(--action-text); box-shadow: 0 4px 14px rgba(139, 125, 107, 0.3); }
 .btn-brand:active { transform: scale(0.96); opacity: 0.9; }
 .btn-ghost { background: var(--input-bg); color: var(--text); border: 1px solid transparent; }
 .btn-ghost:active { transform: scale(0.96); background: var(--border); }
@@ -96,6 +99,7 @@ body {
 
 input, select { font-family: inherit; font-size: 1rem; color: var(--text); background: var(--input-bg); border: 1px solid transparent; border-radius: 12px; padding: 14px 16px; width: 100%; outline: none; transition: all 0.2s; -webkit-appearance: none; appearance: none; }
 input:focus, select:focus { border-color: var(--brand); background: #fff; box-shadow: 0 0 0 3px var(--brand-dim); }
+input::placeholder { color: var(--muted2); font-weight: 500; }
 select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8178' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
 label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; display: block; }
 .form-row { margin-bottom: 16px; }
@@ -204,6 +208,7 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 .kpi-top-border { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
 .kpi-label { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
 .kpi-icon { width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+.kpi-icon svg { width: 12px; height: 12px; stroke-width: 2; fill: none; stroke: currentColor; }
 .kpi-value { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; color: var(--text); line-height: 1; margin-bottom: 8px; }
 .kpi-value span { font-size: 0.9rem; font-weight: 500; color: var(--muted); margin-left: 4px; }
 .kpi-delta { font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 4px; }
@@ -295,7 +300,7 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 
   <div class="phase-group">
     <div class="phase-group-title" onclick="toggleAccordion('lib-strength', this)">
-      <span>💪 Focus: Strength</span>
+      <span style="display:flex; align-items:center; gap:8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green)"><path d="M6.9 11.5l5.6 5.6"/><path d="M10 16.5l3.5-3.5"/><path d="M3.5 10A2.5 2.5 0 0 1 6 7.5c.3 0 .7.1 1 .2l2.3-2.3a2.5 2.5 0 1 1 3.5 3.5l-2.3 2.3c.1.3.2.7.2 1a2.5 2.5 0 0 1-5 0"/><path d="M14 19a2.5 2.5 0 0 0 2.5-2.5c0-.3-.1-.7-.2-1l2.3-2.3a2.5 2.5 0 1 0-3.5-3.5l-2.3 2.3c-.1-.3-.5-.4-.8-.4a2.5 2.5 0 0 0 0 5"/></svg> Focus: Strength</span>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <div class="phase-group-content" id="lib-strength">
@@ -328,7 +333,7 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 
   <div class="phase-group">
     <div class="phase-group-title" onclick="toggleAccordion('lib-hypertrophy', this)">
-      <span>🔥 Focus: Hypertrophy</span>
+      <span style="display:flex; align-items:center; gap:8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--brand)"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> Focus: Hypertrophy</span>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <div class="phase-group-content" id="lib-hypertrophy">
@@ -363,7 +368,7 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 
   <div class="phase-group">
     <div class="phase-group-title" onclick="toggleAccordion('lib-power', this)">
-      <span>⚡ Focus: Power & Hybrid</span>
+      <span style="display:flex; align-items:center; gap:8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Focus: Power & Hybrid</span>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <div class="phase-group-content" id="lib-power">
@@ -387,26 +392,6 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
     </div>
   </div>
 
-  <div class="phase-group">
-    <div class="phase-group-title" onclick="toggleAccordion('lib-deload', this)">
-      <span>🔋 Focus: Recovery</span>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <div class="phase-group-content" id="lib-deload">
-      <div class="routine-card" onclick="openStartModal('deload')">
-        <div class="rc-header"><div class="rc-title">Active Recovery</div></div>
-        <div class="rc-preview"><div class="rc-preview-item">Mobility & Bloodflow</div></div>
-      </div>
-      <div class="routine-card" onclick="openStartModal('mobility')">
-        <div class="rc-header"><div class="rc-title">Mobility Flow</div></div>
-        <div class="rc-preview">
-          <div class="rc-preview-item">Lower Focus</div>
-          <div class="rc-preview-item">Upper Focus</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <button class="btn btn-ghost btn-full" style="border: 1px dashed var(--muted); margin-top:12px; background: transparent;" onclick="openCreateCustomModal()">Build Custom Canvas</button>
 </div>
 
@@ -419,13 +404,24 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
   </div>
 </div>
 
+<div id="page-recovery" class="page">
+  <div class="page-header">
+    <h1>Recovery</h1>
+    <p>Intention-based mobility flows.</p>
+  </div>
+  <div id="flowList"></div>
+</div>
+
 <div id="page-logger" class="page">
   <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
     <div>
       <h1 id="train-header">Train</h1>
       <p id="train-subtitle" style="margin-top:0;">Select a session to start.</p>
     </div>
-    <button class="btn btn-ghost btn-sm" style="background: var(--card-bg);" onclick="open1RMModal()">🎯 1RM Calculator</button>
+    <button class="btn btn-ghost btn-sm" style="background: var(--card-bg); display:flex; align-items:center; gap:6px;" onclick="open1RMModal()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--brand)"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      1RM Vault
+    </button>
   </div>
   
   <div id="loggerSetup"><div id="daySelectorList" style="display:flex; flex-direction:column; gap:16px;"></div></div>
@@ -438,7 +434,10 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
         <button class="btn btn-ghost btn-sm" style="flex:1;" onclick="startTopTimer(90)">90s</button>
         <button class="btn btn-ghost btn-sm" style="flex:1; color: var(--red);" onclick="stopTopTimer()">Stop</button>
       </div>
-      <button class="btn btn-ghost btn-full btn-sm" style="border: 1px dashed var(--border); font-weight:700;" onclick="openPlateCalc()">🏋️ Plate Calculator</button>
+      <button class="btn btn-ghost btn-full btn-sm" style="border: 1px dashed var(--border); font-weight:700; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openPlateCalc()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--action-bg)"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        Plate Calculator
+      </button>
     </div>
     <div id="loggerContent"></div>
   </div>
@@ -473,6 +472,9 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 
     <div class="section-header"><span>Muscle Group Heatmap</span></div>
     <div class="card" id="heatmapWrap" style="padding: 16px; display: flex; gap: 16px; align-items: center;"></div>
+    
+    <div class="section-header"><span>Set Distribution</span></div>
+    <div class="card" style="padding: 16px;"><div id="donutChartWrap" style="position:relative; height: 160px;"><canvas id="donutChart"></canvas></div></div>
   </div>
   
   <div id="historyCalendarView" style="display:none;">
@@ -537,9 +539,10 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 
 <div class="bottom-nav-wrap" id="mainNavWrap">
   <nav class="bottom-nav">
-    <button class="nav-item active" onclick="showPage('program')" id="nav-program"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg><span class="nav-label">Hub</span></button>
-    <button class="nav-item" onclick="showPage('logger')" id="nav-logger"><svg viewBox="0 0 24 24"><path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"/></svg><span class="nav-label">Train</span></button>
-    <button class="nav-item" onclick="showPage('history')" id="nav-history"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20V14"></path></svg><span class="nav-label">Insights</span></button>
+    <button class="nav-item active" onclick="showPage('program')" id="nav-program"><svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10"/></svg><span class="nav-label">Hub</span></button>
+    <button class="nav-item" onclick="showPage('logger')" id="nav-logger"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><span class="nav-label">Train</span></button>
+    <button class="nav-item" onclick="showPage('recovery')" id="nav-recovery"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z"/></svg><span class="nav-label">Recovery</span></button>
+    <button class="nav-item" onclick="showPage('history')" id="nav-history"><svg viewBox="0 0 24 24" fill="none"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z" fill="currentColor"/></svg><span class="nav-label">Insights</span></button>
   </nav>
 </div>
 <div class="active-workout-bar" id="activeWorkoutBar">
@@ -567,32 +570,22 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
   </div>
 </div>
 
-<div class="modal-overlay" id="routineSetupModal">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div style="font-size:1.4rem; font-weight:800; margin-bottom:8px; color:var(--text); letter-spacing:-0.5px;" id="setupTitle">Start Routine</div>
-    
-    <div id="setupPreviewArea" style="display:none;"></div>
-    
-    <div class="form-row" id="setupCustomPhaseRow" style="display:none; margin-top: 16px;">
-      <label>Phase Type</label>
-      <select id="setupPhase"><option value="hybrid">General / Hybrid</option><option value="strength">Strength</option><option value="hypertrophy">Hypertrophy</option><option value="power">Power</option><option value="deload">Deload</option></select>
+<div class="modal-overlay" id="flowModal">
+  <div class="modal" style="text-align:center;">
+    <h2 id="flowName" style="font-size:1.4rem; font-weight:800; margin-bottom:8px; color:var(--text); letter-spacing:-0.5px;">Flow Name</h2>
+    <div id="flowCurrentStretch" style="font-size:1.8rem; font-weight:800; color:var(--action-bg); margin:32px 0;">Stretch Name</div>
+    <div id="flowTimer" style="font-size:4.5rem; font-weight:900; font-variant-numeric:tabular-nums; color:var(--text); margin-bottom:32px; letter-spacing:-2px;">00:00</div>
+    <div id="flowNextStretch" style="font-size:0.95rem; font-weight:600; color:var(--muted); margin-bottom:40px;">Up Next: ...</div>
+    <div style="display:flex; gap:16px; justify-content:center; margin-bottom: 24px;">
+      <button class="btn btn-ghost" style="padding: 16px 24px;" onclick="prevStretch()">❮</button>
+      <button class="btn btn-brand" style="padding: 16px 40px; font-size:1.1rem;" id="flowPlayBtn" onclick="toggleFlowTimer()">Pause</button>
+      <button class="btn btn-ghost" style="padding: 16px 24px;" onclick="nextStretch()">❯</button>
     </div>
-    <div class="form-row" id="setupCustomNameRow" style="display:none">
-      <label>Routine Name</label>
-      <input type="text" id="setupName" placeholder="e.g. Summer Cut" />
-    </div>
-    <div class="form-row" style="margin-top: 16px;">
-      <label>Phase Length (Weeks)</label>
-      <select id="setupWeeks"><option value="4">4 Weeks</option><option value="8" selected>8 Weeks</option><option value="12">12 Weeks</option></select>
-    </div>
-    <div style="display:flex;gap:12px;margin-top:30px">
-      <button class="btn btn-ghost" style="flex:1" onclick="document.getElementById('routineSetupModal').classList.remove('open')">Cancel</button>
-      <button class="btn btn-brand" id="startRoutineBtn" style="flex:1" onclick="confirmStartRoutine()">Set Active</button>
-    </div>
+    <button class="btn btn-ghost btn-full" style="color:var(--red); border:1px solid rgba(217,108,108,0.2); background:rgba(217,108,108,0.05);" onclick="quitFlow()">End Routine</button>
   </div>
 </div>
 
+<div class="modal-overlay" id="routineSetupModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.4rem; font-weight:800; margin-bottom:8px; color:var(--text); letter-spacing:-0.5px;" id="setupTitle">Start Routine</div><div id="setupPreviewArea" style="display:none;"></div><div class="form-row" id="setupCustomPhaseRow" style="display:none; margin-top: 16px;"><label>Phase Type</label><select id="setupPhase"><option value="hybrid">General / Hybrid</option><option value="strength">Strength</option><option value="hypertrophy">Hypertrophy</option><option value="power">Power</option><option value="deload">Deload</option></select></div><div class="form-row" id="setupCustomNameRow" style="display:none"><label>Routine Name</label><input type="text" id="setupName" placeholder="e.g. Summer Cut" /></div><div class="form-row" style="margin-top: 16px;"><label>Phase Length (Weeks)</label><select id="setupWeeks"><option value="4">4 Weeks</option><option value="8" selected>8 Weeks</option><option value="12">12 Weeks</option></select></div><div style="display:flex;gap:12px;margin-top:30px"><button class="btn btn-ghost" style="flex:1" onclick="document.getElementById('routineSetupModal').classList.remove('open')">Cancel</button><button class="btn btn-brand" id="startRoutineBtn" style="flex:1" onclick="confirmStartRoutine()">Set Active</button></div></div></div>
 <div class="modal-overlay" id="exerciseModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.6rem; font-weight:800; margin-bottom:24px; color:var(--text); letter-spacing:-0.5px;">Add Exercise</div><div class="form-row"><label>Category</label><select id="exCategory" onchange="filterExercises()"><option value="">— Select category —</option><option value="chest">Chest</option><option value="back">Back</option><option value="shoulders">Shoulders</option><option value="biceps">Biceps</option><option value="triceps">Triceps</option><option value="quads">Quads</option><option value="hamstrings">Hamstrings</option><option value="calves">Calves</option><option value="core">Core</option><option value="cardio">Cardio & GPP</option><option value="fullbody">Full Body</option></select></div><div class="form-row"><label>Exercise</label><select id="exName"><option value="">— Select category first —</option></select></div><div class="form-row" id="customNameRow" style="display:none"><label>Custom Name</label><input type="text" id="exCustomName" placeholder="Type exercise name…" /></div><div class="form-grid"><div><label>Sets</label><input type="number" id="exSets" value="3" inputmode="numeric" /></div><div><label>Target Reps</label><input type="text" id="exReps" placeholder="e.g. 8-12" /></div></div><div style="display:flex;gap:12px;margin-top:30px"><button class="btn btn-ghost" style="flex:1" onclick="document.getElementById('exerciseModal').classList.remove('open')">Cancel</button><button class="btn btn-brand" style="flex:1" onclick="saveExercise()">Add</button></div></div></div>
 <div class="modal-overlay" id="swapModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.6rem; font-weight:800; margin-bottom:8px; color:var(--text); letter-spacing:-0.5px;">Swap Exercise</div><p style="font-size:0.9rem; color:var(--muted); margin-bottom:24px;">Swap <strong id="swapCurrentName" style="color:var(--text)"></strong>.</p><label>All Exercises</label><div class="form-row" style="display:flex; gap:12px;"><select id="swapAllSelect" style="flex:1;"></select><button class="btn btn-brand btn-sm" onclick="confirmSwap(document.getElementById('swapAllSelect').value)">Swap</button></div><button class="btn btn-ghost btn-full" style="margin-top:16px" onclick="document.getElementById('swapModal').classList.remove('open')">Cancel</button></div></div>
 <div class="modal-overlay" id="plateModal"><div class="modal"><div class="modal-handle"></div><div style="font-size:1.6rem; font-weight:800; margin-bottom:24px; color:var(--text); letter-spacing:-0.5px;">Plate Calculator</div><div class="form-grid"><div><label>Target Weight (lb)</label><input type="number" id="plateTarget" placeholder="225" inputmode="numeric" oninput="renderPlateCalc()"/></div><div><label>Bar Weight (lb)</label><input type="number" id="plateBar" value="45" inputmode="numeric" oninput="renderPlateCalc()"/></div></div><div class="card" style="text-align:center; box-shadow:none;"><div style="font-size: 2.4rem; font-weight: 800; letter-spacing:-1px;" id="plateTotal">—</div><div style="font-size: 0.85rem; color: var(--muted); font-weight:600;" id="plateSub">Enter a target weight</div></div><div id="plateBreakdown"></div><button class="btn btn-ghost btn-full" style="margin-top:16px" onclick="document.getElementById('plateModal').classList.remove('open')">Close</button></div></div>
@@ -640,8 +633,13 @@ const ROUTINES = {
   ppl: { name: 'Push / Pull / Legs', phase: 'hypertrophy', desc: '3-6 days/week · balanced volume split', days: [{ dayName:'Push', exercises:[{name:'Bench Press',sets:4,reps:'8'},{name:'Overhead Press',sets:3,reps:'10'}]}, { dayName:'Pull', exercises:[{name:'Deadlift',sets:3,reps:'5'},{name:'Pull-ups',sets:4,reps:'8'}]}, { dayName:'Legs', exercises:[{name:'Barbell Squat',sets:4,reps:'8'},{name:'Romanian Deadlift',sets:3,reps:'10'}]} ] },
   upperlower: { name: 'Upper / Lower Split', phase: 'hypertrophy', desc: '4 days/week · high frequency', days: [{ dayName:'Upper', exercises:[{name:'Bench Press',sets:4,reps:'8'},{name:'Barbell Row',sets:4,reps:'8'}]}, { dayName:'Lower', exercises:[{name:'Barbell Squat',sets:4,reps:'8'},{name:'Romanian Deadlift',sets:3,reps:'8'}]} ] },
   brosplit: { name: '5-Day Bro Split', phase: 'hypertrophy', desc: '1 muscle group per day · max pump', days: [{ dayName:'Chest', exercises:[{name:'Bench Press',sets:4,reps:'8'},{name:'Incline Dumbbell Press',sets:3,reps:'10'}]} ] },
-  deload: { name: 'Active Recovery', phase: 'deload', desc: '3 days/week · 50% volume to shed fatigue', days: [{ dayName:'Mobility & Bloodflow', exercises:[{name:'Stationary Bike',sets:1,reps:'15 min'},{name:'Push Up',sets:3,reps:'10'}]}]},
-  mobility: { name: 'Mobility Flow', phase: 'deload', desc: '2 days/week · Pure recovery & stretching', days: [{ dayName:'Lower Focus', exercises:[{name:'Stationary Bike',sets:1,reps:'10 min'}]},{dayName:'Upper Focus', exercises:[{name:'Rowing Machine',sets:1,reps:'10 min'}]}]}
+};
+
+const FLOWS = {
+  morning: { name: 'Morning Primer', desc: 'A quick dynamic flow to wake up the joints and prep for the day.', stretches: [{name:'Cat-Cow', duration:60}, {name:'World\'s Greatest Stretch (L)', duration:60}, {name:'World\'s Greatest Stretch (R)', duration:60}, {name:'Deep Squat Hold', duration:60}, {name:'Standing Reach & Fold', duration:60}] },
+  desk: { name: 'Desk Relief', desc: 'Open up the hips and thoracic spine after prolonged sitting.', stretches: [{name:'Couch Stretch (L)', duration:60}, {name:'Couch Stretch (R)', duration:60}, {name:'Thread the Needle (L)', duration:45}, {name:'Thread the Needle (R)', duration:45}, {name:'Pec Stretch (Doorway)', duration:60}] },
+  rotation: { name: 'Full Body Rotation', desc: 'T-spine and hip mobility for fluid movement and power transfer.', stretches: [{name:'90/90 Hip Switches', duration:60}, {name:'Open Book (L)', duration:45}, {name:'Open Book (R)', duration:45}, {name:'Pigeon Pose (L)', duration:60}, {name:'Pigeon Pose (R)', duration:60}] },
+  sleep: { name: 'Down-Regulation', desc: 'Static holds and deep breathing to drop the heart rate pre-sleep.', stretches: [{name:'Child\'s Pose', duration:120}, {name:'Lying Spinal Twist (L)', duration:60}, {name:'Lying Spinal Twist (R)', duration:60}, {name:'Box Breathing (4-4-4-4)', duration:120}] }
 };
 
 const BARBELL_EXERCISES = new Set(['Bench Press','Deadlift','Barbell Squat','Front Squat','Overhead Press','Barbell Row','Box Squat','Incline Bench Press']);
@@ -677,6 +675,12 @@ let warmupTargetExId = null;
 
 let calCurrentMonth = new Date().getMonth();
 let calCurrentYear = new Date().getFullYear();
+
+let activeFlowKey = null;
+let currentStretchIdx = 0;
+let flowTimerRemaining = 0;
+let flowInterval = null;
+let flowPaused = false;
 
 function saveProgramToStore() {
   if (activeProgram) localStorage.setItem('ff_active_program', JSON.stringify(activeProgram));
@@ -770,6 +774,8 @@ function showPage(id) {
   if (id === 'logger' && !isWorkoutActive) setupLoggerPreState();
   if (id === 'program') renderDashboard();
   if (id === 'history') { renderHistory(); switchHistoryTab('charts'); }
+  if (id === 'recovery') renderFlows();
+  if (id === 'data') renderSettings();
 }
 
 function toggleAccordion(id, element) {
@@ -933,7 +939,9 @@ function renderProgramBuilder() {
       <div class="day-section-header">
         <span class="day-tag">Day ${di+1}</span>
         <input class="day-name-input" value="${day.dayName}" onchange="activeProgram.days[${di}].dayName=this.value" />
-        <button class="icon-btn red" style="border-color:transparent" onclick="removeDay(${di})">✕</button>
+        <button class="icon-btn red" style="border-color:transparent" onclick="removeDay(${di})">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <div class="day-section-body">
         ${day.exercises.map((ex, ei) => {
@@ -945,7 +953,9 @@ function renderProgramBuilder() {
               <div class="exercise-row-meta">${ex.sets} sets × ${ex.reps||'—'}</div>
             </div>
             ${ei > 0 ? `<button class="icon-btn link ${isLinked ? 'active' : ''}" onclick="toggleSuperset(${di},${ei})"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></button>` : ''}
-            <button class="icon-btn red" onclick="removeExercise(${di},${ei})">✕</button>
+            <button class="icon-btn red" onclick="removeExercise(${di},${ei})">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
           </div>`
         }).join('')}
         <button class="btn btn-ghost btn-sm btn-full" style="margin-top:6px" onclick="openAddExercise(${di})">＋ Add Exercise</button>
@@ -1077,7 +1087,9 @@ function renderSaved1RMs() {
       <span style="font-weight:700;">${k}</span>
       <div style="display:flex; gap:16px; align-items:center;">
         <span style="color:var(--brand); font-weight:800; font-size:1.1rem;">${saved1RMs[k]} lbs</span>
-        <button class="icon-btn red" style="width:32px;height:32px; border:none;" onclick="delete1RM('${k}')">✕</button>
+        <button class="icon-btn red" style="width:32px;height:32px; border:none;" onclick="delete1RM('${k}')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
     </div>
   `).join('');
@@ -1087,6 +1099,87 @@ function delete1RM(ex) {
   delete saved1RMs[ex];
   save1RMsToStore();
   renderSaved1RMs();
+}
+
+// ── RECOVERY / MOBILITY FLOWS ──
+function renderFlows() {
+  const el = document.getElementById('flowList');
+  el.innerHTML = Object.keys(FLOWS).map(k => `
+    <div class="card" style="cursor:pointer; display:flex; flex-direction:column; gap:8px;" onclick="startFlow('${k}')">
+      <div style="font-size:1.15rem; font-weight:800; color:var(--text); letter-spacing:-0.5px;">${FLOWS[k].name}</div>
+      <div style="font-size:0.85rem; color:var(--text); font-weight:600;">${FLOWS[k].stretches.length} Movements • ~${Math.ceil(FLOWS[k].stretches.reduce((acc, s)=>acc+s.duration,0)/60)} min</div>
+      <div style="font-size:0.85rem; color:var(--muted); line-height:1.4;">${FLOWS[k].desc}</div>
+    </div>
+  `).join('');
+}
+
+function startFlow(key) {
+  activeFlowKey = key;
+  currentStretchIdx = 0;
+  flowPaused = false;
+  document.getElementById('flowName').textContent = FLOWS[key].name;
+  
+  try { if ('wakeLock' in navigator) wakeLock = navigator.wakeLock.request('screen'); } catch (err) {}
+  
+  loadStretch(0);
+  document.getElementById('flowModal').classList.add('open');
+}
+
+function loadStretch(idx) {
+  const flow = FLOWS[activeFlowKey].stretches;
+  if (idx >= flow.length) {
+    quitFlow();
+    toast('Recovery Flow Complete!', 'success');
+    return;
+  }
+  
+  currentStretchIdx = idx;
+  flowTimerRemaining = flow[idx].duration;
+  document.getElementById('flowCurrentStretch').textContent = flow[idx].name;
+  
+  const next = flow[idx+1] ? flow[idx+1].name : 'Finish';
+  document.getElementById('flowNextStretch').textContent = `Up Next: ${next}`;
+  updateFlowTimerDisplay();
+  
+  clearInterval(flowInterval);
+  if (!flowPaused) {
+    flowInterval = setInterval(tickFlow, 1000);
+    document.getElementById('flowPlayBtn').textContent = 'Pause';
+  }
+}
+
+function tickFlow() {
+  flowTimerRemaining--;
+  updateFlowTimerDisplay();
+  if (flowTimerRemaining <= 0) {
+    clearInterval(flowInterval);
+    playDing();
+    loadStretch(currentStretchIdx + 1);
+  }
+}
+
+function updateFlowTimerDisplay() {
+  document.getElementById('flowTimer').textContent = `${Math.floor(flowTimerRemaining/60).toString().padStart(2,'0')}:${(flowTimerRemaining%60).toString().padStart(2,'0')}`;
+}
+
+function toggleFlowTimer() {
+  flowPaused = !flowPaused;
+  if (flowPaused) {
+    clearInterval(flowInterval);
+    document.getElementById('flowPlayBtn').textContent = 'Resume';
+  } else {
+    flowInterval = setInterval(tickFlow, 1000);
+    document.getElementById('flowPlayBtn').textContent = 'Pause';
+  }
+}
+
+function nextStretch() { playDing(); loadStretch(currentStretchIdx + 1); }
+function prevStretch() { if(currentStretchIdx > 0) loadStretch(currentStretchIdx - 1); }
+
+function quitFlow() { 
+  clearInterval(flowInterval); 
+  if (wakeLock) try { wakeLock.release(); } catch(e){}
+  document.getElementById('flowModal').classList.remove('open'); 
 }
 
 // ── LOGGER ──
@@ -1106,7 +1199,9 @@ function setupLoggerPreState() {
         <div style="font-weight:800; font-size:1.15rem; letter-spacing:-0.5px;">${d.dayName}</div>
         <div style="font-size:0.85rem; color:var(--muted); margin-top:6px; font-weight:500;">${d.exercises.length} exercises</div>
       </div>
-      <div style="font-size:1.5rem; color:var(--brand);">▶</div>
+      <div style="font-size:1.5rem; color:var(--brand);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
     </div>`).join('');
 }
 
@@ -1174,8 +1269,12 @@ function renderActiveWorkout() {
         <div class="log-ex-title-row">
           <div class="log-ex-name">${ex.name}</div>
           <div class="log-ex-actions">
-            <span class="action-link warmup" onclick="openWarmupModal('${ex.id}')">Warm-up</span>
-            <span class="action-link swap" onclick="openSwapModal('${ex.id}', '${ex.name.replace(/'/g, "\\'")}')">Swap</span>
+            <span class="action-link warmup" onclick="openWarmupModal('${ex.id}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+            </span>
+            <span class="action-link swap" onclick="openSwapModal('${ex.id}', '${ex.name.replace(/'/g, "\\'")}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+            </span>
           </div>
         </div>
         ${targetHtml}
@@ -1374,12 +1473,12 @@ async function finishWorkout() {
   showPage('program');
 }
 
-// ── CHARTS & ANALYTICS DASHBOARD ──
-let strengthChart=null; let volumeChart=null;
+// ── CHARTS & CALENDAR ──
+let strengthChart=null; let volumeChart=null; let muscleChart=null;
 
 function updateChartDefaults() {
   Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#8A8178';
-  Chart.defaults.borderColor = 'transparent';
+  Chart.defaults.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border').trim() || '#EAE5DE';
   Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Inter', sans-serif";
 }
 
@@ -1395,9 +1494,7 @@ function switchHistoryTab(tab) {
   if (tab === 'charts') {
     updateChartDefaults();
     updateKPIs();
-    updateVolumeChart(); 
-    updateStrengthChart(); 
-    updateHeatmap();
+    updateVolumeChart(); updateStrengthChart(); updateMuscleChart();
   }
   if (tab === 'cal') { renderCalendar(); }
 }
@@ -1410,7 +1507,8 @@ function updateKPIs() {
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
   history.forEach(s => {
-    const sDate = new Date(s.date + 'T00:00:00');
+    const parts = s.date.split('-');
+    const sDate = new Date(parts[0], parts[1]-1, parts[2]);
     if (sDate >= oneWeekAgo) sessionsThisWeek++;
     s.entries.forEach(e => e.sets.forEach(set => {
       if (!set.isWarmup) totalVolume += (parseFloat(set.weight)||0) * (parseInt(set.reps)||0);
@@ -1420,14 +1518,14 @@ function updateKPIs() {
   const adherence = totalSessions > 0 ? '100' : '0'; // Placeholder logic
 
   document.getElementById('kpiGrid').innerHTML = `
-    ${createKpiCard('Total Sessions', totalSessions, '', 'All time', 'up', 'var(--brand)', '📊')}
-    ${createKpiCard('Volume', (totalVolume/1000).toFixed(1), 'k', 'Lbs moved', 'up', 'var(--green)', '🏋️')}
-    ${createKpiCard('This Week', sessionsThisWeek, '', 'Sessions logged', 'neutral', 'var(--gold)', '📅')}
-    ${createKpiCard('Adherence', adherence, '%', 'On track', 'up', 'var(--action-bg)', '🎯')}
+    ${createKpiCard('Total Sessions', totalSessions, '', 'All time', 'neutral', 'var(--brand)', '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>')}
+    ${createKpiCard('Volume', (totalVolume/1000).toFixed(1), 'k', 'Lbs moved', 'neutral', 'var(--green)', '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>')}
+    ${createKpiCard('This Week', sessionsThisWeek, '', 'Sessions logged', 'up', 'var(--gold)', '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>')}
+    ${createKpiCard('Adherence', adherence, '%', 'On track', 'up', 'var(--action-bg)', '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>')}
   `;
 }
 
-function createKpiCard(label, value, unit, delta, deltaType, color, icon) {
+function createKpiCard(label, value, unit, delta, deltaType, color, iconSvg) {
   const deltaColor = deltaType === 'up' ? 'var(--green)' : deltaType === 'down' ? 'var(--red)' : 'var(--muted)';
   const deltaIcon = deltaType === 'up' ? '▲' : deltaType === 'down' ? '▼' : '−';
   
@@ -1435,7 +1533,7 @@ function createKpiCard(label, value, unit, delta, deltaType, color, icon) {
   <div class="kpi-card">
     <div class="kpi-top-border" style="background: linear-gradient(90deg, ${color}, transparent);"></div>
     <div class="kpi-label">
-      <div class="kpi-icon" style="background: ${color}20; color: ${color};">${icon}</div>
+      <div class="kpi-icon" style="background: ${color}30; color: ${color};">${iconSvg}</div>
       ${label}
     </div>
     <div class="kpi-value">${value}<span>${unit}</span></div>
@@ -1457,7 +1555,7 @@ function renderCalendar() {
   const daysInMonth = new Date(calCurrentYear, calCurrentMonth + 1, 0).getDate();
   
   let html = `<div class="cal-day-name">Sun</div><div class="cal-day-name">Mon</div><div class="cal-day-name">Tue</div><div class="cal-day-name">Wed</div><div class="cal-day-name">Thu</div><div class="cal-day-name">Fri</div><div class="cal-day-name">Sat</div>`;
-  for(let i = 0; i < firstDay; i++) { html += `<div class="cal-cell empty"></div>`; }
+  for(let i = 0; i < firstDay; i++) { html += `<div class="cal-cell empty">&#8203;</div>`; }
   
   const todayStr = getLocalYMD();
   for(let i = 1; i <= daysInMonth; i++) {
@@ -1476,7 +1574,9 @@ function selectCalDate(dateStr) {
   if(sessions.length === 0) { el.innerHTML = `<div class="empty" style="margin-top: 16px; padding: 30px;"><p>No workouts on this date.</p></div>`; return; }
   
   el.innerHTML = `<div class="section-label" style="margin-top: 24px;">Workouts on ${dateStr}</div>` + sessions.map(s=>{
-    return `<div class="history-card"><div class="history-card-header"><div><div class="history-day-label" style="font-size:1rem;">${s.dayName}</div></div><button class="icon-btn red" style="width:28px;height:28px; border:none;" onclick="deleteHistory(${s.id})">✕</button></div>${s.entries.map(e=>`<div class="history-ex-row" style="padding:6px 0;"><div class="history-ex-name" style="font-size:0.85rem;">${e.exercise}</div><div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;">${e.sets.map(set => `<span class="set-chip ${set.isWarmup?'warmup-icon':''}" style="padding:4px 6px; font-size:0.7rem; background:var(--input-bg);">${set.isWarmup?'W: ':''}${set.reps} × ${set.weight}</span>`).join('')}</div></div>`).join('')}</div>`;
+    return `<div class="history-card"><div class="history-card-header"><div><div class="history-day-label" style="font-size:1rem;">${s.dayName}</div></div><button class="icon-btn red" style="width:28px;height:28px; border:none;" onclick="deleteHistory(${s.id})">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button></div>${s.entries.map(e=>`<div class="history-ex-row" style="padding:6px 0;"><div class="history-ex-name" style="font-size:0.85rem;">${e.exercise}</div><div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;">${e.sets.map(set => `<span class="set-chip ${set.isWarmup?'warmup-icon':''}" style="padding:4px 6px; font-size:0.7rem; background:var(--input-bg);">${set.isWarmup?'W: ':''}${set.reps} × ${set.weight}</span>`).join('')}</div></div>`).join('')}</div>`;
   }).join('');
 }
 
@@ -1498,23 +1598,26 @@ function updateVolumeChart() {
   
   if(volumeChart) volumeChart.destroy();
   const ctx = document.getElementById('volumeChart').getContext('2d');
+  const brandColor = getComputedStyle(document.documentElement).getPropertyValue('--brand').trim();
+  
   volumeChart = new Chart(ctx, { 
     type: 'bar', 
-    data: { labels, datasets: [{ label: 'Volume', data, backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--brand').trim(), borderRadius: 4 }] }, 
+    data: { labels, datasets: [{ label: 'Volume (lbs)', data, backgroundColor: brandColor, borderRadius: 4 }] }, 
     options: { 
       responsive: true, 
       maintainAspectRatio: false, 
       plugins: { legend: { display: false } },
       scales: {
-        x: { grid: { display: false } },
-        y: { grid: { color: 'rgba(0,0,0,0.03)' }, border: { display: false }, ticks: { display: false } }
+        x: { display: true, grid: { display: false } },
+        y: { display: true, beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false } }
       }
     } 
   });
 }
 
-function updateHeatmap() {
-  const wrap = document.getElementById('heatmapWrap');
+function updateMuscleChart() {
+  if (typeof Chart === 'undefined') return;
+  const wrap = document.getElementById('muscleChartWrap');
   if (!history.length) { wrap.innerHTML = `<div class="chart-empty" style="width:100%;">No data</div>`; return; }
 
   const gc = { chest: 0, back: 0, shoulders: 0, legs: 0, arms: 0, core: 0 };
@@ -1534,11 +1637,11 @@ function updateHeatmap() {
   const data = [
     { muscle: "Legs", sets: gc.legs, pct: totalSets ? Math.round((gc.legs/totalSets)*100) : 0, color: "var(--green)" },
     { muscle: "Chest", sets: gc.chest, pct: totalSets ? Math.round((gc.chest/totalSets)*100) : 0, color: "var(--brand)" },
-    { muscle: "Back", sets: gc.back, pct: totalSets ? Math.round((gc.back/totalSets)*100) : 0, color: "var(--action-bg)" },
+    { muscle: "Back", sets: gc.back, pct: totalSets ? Math.round((gc.back/totalSets)*100) : 0, color: "var(--blue)" },
     { muscle: "Shoulders", sets: gc.shoulders, pct: totalSets ? Math.round((gc.shoulders/totalSets)*100) : 0, color: "var(--gold)" },
     { muscle: "Arms", sets: gc.arms, pct: totalSets ? Math.round((gc.arms/totalSets)*100) : 0, color: "var(--red)" },
     { muscle: "Core", sets: gc.core, pct: totalSets ? Math.round((gc.core/totalSets)*100) : 0, color: "var(--muted)" }
-  ].sort((a,b) => b.sets - a.sets);
+  ].sort((a,b) => b.sets - a.sets).filter(d => d.sets > 0);
 
   wrap.innerHTML = `
     <svg width="90" height="180" viewBox="0 0 90 180" style="flex-shrink: 0;">
@@ -1578,7 +1681,7 @@ function updateStrengthChart() {
   const exFreq = {};
   history.forEach(s => s.entries.forEach(e => { if(exList.includes(e.exercise)) exFreq[e.exercise] = (exFreq[e.exercise]||0)+1; }));
   
-  const topExercises = Object.keys(exFreq).sort((a,b) => exFreq[b] - exFreq[a]).slice(0, 2);
+  const topExercises = Object.keys(exFreq).sort((a,b) => exFreq[b] - exFreq[a]).slice(0, 3);
   if(!topExercises.length) { wrap.innerHTML = `<div class="chart-empty">No logged sets</div>`; return; }
   
   const labelsSet = new Set();
@@ -1587,7 +1690,8 @@ function updateStrengthChart() {
   
   const colors = [
     { border: getComputedStyle(document.documentElement).getPropertyValue('--green').trim(), bg: 'rgba(125, 157, 117, 0.1)' },
-    { border: getComputedStyle(document.documentElement).getPropertyValue('--brand').trim(), bg: 'rgba(212, 163, 115, 0.1)' }
+    { border: getComputedStyle(document.documentElement).getPropertyValue('--brand').trim(), bg: 'rgba(212, 163, 115, 0.1)' },
+    { border: getComputedStyle(document.documentElement).getPropertyValue('--blue').trim(), bg: 'rgba(91, 156, 246, 0.1)' }
   ];
 
   const datasets = topExercises.map((exName, idx) => {
@@ -1630,9 +1734,10 @@ function updateStrengthChart() {
     options: { 
       responsive: true, 
       maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 6 } } },
       scales: {
-        x: { grid: { display: false } },
-        y: { grid: { color: 'rgba(0,0,0,0.03)' }, border: { display: false }, ticks: { display: false } }
+        x: { display: true, grid: { display: false } },
+        y: { display: true, grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false } }
       }
     } 
   });
@@ -1644,7 +1749,7 @@ function renderHistory(){
   el.innerHTML=history.map(s=>{
     const dur = s.duration ? `⏱ ${Math.floor(s.duration/60)}m` : '';
     const totalSets = s.entries.reduce((a,e)=>a+e.sets.filter(set=>!set.isWarmup).length,0);
-    return `<div class="history-card"><div class="history-card-header"><div><div class="history-date">${s.date}</div><div class="history-day-label">${s.dayName}</div><div class="history-meta-row">${dur ? `<span class="history-meta-chip">${dur}</span>` : ''}<span class="history-meta-chip">${totalSets} working sets</span></div></div><button class="icon-btn red" style="border:none;" onclick="deleteHistory(${s.id})">✕</button></div>
+    return `<div class="history-card"><div class="history-card-header"><div><div class="history-date">${s.date}</div><div class="history-day-label">${s.dayName}</div><div class="history-meta-row">${dur ? `<span class="history-meta-chip">${dur}</span>` : ''}<span class="history-meta-chip">${totalSets} working sets</span></div></div><button class="icon-btn red" style="border:none;" onclick="deleteHistory(${s.id})"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div>
       ${s.entries.map(e=>`<div class="history-ex-row"><div class="history-ex-name">${e.exercise}</div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;">${e.sets.map(set => `<span class="set-chip ${set.isWarmup?'warmup-icon':''}">${set.isWarmup?'W: ':''}${set.reps} × ${set.weight}</span>`).join('')}</div></div>`).join('')}</div>`;
   }).join('');
 }
