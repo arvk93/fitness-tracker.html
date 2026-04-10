@@ -6,7 +6,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>MODUS</title>
+<title>ARETIS</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
 <style>
@@ -81,7 +81,7 @@ body {
 
 /* ── PAGES & COMPONENTS ── */
 .page { display: none; max-width: 640px; margin: 0 auto; padding: 24px 20px 160px 20px; opacity: 0; }
-.page.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.page.active { display: block; animation: fadeIn 0.4s forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
 .page-header { margin-bottom: 24px; text-align: left; }
@@ -94,7 +94,7 @@ body {
 
 /* ── BUTTONS & FORMS ── */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 14px; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); color: inherit; }
-.btn-brand { background: var(--action-bg); color: var(--action-text); box-shadow: 0 4px 14px rgba(139, 125, 107, 0.2); }
+.btn-brand { background: var(--action-bg); color: var(--action-text); box-shadow: 0 4px 14px rgba(139, 125, 107, 0.3); }
 .btn-brand:active { transform: scale(0.96); opacity: 0.9; }
 .btn-ghost { background: var(--input-bg); color: var(--text); border: 1px solid transparent; }
 .btn-ghost:active { transform: scale(0.96); background: var(--border); }
@@ -249,7 +249,7 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 .history-ex-row:last-child { border-bottom: none; }
 .history-ex-name { font-size: 1rem; font-weight: 600; flex: 1; color: var(--text); }
 .set-chip { background: var(--bg-color); border-radius: 8px; padding: 8px 12px; font-size: 0.85rem; font-weight: 700; color: var(--text); border: 1px solid var(--border); }
-.chart-empty { text-align: center; padding: 40px 10px; color: var(--muted); font-size: 0.95rem; font-weight: 600; background: var(--bg-color); border-radius: 12px; border: 1px dashed var(--border); }
+.chart-empty { text-align: center; padding: 40px 10px; color: var(--muted); font-size: 0.95rem; font-weight: 500; }
 
 /* ── SETTINGS ── */
 .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); }
@@ -289,7 +289,7 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 <div class="top-bar">
   <div class="brand">
     <div class="brand-text">
-      <span class="brand-name">MODUS</span>
+      <span class="brand-name">ARETIS</span>
       <span class="brand-sub">Sustainable Training</span>
     </div>
   </div>
@@ -315,15 +315,27 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
     <div class="phase-group-content" id="lib-strength">
       <div class="routine-card" onclick="openStartModal('starting_strength')">
         <div class="rc-header"><div class="rc-title">Starting Strength</div></div>
-        <div class="rc-preview"><div class="rc-preview-item">Workout A</div><div class="rc-preview-item">Workout B</div></div>
+        <div class="rc-preview">
+          <div class="rc-preview-item">Workout A</div>
+          <div class="rc-preview-item">Workout B</div>
+        </div>
       </div>
       <div class="routine-card" onclick="openStartModal('five_three_one')">
         <div class="rc-header"><div class="rc-title">5/3/1 Boring But Big</div></div>
-        <div class="rc-preview"><div class="rc-preview-item">Squat Day</div><div class="rc-preview-item">Bench Day</div><div class="rc-preview-item">Deadlift Day</div><div class="rc-preview-item">Overhead Day</div></div>
+        <div class="rc-preview">
+          <div class="rc-preview-item">Squat Day</div>
+          <div class="rc-preview-item">Bench Day</div>
+          <div class="rc-preview-item">Deadlift Day</div>
+          <div class="rc-preview-item">Overhead Day</div>
+        </div>
       </div>
       <div class="routine-card" onclick="openStartModal('texas_method')">
         <div class="rc-header"><div class="rc-title">Texas Method</div></div>
-        <div class="rc-preview"><div class="rc-preview-item">Volume Day</div><div class="rc-preview-item">Light Day</div><div class="rc-preview-item">Intensity Day</div></div>
+        <div class="rc-preview">
+          <div class="rc-preview-item">Volume Day</div>
+          <div class="rc-preview-item">Light Day</div>
+          <div class="rc-preview-item">Intensity Day</div>
+        </div>
       </div>
     </div>
   </div>
@@ -336,15 +348,29 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
     <div class="phase-group-content" id="lib-hypertrophy">
       <div class="routine-card" onclick="openStartModal('arnold')">
         <div class="rc-header"><div class="rc-title">Arnold Split</div></div>
-        <div class="rc-preview"><div class="rc-preview-item">Chest & Back</div><div class="rc-preview-item">Shoulders & Arms</div><div class="rc-preview-item">Legs</div></div>
+        <div class="rc-preview">
+          <div class="rc-preview-item">Chest & Back</div>
+          <div class="rc-preview-item">Shoulders & Arms</div>
+          <div class="rc-preview-item">Legs</div>
+        </div>
       </div>
       <div class="routine-card" onclick="openStartModal('brosplit')">
         <div class="rc-header"><div class="rc-title">5-Day Bro Split</div></div>
-        <div class="rc-preview"><div class="rc-preview-item">Chest</div><div class="rc-preview-item">Back</div><div class="rc-preview-item">Arms</div><div class="rc-preview-item">Legs</div><div class="rc-preview-item">Shoulders</div></div>
+        <div class="rc-preview">
+          <div class="rc-preview-item">Chest</div>
+          <div class="rc-preview-item">Back</div>
+          <div class="rc-preview-item">Arms</div>
+          <div class="rc-preview-item">Legs</div>
+          <div class="rc-preview-item">Shoulders</div>
+        </div>
       </div>
       <div class="routine-card" onclick="openStartModal('ppl')">
         <div class="rc-header"><div class="rc-title">Push / Pull / Legs</div></div>
-        <div class="rc-preview"><div class="rc-preview-item">Push</div><div class="rc-preview-item">Pull</div><div class="rc-preview-item">Legs</div></div>
+        <div class="rc-preview">
+          <div class="rc-preview-item">Push</div>
+          <div class="rc-preview-item">Pull</div>
+          <div class="rc-preview-item">Legs</div>
+        </div>
       </div>
     </div>
   </div>
@@ -357,11 +383,20 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
     <div class="phase-group-content" id="lib-power">
       <div class="routine-card" onclick="openStartModal('westside')">
         <div class="rc-header"><div class="rc-title">Westside Cut Phase</div></div>
-        <div class="rc-preview"><div class="rc-preview-item">Max Effort Lower</div><div class="rc-preview-item">Max Effort Upper</div><div class="rc-preview-item">Dynamic Lower</div><div class="rc-preview-item">Dynamic Upper</div><div class="rc-preview-item">GPP & Loaded Cardio</div></div>
+        <div class="rc-preview">
+          <div class="rc-preview-item">Max Effort Lower</div>
+          <div class="rc-preview-item">Max Effort Upper</div>
+          <div class="rc-preview-item">Dynamic Lower</div>
+          <div class="rc-preview-item">Dynamic Upper</div>
+          <div class="rc-preview-item">GPP & Loaded Cardio</div>
+        </div>
       </div>
       <div class="routine-card" onclick="openStartModal('tactical')">
         <div class="rc-header"><div class="rc-title">Tactical Barbell</div></div>
-        <div class="rc-preview"><div class="rc-preview-item">Strength 1</div><div class="rc-preview-item">Conditioning</div></div>
+        <div class="rc-preview">
+          <div class="rc-preview-item">Strength 1</div>
+          <div class="rc-preview-item">Conditioning</div>
+        </div>
       </div>
     </div>
   </div>
@@ -459,6 +494,9 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 
     <div class="section-header"><span>Muscle Group Heatmap</span></div>
     <div class="card" id="heatmapWrap" style="padding: 16px; display: flex; gap: 16px; align-items: center;"></div>
+    
+    <div class="section-header"><span>Set Distribution</span></div>
+    <div class="card" style="padding: 16px;"><div id="donutChartWrap" style="position:relative; height: 160px;"><canvas id="donutChart"></canvas></div></div>
   </div>
   
   <div id="historyCalendarView" style="display:none;">
@@ -536,7 +574,7 @@ label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom:
 
 <div class="modal-overlay" id="onboardingModal">
   <div class="modal">
-    <div style="font-size:2.2rem; font-weight:900; margin-bottom:12px; color:var(--text); text-align:center; letter-spacing: -1px;">Welcome to MODUS.</div>
+    <div style="font-size:2.2rem; font-weight:900; margin-bottom:12px; color:var(--text); text-align:center; letter-spacing: -1px;">Welcome to ARETIS.</div>
     <p style="font-size:1rem; color:var(--muted); margin-bottom:32px; text-align:center; font-weight:500;">Your sustainable training companion.</p>
     <div class="card" style="box-shadow:none; border-color:var(--border);">
       <h3 style="font-size:1.1rem; margin-bottom:6px; color:var(--text); font-weight:800;">1. Choose Your Path</h3>
@@ -650,7 +688,8 @@ const ROUTINES = {
   ppl: { name: 'Push / Pull / Legs', phase: 'hypertrophy', desc: '3-6 days/week · balanced volume split', days: [{ dayName:'Push', exercises:[{name:'Bench Press',sets:4,reps:'8'},{name:'Overhead Press',sets:3,reps:'10'}]}, { dayName:'Pull', exercises:[{name:'Deadlift',sets:3,reps:'5'},{name:'Pull-ups',sets:4,reps:'8'}]}, { dayName:'Legs', exercises:[{name:'Barbell Squat',sets:4,reps:'8'},{name:'Romanian Deadlift',sets:3,reps:'10'}]} ] },
   upperlower: { name: 'Upper / Lower Split', phase: 'hypertrophy', desc: '4 days/week · high frequency', days: [{ dayName:'Upper', exercises:[{name:'Bench Press',sets:4,reps:'8'},{name:'Barbell Row',sets:4,reps:'8'}]}, { dayName:'Lower', exercises:[{name:'Barbell Squat',sets:4,reps:'8'},{name:'Romanian Deadlift',sets:3,reps:'8'}]} ] },
   brosplit: { name: '5-Day Bro Split', phase: 'hypertrophy', desc: '1 muscle group per day · max pump', days: [{ dayName:'Chest', exercises:[{name:'Bench Press',sets:4,reps:'8'},{name:'Incline Dumbbell Press',sets:3,reps:'10'}]} ] },
-  deload: { name: 'Deload Week', phase: 'deload', desc: '3 days/week · 50% volume to shed fatigue', days: [{ dayName:'Full Body Recovery', exercises:[{name:'Barbell Squat',sets:2,reps:'5'},{name:'Bench Press',sets:2,reps:'5'},{name:'Barbell Row',sets:2,reps:'5'}]}]},
+  deload: { name: 'Active Recovery', phase: 'deload', desc: '3 days/week · 50% volume to shed fatigue', days: [{ dayName:'Mobility & Bloodflow', exercises:[{name:'Stationary Bike',sets:1,reps:'15 min'},{name:'Push Up',sets:3,reps:'10'}]}]},
+  mobility: { name: 'Mobility Flow', phase: 'deload', desc: '2 days/week · Pure recovery & stretching', days: [{ dayName:'Lower Focus', exercises:[{name:'Stationary Bike',sets:1,reps:'10 min'}]},{dayName:'Upper Focus', exercises:[{name:'Rowing Machine',sets:1,reps:'10 min'}]}]}
 };
 
 const FLOWS = {
@@ -1260,6 +1299,29 @@ function findGhostData(exName) {
   return null;
 }
 
+function getSuggestedTarget(exName, targetRepsStr) {
+  if (!saved1RMs[exName] || !targetRepsStr) return null;
+  const matches = targetRepsStr.match(/\d+/g);
+  if (!matches) return null;
+  let tr = parseInt(matches[0]);
+  if (matches.length > 1) tr = Math.round((parseInt(matches[0]) + parseInt(matches[1])) / 2);
+  
+  const onerm = saved1RMs[exName];
+  const lower = ['Deadlift', 'Barbell Squat', 'Front Squat', 'Box Squat', 'Rack Pull', 'Sumo Deadlift'];
+  const press = ['Overhead Press', 'Seated Dumbbell Press', 'Arnold Press'];
+  let tw = 0;
+  
+  if (lower.includes(exName)) {
+    tw = onerm / (1 + 0.033 * tr);
+  } else if (press.includes(exName)) {
+    tw = onerm / Math.pow(tr, 0.10);
+  } else {
+    tw = onerm * ((37 - tr) / 36);
+    if (tr > 10) tw = onerm / (1 + tr/30);
+  }
+  return Math.round(tw / 5) * 5; 
+}
+
 function renderActiveWorkout() {
   const day = activeProgram.days[activeDayIdx];
   let html = '';
@@ -1499,6 +1561,7 @@ let strengthChart=null; let volumeChart=null; let muscleChart=null;
 
 function updateChartDefaults() {
   Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#8A8178';
+  Chart.defaults.borderColor = 'transparent';
   Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Inter', sans-serif";
 }
 
@@ -1517,7 +1580,6 @@ function switchHistoryTab(tab) {
     updateVolumeChart(); 
     updateStrengthChart(); 
     updateHeatmap();
-    updateDonutChart();
   }
   if (tab === 'cal') { renderCalendar(); }
 }
@@ -1660,11 +1722,11 @@ function updateHeatmap() {
   const data = [
     { muscle: "Legs", sets: gc.legs, pct: totalSets ? Math.round((gc.legs/totalSets)*100) : 0, color: "var(--green)" },
     { muscle: "Chest", sets: gc.chest, pct: totalSets ? Math.round((gc.chest/totalSets)*100) : 0, color: "var(--brand)" },
-    { muscle: "Back", sets: gc.back, pct: totalSets ? Math.round((gc.back/totalSets)*100) : 0, color: "var(--blue)" },
+    { muscle: "Back", sets: gc.back, pct: totalSets ? Math.round((gc.back/totalSets)*100) : 0, color: "var(--action-bg)" },
     { muscle: "Shoulders", sets: gc.shoulders, pct: totalSets ? Math.round((gc.shoulders/totalSets)*100) : 0, color: "var(--gold)" },
     { muscle: "Arms", sets: gc.arms, pct: totalSets ? Math.round((gc.arms/totalSets)*100) : 0, color: "var(--red)" },
     { muscle: "Core", sets: gc.core, pct: totalSets ? Math.round((gc.core/totalSets)*100) : 0, color: "var(--muted)" }
-  ].sort((a,b) => b.sets - a.sets).filter(d => d.sets > 0);
+  ].sort((a,b) => b.sets - a.sets);
 
   wrap.innerHTML = `
     <svg width="90" height="180" viewBox="0 0 90 180" style="flex-shrink: 0;">
@@ -1679,7 +1741,7 @@ function updateHeatmap() {
       <rect x="30" y="92" width="13" height="36" rx="6" fill="${gc.legs > 0 ? 'var(--green)' : 'var(--input-bg)'}" opacity="${gc.legs > 0 ? '0.8' : '1'}"/>
       <rect x="47" y="92" width="13" height="36" rx="6" fill="${gc.legs > 0 ? 'var(--green)' : 'var(--input-bg)'}" opacity="${gc.legs > 0 ? '0.8' : '1'}"/>
     </svg>
-    <div style="flex: 1; display: flex; flex-direction: column; gap: 12px;">
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
       ${data.map(d => `
         <div style="display: flex; align-items: center; gap: 8px;">
           <span style="font-size: 11px; font-weight: 600; color: var(--text); width: 64px; flex-shrink: 0;">${d.muscle}</span>
@@ -1693,63 +1755,10 @@ function updateHeatmap() {
   `;
 }
 
-function updateDonutChart() {
-  if (typeof Chart === 'undefined') return;
-  const wrap = document.getElementById('donutChartWrap');
-  if(!history.length) { wrap.innerHTML = `<div class="chart-empty" style="width:100%; border:none; background:transparent;">No data</div>`; return; }
-  if(!wrap.querySelector('canvas')) wrap.innerHTML = `<canvas id="donutChart"></canvas>`;
-  
-  let push = 0, pull = 0, legs = 0, core = 0;
-  let totalSets = 0;
-  
-  history.forEach(s => s.entries.forEach(e => {
-    const validSets = e.sets.filter(set => !set.isWarmup).length;
-    totalSets += validSets;
-    if (EXERCISES.chest.includes(e.exercise) || EXERCISES.shoulders.includes(e.exercise) || EXERCISES.triceps.includes(e.exercise)) push += validSets;
-    else if (EXERCISES.back.includes(e.exercise) || EXERCISES.biceps.includes(e.exercise)) pull += validSets;
-    else if (EXERCISES.quads.includes(e.exercise) || EXERCISES.hamstrings.includes(e.exercise) || EXERCISES.calves.includes(e.exercise)) legs += validSets;
-    else if (EXERCISES.core.includes(e.exercise)) core += validSets;
-  }));
-  
-  const labels = ['Push', 'Pull', 'Legs', 'Core'].filter((l, i) => [push, pull, legs, core][i] > 0);
-  const data = [push, pull, legs, core].filter(d => d > 0);
-  
-  if(muscleChart) muscleChart.destroy();
-  const ctx = document.getElementById('donutChart').getContext('2d');
-  
-  muscleChart = new Chart(ctx, { 
-    type: 'doughnut', 
-    data: { 
-      labels, 
-      datasets: [{ 
-        data, 
-        backgroundColor: [
-          getComputedStyle(document.documentElement).getPropertyValue('--blue').trim(), 
-          getComputedStyle(document.documentElement).getPropertyValue('--brand').trim(), 
-          getComputedStyle(document.documentElement).getPropertyValue('--green').trim(), 
-          getComputedStyle(document.documentElement).getPropertyValue('--gold').trim()
-        ], 
-        borderWidth: 0 
-      }] 
-    }, 
-    options: { 
-      responsive: true, 
-      maintainAspectRatio: false, 
-      cutout: '75%', 
-      plugins: { 
-        legend: { 
-          position: 'right', 
-          labels: { usePointStyle: true, padding: 20 } 
-        } 
-      } 
-    } 
-  });
-}
-
 function updateStrengthChart() {
   if (typeof Chart === 'undefined') return;
   const wrap = document.getElementById('strengthChartWrap');
-  if(!history.length) { wrap.innerHTML = `<div class="chart-empty" style="width:100%; border:none; background:transparent;">No data</div>`; return; }
+  if(!history.length) { wrap.innerHTML = `<div class="chart-empty">No data</div>`; return; }
   if(!wrap.querySelector('canvas')) wrap.innerHTML = `<canvas id="strengthChart"></canvas>`;
   
   const group = document.getElementById('chartMuscleGroup').value;
@@ -1757,8 +1766,8 @@ function updateStrengthChart() {
   const exFreq = {};
   history.forEach(s => s.entries.forEach(e => { if(exList.includes(e.exercise)) exFreq[e.exercise] = (exFreq[e.exercise]||0)+1; }));
   
-  const topExercises = Object.keys(exFreq).sort((a,b) => exFreq[b] - exFreq[a]).slice(0, 3);
-  if(!topExercises.length) { wrap.innerHTML = `<div class="chart-empty" style="width:100%; border:none; background:transparent;">No logged sets</div>`; return; }
+  const topExercises = Object.keys(exFreq).sort((a,b) => exFreq[b] - exFreq[a]).slice(0, 2);
+  if(!topExercises.length) { wrap.innerHTML = `<div class="chart-empty">No logged sets</div>`; return; }
   
   const labelsSet = new Set();
   history.forEach(s => s.entries.forEach(e => { if(topExercises.includes(e.exercise)) labelsSet.add(s.date); }));
@@ -1766,8 +1775,7 @@ function updateStrengthChart() {
   
   const colors = [
     { border: getComputedStyle(document.documentElement).getPropertyValue('--green').trim(), bg: 'rgba(125, 157, 117, 0.1)' },
-    { border: getComputedStyle(document.documentElement).getPropertyValue('--brand').trim(), bg: 'rgba(212, 163, 115, 0.1)' },
-    { border: getComputedStyle(document.documentElement).getPropertyValue('--blue').trim(), bg: 'rgba(91, 156, 246, 0.1)' }
+    { border: getComputedStyle(document.documentElement).getPropertyValue('--brand').trim(), bg: 'rgba(212, 163, 115, 0.1)' }
   ];
 
   const datasets = topExercises.map((exName, idx) => {
@@ -1808,19 +1816,11 @@ function updateStrengthChart() {
     type: 'line', 
     data: { labels, datasets }, 
     options: { 
-      layout: { padding: { top: 10 } },
       responsive: true, 
       maintainAspectRatio: false,
-      plugins: { 
-        legend: { 
-          display: true,
-          position: 'top', 
-          labels: { padding: 20, usePointStyle: true, boxWidth: 8 } 
-        } 
-      },
       scales: {
-        x: { display: true, grid: { display: false } },
-        y: { display: true, grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false } }
+        x: { grid: { display: false } },
+        y: { grid: { color: 'rgba(0,0,0,0.03)' }, border: { display: false }, ticks: { display: false } }
       }
     } 
   });
@@ -1832,7 +1832,7 @@ function renderHistory(){
   el.innerHTML=history.map(s=>{
     const dur = s.duration ? `⏱ ${Math.floor(s.duration/60)}m` : '';
     const totalSets = s.entries.reduce((a,e)=>a+e.sets.filter(set=>!set.isWarmup).length,0);
-    return `<div class="history-card"><div class="history-card-header"><div><div class="history-date">${s.date}</div><div class="history-day-label">${s.dayName}</div><div class="history-meta-row">${dur ? `<span class="history-meta-chip">${dur}</span>` : ''}<span class="history-meta-chip">${totalSets} working sets</span></div></div><button class="icon-btn red" style="border:none;" onclick="deleteHistory(${s.id})"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div>
+    return `<div class="history-card"><div class="history-card-header"><div><div class="history-date">${s.date}</div><div class="history-day-label">${s.dayName}</div><div class="history-meta-row">${dur ? `<span class="history-meta-chip">${dur}</span>` : ''}<span class="history-meta-chip">${totalSets} working sets</span></div></div><button class="icon-btn red" style="border:none;" onclick="deleteHistory(${s.id})">✕</button></div>
       ${s.entries.map(e=>`<div class="history-ex-row"><div class="history-ex-name">${e.exercise}</div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;">${e.sets.map(set => `<span class="set-chip ${set.isWarmup?'warmup-icon':''}">${set.isWarmup?'W: ':''}${set.reps} × ${set.weight}</span>`).join('')}</div></div>`).join('')}</div>`;
   }).join('');
 }
@@ -1858,7 +1858,7 @@ function exportCSV() {
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = `MODUS_${getLocalYMD()}.csv`;
+  link.download = `ARETIS_${getLocalYMD()}.csv`;
   document.body.appendChild(link); link.click(); document.body.removeChild(link);
 }
 
@@ -1867,7 +1867,7 @@ function exportJSON() {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = `MODUS_Backup_${getLocalYMD()}.json`;
+  link.download = `ARETIS_Backup_${getLocalYMD()}.json`;
   document.body.appendChild(link); link.click(); document.body.removeChild(link);
   toast('Backup saved ✓', 'success');
 }
